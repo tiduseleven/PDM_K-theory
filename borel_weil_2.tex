@@ -1,0 +1,148 @@
+% chktex-file 18
+\section{The Borel-Weil theorem}
+Let $G$ be an algebraic group over $\CC$, $T$ be a maximal torus contained in a Borel subgroup $B = TU$, where $U = (B,B)$.\\
+While the highest weight theorem guarantees the existence, for any dominant weight ${\lambda \in {X(T)}_+}$, of an irreducible representation $V(\lambda)$ with highest weight $\lambda$, the actual computation of that module is far from explicit. The Borel-Weil theorem aims to give a more geometric point of view on that vector space.
+
+\subsection{Line bundles on an algebraic variety}
+As the name suggests, a line bundle is a way of associating a line to each point of an algebraic variety, in a way that is locally coherent.
+\begin{defn}
+    Let $X$ be an algebraic variety over $\CC$. A \emph{line bundle over $X$} is a variety $E$ over $\CC$ with a morphism of varieties $\pi : E \to X$ such that
+    \begin{enumerate}
+        \item For every point $x \in X$, the preimage $\pi^{-1}(x)$ is isomorphic to $\CC$.
+        \item There is a covering $U_i$ of $X$ such that, for all $i$, there is an isomorphism $\phi_i: \pi^{-1}(U_i) \to U_i \times \CC$ such that there is a commutative diagram
+        % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXHBpXnstMX1cXGxlZnQoVV9pXFxyaWdodCkiXSxbMiwwLCJVX2kgXFx0aW1lcyBcXENDIl0sWzEsMSwiVV9pIl0sWzAsMSwiXFx2YXJwaGlfaSIsMl0sWzEsMiwiXFxwaV8xIiwyXSxbMCwyLCJcXHBpIl1d
+        \[\begin{tikzcd}[ampersand replacement=\&,sep=scriptsize]
+            {\pi^{-1}\left(U_i\right)} \&\& {U_i \times \CC} \\
+            \& {U_i}
+            \arrow["{\varphi_i}"', from=1-1, to=1-3]
+            \arrow["\pi", from=1-1, to=2-2]
+            \arrow["{\pi_1}"', from=1-3, to=2-2]
+        \end{tikzcd}\]
+        where $\pi_1$ is the projection onto $U_i$.
+        \item On non-empty intersections $U_{ij} := U_i \cap U_j$, there are transition functions $f_{ij}: U_i \cap U_j \rightarrow \CC^*$ such that the diagram
+            % https://q.uiver.app/#q=WzAsMyxbMiwwLCJcXGxlZnQoVV9pIFxcY2FwIFVfaikgXFx0aW1lcyBcXENDIl0sWzEsMSwiXFxwaV57LTF9XFxsZWZ0KFVfaSBcXGNhcCBVX2pcXHJpZ2h0KSJdLFswLDAsIlxcbGVmdChVX2kgXFxjYXAgVV9qKSBcXHRpbWVzIFxcQ0MiXSxbMSwyLCJcXHZhcnBoaV9qIl0sWzEsMCwiXFx2YXJwaGlfaSIsMl0sWzIsMCwiRl97aWp9IiwyXV0=
+        \[\begin{tikzcd}[ampersand replacement=\&, sep = scriptsize]
+        {\left(U_i \cap U_j\right) \times \CC} \&\& {\left(U_i \cap U_j\right) \times \CC} \\
+        \& {\pi^{-1}\left(U_i \cap U_j\right)}
+        \arrow["{F_{ij}}"', from=1-1, to=1-3]
+        \arrow["{\varphi_j}", from=2-2, to=1-1]
+        \arrow["{\varphi_i}"', from=2-2, to=1-3]
+        \end{tikzcd}\] 
+        commutes, where $F_{ij}(u, z) = (u, f_{ij}(u) z)$. Furthermore, there is a cocycle condition $f_{ik} = f_{ij} \cdot f_{jk}$.
+    \end{enumerate}
+\end{defn}
+
+A classical example of a line bundle is the \emph{tautological line bundle} over $\proj{1}{\CC}$ where one associates to a point $[x:y]$ the unique line in $\CC^2$ passing through it. The total space is therefore $E := \left\{(L, v) ~\middle|~ L \in \proj{1}{\CC}, v \in L\right\}$.
+
+Since line bundles come with a map, one may be interested in sections of that map, which will be of particular interest in the Borel-Weil theorem.
+\begin{defn}
+    Let $X$ be an algebraic variety and let $\mathcal{L}$ be a line bundle over $X$, i.e.\ a variety $E$ with a map $\pi: E \rightarrow X$ as specified above. The \emph{space of global sections} of $\mathcal{L}$ is
+    \[ H^0(X, \mathcal{L}) = \left\{\sigma: X \to E ~\middle|~ \pi \circ \sigma = \textnormal{id}_{X}\right\}.\]
+\end{defn}
+The tautological line bundle only has one section. Indeed, a section $\sigma: \proj{1}{\CC} \to E$ would be given by $\sigma([x:y]) = ([x:y], f([x:y]))$ for some morphism of varieties $f: \proj{1}{\CC} \to \CC^2$. One may show a morphism from a projective variety to an affine one is constant, so that $f([x:y]) = v$ for a fixed $v \in \CC^2$. The definition of $E$ requires that, for all lines $L \in \proj{1}{\CC}$, $f(L)$ must be a point of $L$, thus $f$ must be constantly zero.\\
+Since $f$ is uniquely defined, the only possible section of the tautological line bundle is $\sigma(L) = (L, 0)$.
+
+\subsection{The Borel-Weil theorem}
+\subsubsection{Fibration over a subgroup}
+In order to associate a line bundle to any weight, we will make use of a space built by gluing an algebraic group $G$ with a space $X$ along the action of a closed subgroup $F$ on $X$.
+
+\begin{defn}
+    Let $G$ be an algebraic group, $F$ a closed subgroup of $G$ and $X$ an algebraic variety equipped with an action of $F$. The variety $G \times_F X$ is the space
+    \[ G \times_F X = G \times X / \sim, \]
+    where $\sim$ is the equivalence relation defined by $(g, x) \sim (g f^{-1}, f.x)$ or, equivalently $(g f, x) \sim (g, f . x)$. The equivalence class of some element $(g, x) \in G\times X$ is denoted $[g,x]$.
+\end{defn}
+
+This space naturally inherits a $G$-action given by $g [g', x] = [g g', x]$. Furthermore, there is a $G$-equivariant map $\pi: G \times_F X \to G/F$ given by $[g,x] \mapsto gF$ whose fibers are $X$ (i.e., for all $gF \in G/F$, $\pi^{-1}(gF) \cong X$).
+
+\subsubsection{The line bundle of a character}
+Let $\lambda \in X(T)$ be a character. By sending all elements of $U$ to $1$, we can extend $\lambda$ to a map $B \rightarrow \CC^*$. This gives $\CC$ a $B$-action by $b . z = \lambda(b) \cdot z$. Denote $\CC$ with this action $\CC_\lambda$. Since $B$ is a closed subgroup of $G$ and $\CC_\lambda$ has a $B$-action, we may build the space $G \times_B \CC_{\lambda}$, which comes with a map $\pi: G \times_B \CC_{\lambda} \to G/B$ whose fibers are $\CC$. This in fact gives a line bundle.
+\begin{defn}
+    Let $\lambda \in X(T)$. The \emph{line bundle associated to $\lambda$}, denoted $\mathcal{L}(\lambda)$, is the space $G \times_B \CC_{-\lambda}$ with the map
+    \begin{alignat*}{4}
+    \psi: \quad &G \times_B \CC_{-\lambda} &\ \to\ &G/B\\
+           & \quad [g, z] &\ \mapsto\ &gB.
+\end{alignat*}
+\end{defn}
+
+The quotient relation of $G \times_B \CC_{-\lambda}$ precisely says that $[g b, z] = [g, {\lambda(b)}^{-1} z]$.
+This space of sections naturally inherits a $G$-action. If $g \in G$ and $\sigma \in H^{0}(G/B, \mathcal{L}(\lambda))$, let $g. \sigma$ be defined as $(g . \sigma) (h B) = g.\sigma(g^{-1}h B)$, where the action on the right is the $G$-action defined on $G \times_B \CC_{-\lambda}$. 
+
+\subsubsection{Stating the theorem}
+As we have now defined all the notions required for the theorem, we are ready to state it.
+
+\begin{theorem}[Borel-Weil theorem]
+    If $\lambda \in X(T)_+$ is a dominant weight, there is a $G$-equivariant isomorphism of representations
+    \[ H^{0}(G/B, \mathcal{L}(\lambda)) \cong {V(\lambda)}^*. \]
+\end{theorem}
+
+While the isomorphism is with the dual of $V(\lambda)$, taking the dual once more gives a space isomorphic to $V(\lambda)$.
+
+\subsection{Proving the theorem}
+The proof of the Borel-Weil theorem can be split into multiple parts, following~\cite{kumar}. For ease of notation, let $\mathcal{L} = \mathcal{L}(\lambda)$. Any tensor product will implicitly be over $\CC$. 
+
+\subsubsection{Pulling back the line bundle}
+The first step will be to identify the space of sections of $\mathcal{L}$ with the sections of another line bundle $\hat{\mathcal{L}}$ over $G$ that are fixed by $B$. The point is that this new space will be more readily computable.
+
+To do so, let $\hat{\mathcal{L}}$ be the line bundle defined by $\hat{\pi} : G \times \CC_{\lambda} \to G$; abstractly speaking, this can be seen as the pullback of the line bundle $\mathcal{L}$ under $G \rightarrow G/B$. Let us now compare sections of $\mathcal{L}$ and $\hat{\mathcal{L}}$.\\
+A section of $\hat{\mathcal{L}}$ is a map of varieties $\sigma: G \rightarrow G \times \CC_{\lambda}$ such that $\hat{\pi} \circ \sigma = \textnormal{id}_G$. Such a map is of the form $\sigma(g) = (\phi(g), \psi(g))$, where $\phi$ and $\psi$ are morphisms of varieties. Since $\sigma$ is a section of $\pi$, $\phi$ must be the identity on $G$, so that any section is of the form $\sigma(g) = (g, f(g))$ for some $f \in K[G]$. Thus
+\[ H^0\left(G, \hat{\mathcal{L}}\right) \cong k[G] \cong k[G] \otimes \CC_{\lambda}. \]
+There is a $B$-action on $k[G] \otimes \CC_{\lambda}$ given by
+\[ \bigl(b . (f \otimes v)\bigr) (g) = f(g \cdot b) \otimes \lambda^{-1}(b) v, \]
+which in turns induces an action on $k[G]$ given by
+\[ (b.f)(g) = \lambda^{-1}(b) f(g \cdot b).\]
+On the other hands, a section $\sigma : G/B \to G \times_B \CC_{-\lambda}$ of $\mathcal{L}$ is given by $\sigma(g B) = [g, f(g)]$, where the choice of $f \in k[G]$ is restricted so that $\sigma$ is well-defined (i.e.~independent of a representative of $gB$). This well-definedness requires
+\[ [g, f(g)] = [gb, f(gb)] = [g, bf(gb)] = [g, \lambda^{-1}(b)f(gb)], \]
+which precisely says that $f(g) = \lambda^{-1}(b)f(g\cdot b)$ for all $b \in B$. Thus, sections of $\mathcal{L}$ are precisely given by regular functions $f \in k[G]$ that are stable under the above $B$-action. All together, this means that 
+\[ {\left[H^{0}\left(G, \hat{\mathcal{L}}\right)\right]}^{B} \cong H^{0}(G/B, \mathcal{L}), \]
+as $G$-modules.
+\subsubsection[Identifying]{Identifying ${\left[H^{0}\left(G, \hat{\mathcal{L}}\right)\right]}^B$}
+Let us define two $(G \times G)$-modules. First, $k[G]$ can be seen as a $(G \times G)$-module via $((g_1, g_2).f)(g) = f(g_1^{-1} g g_2)$. Then, the space
+\[ \mathcal{M} = \bigoplus_{\mu \in {X(T)}_+} {V(\mu)}^* \otimes V(\mu) \]
+is given a $G \times G$-action coordinate-wise, with the first copy of $G$ acting on the duals, and the second copy acting on the highest weight representation. \\
+One can show that these two $(G \times G)$-modules are isomorphic, with an explicit isomorphism given by $\Phi = \sum_{\mu \in {X(T)}_+} \Phi_\mu : \mathcal{M} \to k[G]$, where
+\begin{alignat*}{4}
+    \Phi_\mu: \quad & {V(\mu)}^* \otimes V(\mu) &\ \to\ & k[G]\\
+           & \quad f \otimes v  &\ \mapsto\ & \Phi_\mu\left(f \otimes v \right)(g) = f(gv).
+\end{alignat*}
+
+By restricting the $(G \times G)$-module structure on $k[G]$ along 
+$B \hookrightarrow G$, we obtain a $(G \times B)$-module structure. 
+This extends diagonally to $k[G] \otimes \CC_{-\lambda}$: $G$ acts on 
+$k[G]$ via the left regular representation, $(g \cdot f)(x) = f(g^{-1}x)$, 
+and trivially on $\CC_{-\lambda}$, while $B$ acts on $k[G]$ via the right 
+regular representation, $(b \cdot f)(g) = f(gb)$, and on $\CC_{-\lambda}$ 
+via the character $-\lambda$.
+
+Since left and right multiplications in $G$ commute, so do the 
+actions of $G$ and $B$ on $k[G] \otimes \CC_{-\lambda}$. In particular, 
+the $G$-action preserves the $B$-invariant subspace, so 
+${\left[k[G] \otimes \CC_{-\lambda}\right]}^B$ is a $G$-module in its own 
+right. Since $\Phi$ is $(G \times G)$-equivariant, it is in particular 
+$(G \times B)$-equivariant, and so induces an isomorphism of $G$-modules 
+on $B$-invariants.
+
+\subsubsection{The final identifications}
+In light of the previous paragraph, we get a series of $G$-module isomorphisms
+
+\begin{align*}
+    {\left[H^{0}\left(G, \hat{\mathcal{L}}\right)\right]}^B &\cong {\left[k[G] \otimes \CC_{\lambda}\right]}^B \\
+    & \cong {\left[\left(\bigoplus_{\mu \in {X(T)}_+} {V(\mu)}^* \otimes V(\mu)\right) \otimes \CC_{-\lambda}\right]}^B \\
+    & \cong \bigoplus_{\mu \in {X(T)}_+} {\left[ {V(\mu)}^*  \otimes V(\mu) \otimes \CC_{-\lambda}\right]}^B \\
+    & \overset{\textnormal{\tiny (1)}}{\cong} \bigoplus_{\mu \in {X(T)}_+} {V(\mu)}^* \otimes {\left[V(\mu) \otimes \CC_{-\lambda}\right]}^B \\
+    & \overset{\textnormal{\tiny (2)}}{\cong} \bigoplus_{\mu \in {X(T)}_+} {V(\mu)}^* \otimes {\left[\CC_{\mu} \otimes \CC_{-\lambda}\right]}^T \\
+    & \overset{\textnormal{\tiny (3)}}{\cong} {V(\lambda)}^*.
+\end{align*}
+
+Let us explain the last three isomorphisms:
+\begin{enumerate}[label = {(\arabic*)}]
+    \item The $(G \times B)$-action on each $({V(\mu)}^* \otimes V(\mu)) \otimes \CC_{- \lambda}$ is done diagonally, and the action on ${V(\mu)}^* \otimes V(\mu)$ is done such that $G$ acts on the first term, while $B$ acts on the second. In particular, every element of ${V(\mu)}^*$ is fixed by $B$;
+    \item Recall that $B = T \ltimes U$. We thus have that \begin{align*}
+        [V(\mu) \otimes \CC_{-\lambda}] &= {[{[V(\mu) \otimes \CC_{-\lambda}]}^U]}^T \\
+            &= {[{[V(\mu)]}^U \otimes \CC_{-\lambda}]}^T \\
+            &= {[\CC_{\mu} \otimes \CC_{-\lambda}]}^T,
+    \end{align*}
+    where the last equality is because $B$ stabilizes a $1$-dimensional vector space in $V(\mu)$, and acts exactly via the action given on $\CC_\mu$;
+    \item Note that $\CC_{\mu} \otimes \CC_{-\lambda} \cong \CC_{\mu - \lambda}$. Finally, $\CC_{\mu - \lambda}$ is stabilized by $T$ if and only if $\mu - \lambda = 0$, i.e.~$\mu = \lambda$.
+\end{enumerate}
+
+\hfill $\square$

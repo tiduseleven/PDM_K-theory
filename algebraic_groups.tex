@@ -1,0 +1,443 @@
+
+% chktex-file 18
+\section{The theory of algebraic groups}
+
+There are many ways an abstract group may respect some additional structure. For example, topological groups have a topology under which multiplication and inverse are continuous and Lie groups have the structure of a manifold. Another structure they may have is that of an algebraic variety, which is the main subject of this project.
+
+\subsection{Fundamental definitions}
+
+\subsubsection{Basic properties of algebraic groups}
+
+\begin{defn}
+    Let G be a variety endowed with a group structure via two maps $\mu: G \times G \rightarrow G$ and $\iota: G \rightarrow G$. We say that $G$ is an \emph{algebraic group} if $\mu$ and $\iota$ are morphisms of varieties.
+\end{defn}
+
+While an algebraic group has a topology, it is not necessarily a topological group. Indeed, in the context of algebraic groups, $\mu$ is required to be continuous with respect to the Zariski topology on $G \times G$, whereas it would have to be continuous with respect to the product topology for it to be a topological group.
+
+Morphisms of algebraic groups are naturally defined as morphisms of varieties that preserve the group structure. In particular, left and right multiplication by an element of the group is a morphism of algebraic groups.
+
+Using fundamental properties of both groups and algebraic varieties allows straightforward construction of new algebraic groups from existing ones.
+
+\begin{theorem}\label{thm:new_groups}
+    Let $G$ be an algebraic group.
+    \begin{enumerate}
+        \item Let $G' \leq G$ be a closed subgroup of $G$. Then $G'$ is an algebraic group;
+        \item Let $H$ be another algebraic group. The product $G \times H$ is an algebraic group.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    \begin{enumerate}
+        \item A closed subset of an algebraic variety is an algebraic variety, so that $G'$ is an algebraic variety as well. By definition of subgroup, the maps $\mu$ and $\iota$ restrict to $G'$ and are easily seen to be morphisms of varieties after the restriction.
+        \item The product $G \times H$ clearly inherits the structure of both a group and an algebraic variety. Denoting $\mu_G$, $\mu_H$, $\iota_G$ and $\iota_H$ the multiplications and inversions of $G$ and $H$, we see that $\mu_{G \times H} = (\mu_G \times \mu_H) \circ \textnormal{swap}$, where $\textnormal{swap}: G \times H \times G \times H \rightarrow G \times G \times H \times H$ swaps the two middle terms of the product. Finally, $\iota_{G\times H} = \iota_G \times \iota_H$, so that both multiplication and inversion of elements of $G \times H$ are morphisms of varieties.
+    \end{enumerate}
+\end{proof}
+
+As in the case of abstract groups, it is interesting to study, for $H < G$ a closed subgroup, the maximal subgroup of $G$ of which $H$ is a normal subgroup.
+
+\begin{defn}
+    Let $G$ be an algebraic group, $H$ a closed subgroup. The \emph{normalizer} of $H$ in $G$ is the subgroup 
+    \[ N_G(H) = \left\{g \in G ~\middle|~ g H g^{-1} = H\right\}.\]
+\end{defn}
+One may show this subgroup is closed (see~\cite[Section~8.2]{humphreys_linear_1975}).
+
+\subsubsection{Examples}
+Let $K$ be a field, which can be seen as the affine line $\affn{1}{K}$. Looking at the additive group structure of $K$ gives it an algebraic group structure, which will be called the \emph{additive group} and written $\Ga$. Furthermore, \cref{thm:new_groups} gives $\ank$ the structure of an algebraic group, seen as the $n$-fold product of $\affn{1}{K}$.
+
+Giving $K^*$ the structure of an algebraic group is also possible, but the algebraic variety structure is less straightforward. Indeed, $K^*$ is an open subset of $\affn{1}{K}$ (as the complement of $V(x)$), not a closed one. Instead, the \emph{multiplicative group} $\Gm$ is achieved as the affine curve $V(xy - 1) \subseteq \affn{2}{K}$, with multiplication given by $(a,b) \cdot (a', b') = (a\cdot a', b\cdot b')$ and inverse ${(a,b)}^{-1} = (a^{-1}, b^{-1})$. A bijective map from $K^*$ to $\Gm$ is built by simply sending a non-zero element $a \in K^*$ to $(a, 1/a) \in V(xy - 1)$, so that we will naturally identify $K^*$ with $\Gm$.
+
+The matrix group of invertible matrices $\GL{n}{K}$ may also be given the structure of an algebraic variety, in a similar way to $\Gm$. Indeed, as was the case for $\Gm$, it is an open subset of $\affn{n^2}{K}$ instead of a closed one. However, it can be seen as the vanishing set of the polynomial equation $\det{({(x_{ij})}_{i,j = 1}^n)} \cdot y - 1 = 0$ in $\affn{n^2+1}{K}$, giving it the structure of an affine variety.
+
+Because $\GL{n}{K}$ is an algebraic group, any closed subgroup thereof is an algebraic group. In particular, the group of invertible matrices with determinant one $\SL{n}{K}$ is cut out by the equation $y = 1$ in $\affn{n^2 + 1}{K}$. The group of invertible upper triangular matrices $\B{n}{K}$ is cut out by ${\{x_{ij}\}}_{i > j}$. The group of invertible diagonal matrices $\D{n}{K}$ is cut out by ${\{x_{ij}\}}_{i \neq j}$. Since the intersection of closed subsets is also closed, any intersection of these subgroups is in turns an algebraic group. Alternatively, $\D{n}{K}$ can also be seen as the $n$-fold product of $\Gm$.
+
+\subsubsection{Connectivity of algebraic groups}\label{subsubection:connectivity}
+
+In the context of algebraic groups, connectivity is closely related to the notion of constructible sets, which allows the proof of a very explicit criterion.
+\begin{theorem}
+    Let $G$ be an algebraic group, $Y_i$ a family of closed connected subgroups of $G$ indexed by a set $I$, such that $G$ is generated by the collection $Y_i$. Then $G$ is connected.
+\end{theorem}
+A proof can be found in~\cite[Section~7.5]{humphreys_linear_1975}.
+
+This proposition allows us to see that $\SL{n}{K}$ is connected, since it is generated by the groups $U_{ij}$ ($i \neq j$) consisting of matrices with $1$s on the diagonal and arbitrary value in the $(i,j)$ position, and the groups $H_k$ ($1 \leq k \leq n-1$) consisting of diagonal matrices with entries $t$ in position $k$, $t^{-1}$ in position $k+1$ and $1$ everywhere, for every $t \in k \setminus \left\{0\right\}$. Indeed, each $U_{ij}$ is isomorphic to $\Ga$ and each $H_k$ is isomorphic to $\Gm$, both of which are connected.\\
+In fact, one may even show that $\SL{n}{K}$ is simply connected for $n \geq 2$ (see~\cite[Section~13.3]{hall_lie_2015}).
+
+\subsubsection{Actions of algebraic groups}
+
+The study of algebraic groups is fundamentally linked to their actions on varieties and vector spaces. Just as abstract groups are studied by their action on vector spaces, general algebraic groups are understood through their representations.
+
+\begin{defn}
+    Let $G$ be an algebraic group and $X$ be a variety. We say that $G$ \emph{acts on} $X$ if there is a morphism of varieties $\varphi: G \times X \rightarrow X$, denoted by $\phi(g,x) = g . x$, such that
+    \begin{alignat*}{4}
+        (A1)&\quad g_1 . (g_2 . x) = (g_1 \cdot g_2) . x \quad & \textnormal{for}\quad & g_i \in G, x \in X;\\
+        (A2)&\quad e . x = x \quad & \textnormal{for}\quad & x \in X.
+    \end{alignat*}
+    A variety equipped with a $G$-action is called a $G$-module.
+\end{defn}
+
+This is precisely the definition of a group action, with the added condition that the action respects the variety structure. As a consequence, the classical notions related to a group action extend to this context.
+
+Let $G$ be an algebraic group that acts on a variety $X$. The \emph{orbit} of an element $x \in X$ is the set
+\[ \orbit{G}{x} = G . x =  \left\{g . x ~\middle|~ g \in G\right\}. \]
+We say that $G$ \emph{acts transitively} on X if $G . x = X$ for any $x \in X$. An element $x \in X$ is a \emph{fixed point} of $X$ if $G.x = x$. The set of fixed points of $X$ is denoted $X^G$. We state without proof that it is closed.
+
+The \emph{stabilizer} of an element $x \in X$ is the set
+\[ \stab{G}{x} = \left\{g \in G ~\middle|~ g.x = x\right\}.\]
+The stabilizer of any element $x \in X$ is a subgroup of $G$. Furthermore, it is closed in the Zariski topology. Indeed, let $\varphi_x: G \rightarrow X$ denote the morphism that sends $g \mapsto g.x$. It is the composition of $g \in G \mapsto (g, x) \in G \times X$ with $\varphi$, so it is a morphism of varieties. In particular, the preimage $\varphi_x^{-1}\left(\left\{x\right\}\right)$ is closed since singletons of an algebraic variety are closed, and is precisely $\stab{G}{x}$. Consequently, stabilizers are algebraic groups as well.
+
+The \emph{centralizer} of $X$ is the subgroup
+\[ \textnormal{C}_G(X) = \left\{g \in G ~\middle|~ g.x = x \textnormal{ for all } x \in X\right\}. \]
+Since $\textnormal{C}_G(X) = \bigcap_{x \in X} \stab{G}{x}$, it is a closed subgroup of $G$, thus it is an algebraic group.
+
+\subsubsection{Classical actions of algebraic groups}\label{subsubsection:actions}
+Many actions of algebraic groups arise naturally in the study of algebraic groups.
+
+\paragraph{Action from a representation}
+Let $\phi : G \rightarrow \GL{}{V}$ be a representation of an algebraic group $G$, where $V$ is finite-dimensional. Then $V$ naturally inherits a $G$-action via $x.v = \phi(x)(v)$.
+
+\paragraph{Left (and right) translation}
+Let $G$ be an algebraic group act on a variety $X$. The coordinate ring $k[X]$ naturally inherits two $G$-actions. Let $f \in k[X]$. As discussed informally in~\cref{subsubsection:tangent}, $f$ may be seen as a map from $X$ to $K$. The \emph{left translation} of functions by $G$ is the action $\lambda : G \times k[X] \to k[X]$ defined by $\lambda(g, f)(x) = f(g^{-1}.x)$. We will often write $\lambda_g$ to define the action when fixing an element $g \in G$, and $\lambda_g(f)(x) = \lambda(g,f)(x)$.
+
+If $X = G$, there is also a \emph{right translation} of functions, denoted $\rho$, and defined by $\rho(g, f)(h) = f(h g)$. We will often write $\rho_g$ when fixing an element, and write $\rho_g f (h) = \rho(g,f)(h)$.
+
+\paragraph{The inner automorphism}
+An algebraic group $G$ acts on itself via conjugation. This action is called the action by \emph{inner automorphisms}, and is written (for each $g \in G$) $\Inner{g}$. Its action is defined by $\Inner{g} (h) = g h g^{-1}$.
+
+\paragraph{induced actions on symmetric and exterior powers}
+Let $G$ be an algebraic group acting on a vector space $V$. There is an induced action on both symmetric and exterior powers of $V$. Let $k \in \NN$ and $v_1, \ldots, v_k \in V$. Then $G$ acts distributively as
+\[ g . \left(v_1 \circledast \cdots \circledast v_k \right) = \left(g . v_1 \circledast \cdots \circledast g.v_k \right), \]
+where $\circledast$ is either $\wedge$ or $\odot$.
+
+\subsection{Embedding algebraic groups into general linear space}
+A theorem due to Chevalley allows the embedding of any algebraic group into the general linear group of a vector space, such that a given closed subgroup acts trivially on a line.
+\begin{theorem}[Chevalley]\label{thm:chevalley}
+    Let $G$ be an algebraic group, $H$ a closed subgroup. There is an embedding $\phi: G \to \GL{}{V}$ and a one-dimensional subspace $L$ of $V$ such that
+    \[ H = \left\{g \in G ~\middle|~ \phi(g)L = L\right\}.\]
+\end{theorem}
+This result is proven in~\cite[Section~11.2]{humphreys_linear_1975}.
+
+Taking the projectification of $V$ yields an action of $G$ on $\PP(V)$ such that $H$ is precisely the stabilizer of the point $[L]$. Set-theoretically, this allows the identification of the space $G/H$ with the orbit of $[L]$ in $\PP(V)$ (via the orbit-stabilizer theorem).
+
+\subsection{Reductive groups}
+\subsubsection{Semisimple and unipotent elements}
+To motivate the general definitions, let us first consider the case where the algebraic group $G$ is a subgroup of $\GL{}{V}$. Recall that a matrix $M$ is \emph{unipotent} if $(M - I)$ is nilpotent or, equivalently, if all its eigenvalues are $1$. A matrix $M$ is \emph{semisimple} if its minimal polynomial has distinct roots, i.e.~if $M$ is diagonalizable. Any element $\GL{n}{K}$ can be written (uniquely) as the product of a semisimple and a unipotent matrix, motivating the notions of semisimple and unipotent parts of an invertible matrix.
+
+More generally, the notions of unipotent and semisimple elements relate to the right translation on the ring of regular functions, and every element of $G$ can be written uniquely as a product of a unipotent and a semisimple element.
+
+\begin{theorem}
+    Let $G$ be an algebraic group. If $g \in G$, there exist unique elements $s, u \in G$ such that $g = g_s g_u$, $g_s$ and $g_u$ commute, $\rho_{g_s} \in \GL{}{K[G]}$ is semisimple and $\rho_{g_u} \in \GL{}{k[G]}$ is unipotent. Furthermore, if $\phi: G \to G'$ is a morphism of algebraic groups, then $\phi(g_s) = {\phi(g)}_s$ and $\phi(g_u) = {\phi(g)}_u$ for any $g \in G$.
+\end{theorem}
+A proof can be found in~\cite[Section~15.4]{humphreys_linear_1975}. The uniqueness of these elements motivates the following definition.
+\begin{defn}
+    With notation as above, we call $g_s$ the \emph{semisimple part} of $g$ and $g_u$ the \emph{unipotent part} of $g$.\\
+    We denote $G_s$ the set of elements of $G$ such that $g = g_s$, and $G_u$ the set of elements of $G$ such that $g = g_u$
+\end{defn}
+
+\paragraph{Explicit description for upper triangular matrices in $\SL{2}{\CC}$}
+Let $B < \SL{2}{\CC}$ be the subgroup of upper triangular matrices in $\SL{2}{\CC}$, let
+\[ M = \begin{pmatrix}
+    \lambda & a \\
+    0 & \frac{1}{\lambda}
+\end{pmatrix} \in B.\]
+The decomposition into semisimple and unipotent part depends on $\lambda$. Indeed, if $\lambda \neq 1$, then the characteristic polynomial of $M$ already has distinct root, so that $M$ is semisimple. We may therefore take $M_s = M$ and $M_u = 1$.\\
+If $\lambda = 1$, then $M$ is unipotent so that $M_s = 1$ and $M_u = M$.
+
+\subsubsection{The radical of a group}
+A well-known fact in group theory is that, if $A,B < G$ are two normal solvable subgroups, then so is $A \cdot B < G$. In particular, this implies that there is a unique maximal normal solvable subgroup of $G$. This motivates the following definitions.
+\begin{defn}
+    Let $G$ be an algebraic group. The identity component of its largest normal solvable subgroup is called the \emph{radical} of $G$, denoted $R(G)$.\\
+    The subgroup of $R(G)$ consisting of all its unipotent elements is called the \emph{unipotent radical} of $G$, denoted $R_u(G)$. It is equivalently the largest connected normal unipotent subgroup of $G$.
+\end{defn}
+
+Many classical algebraic groups have either a trivial radical or a trivial unipotent radical, giving rise to the definitions of semisimple and reductive groups.
+\begin{defn}
+    A connected algebraic group $G \neq e$ is \emph{semisimple} if its radical $R(G)$ is trivial. It is \emph{reductive} if its unipotent radical $R_u(G)$ is trivial.
+\end{defn}
+For example, one can show that $\SL{n}{K}$ is semisimple, while $\GL{n}{K}$ and any product of copies of $\Gm$ are reductive. Furthermore, any semisimple group is reductive by definition.\\
+Reductive groups are very relevant, especially in characteristic $0$, as their representation theory can be studied through their irreducible representations. In that case, one can show that any representation of $G$ (i.e.~, any vector space $V$ with a morphism $G \to \GL{}{V}$) can be decomposed into a direct sum of irreducible representations.
+
+While some notions may be studied when $G$ is not reductive, we will from now on always assume that $G$ denotes a connected reductive algebraic group.
+
+
+\subsection{Projective spaces as quotients of algebraic groups}
+\subsubsection{Motivation}\label{subsubsection:homogeneous_motivation}
+Let $V = \CC^n$ be an $n$-dimensional vector space over $\CC$. There is a natural action of $\SLnC$ on $V$ given by matrix multiplication. This action induces one on the flag variety $\flag{V}$. Indeed, given a full flag 
+\[\mathcal{F}: 0 \subseteq V_1 \subseteq \cdots \subseteq V_n = V,\]
+where $\dim{V_i} = i$, the action of $M \in \SLnC$ is defined by sending a vector space $V_i$ spanned by vectors $v_1, \ldots, v_i$ to the vector space spanned by $M \cdot v_1, \ldots, M \cdot v_i$. Note that invertibility of $M$ ensures that the new vector space is also of dimension $i$, and the inclusions are clearly preserved.
+
+Furthermore, any flag in $\flag{\CC^n}$ may be obtained from the \emph{standard flag} ${0 \subseteq \langle e_1 \rangle \subseteq \cdots \subseteq \langle e_1, \ldots, e_n \rangle = \CC^n}$ by action of $\SL{n}{\CC}$. Indeed, with notation as above, one may choose a vector $v_1$ spanning $V_1$ of norm $1$. This can be extended to an orthonormal basis of $V_2$ with vectors $v_1$ and $v_2$. Continuing the process creates another orthonormal basis vectors of $\CC^n$ given by $v_1, \ldots v_n$. The matrix $M$ with columns given by $v_1, \ldots, v_n$ is precisely the matrix sending the standard flag to the flag $\mathcal{F}$. Since the basis is orthonormal, the determinant of $M$ is $1$, so that $M \in \SLnC$.
+
+Finally, note that the standard flag is stabilized with respect to the action of $\SLnC$ precisely by the subgroup of upper triangular matrices of determinant $1$, which we denote $B$. The orbit-stabilizer theorem then tells us that
+\[ G/B \cong \flag{\CC^n} \]
+as sets. As we will see later, this bijection can be promoted to an isomorphism of algebraic varieties. More generally, it will turn out that quotienting an algebraic group by a so-called Borel subgroup gives a projective variety.
+
+\subsubsection{Solvable groups}
+A standard notion in the study of abstract groups is that of the commutator subgroup, and of solvability of a group. These notions extend well to the study of algebraic groups, since commutator subgroups are closed and therefore also algebraic groups. We first recall these notions for abstract groups.
+
+\begin{defn}
+    Let $G$ be an abstract group, let $x,y \in G$. The \emph{commutator} of $x$ and $y$, denoted $(x,y)$, is the element $x y x^{-1} y^{-1}$. If $A,B$ are two subgroups of $G$, the \emph{commutator group} of $A$ and $B$, denoted $(A,B)$ is the subgroup of $G$ generated by the elements $(x,y)$, for $x \in A$, $y \in B$.
+\end{defn}
+
+Let $G$ be an algebraic group. One may show that if $A$ and $B$ are closed and normal subgroups of $G$, their commutator subgroup is closed in $G$ (see~\cite[Section~17.2]{humphreys_linear_1975}), which implies that it is itself an algebraic group. This means, in particular, that $(G,G)$ is an algebraic group. This motivates the definition of the derived series of an algebraic group, leading to the notion of solvability.
+
+\begin{defn}
+    Let $G$ be an algebraic group. The \emph{derived series} of $G$ is defined inductively by $\mathcal{D}^0 G = G$, $\mathcal{D}^{i+1} G = (\mathcal{D}^{i} G, \mathcal{D}^{i} G)$.
+
+    An algebraic group $G$ is \emph{solvable} if its derived series terminates in $0$, i.e.\ if there exists $n \geq 0$ such that $\mathcal{D}^{n} G = \left\{e \right\}$.
+\end{defn}
+
+Let $H < G$ be a (not necessarily closed) subgroup of $G$. Since the commutator map ${(\cdot, \cdot) : G \times G \to G}$ is continuous, one may show that, for two subgroups $A,B < G$, there is an inclusion $\left(\overline{A}, \overline{B}\right) \subseteq \overline{(A,B)}$ (this is purely a topological property). In particular, suppose $H$ is solvable, i.e.~there is some $n$ such that $\mathcal{D}^n H = \left\{e\right\}$. By the previous remark, $\mathcal{D}^i \overline{H} \subseteq \overline{\mathcal{D}^i H}$ using induction. Since points are closed, 
+\[ \mathcal{D}^n \overline{H} \subseteq \overline{\mathcal{D}^n H} = \overline{\left\{e\right\}} = \left\{e\right\},\]
+so $\mathcal{D}^n \overline{H} = \left\{e\right\}$ and $\overline{H}$ is solvable. We have thus proven the following result.
+\begin{theorem}
+    Let $G$ be an algebraic group, $H$ be a solvable abstract subgroup of $G$. Then its Zariski closure $\bar{H}$ is also solvable.
+\end{theorem}
+
+It is very useful to see that a group is solvable if and only if it has a filtration of subgroups where the successive quotients are abelian.
+\begin{theorem}
+    Let $G$ be an algebraic group. Then $G$ is solvable if and only if there exists a filtration 
+    \[\left\{e\right\} \lhd G_1 \lhd G_2 \lhd \cdots \lhd G_n = G \]
+    such that $G_i/G_{i-1}$ is abelian for all $i \geq 1$.
+\end{theorem}
+
+\begin{proof}
+    A solvable group clearly has a suitable filtration. Indeed, if $\mathcal{D}^n G = \left\{e\right\}$, 
+    \[0 = \mathcal{D}^n G \lhd \mathcal{D}^{n-1} G \lhd \cdots \lhd \mathcal{D}^{0} = G\]
+    precisely satisfies $\mathcal{D}^i G / \mathcal{D}^{i+1} G$ being abelian since it is exactly the abelianization of $ \mathcal{D}^i G$.
+
+    Conversely, let
+    \[\left\{e\right\} \lhd G_1 \lhd G_2 \lhd \cdots \lhd G_n = G \]
+    be a filtration of $G$ such that $G_i / G_{i-1}$ is abelian for all $i \geq 1$. We proceed by induction. If $n$ = 1, then $G$ is abelian and its derived subgroup is trivial. Assume now that the claim holds for any group $G$ admitting a filtration of length $n-1$. Since $G/G_{n-1}$ is abelian, $\mathcal{D}^{1}(G) \lhd G_{n-1}$. Thus, there exists some $n_1 \leq n-1$ such that $\mathcal{D}^1(G) \lhd G_{n_1}$ but $\mathcal{D}^1{G} \not{\subseteq} G_{n_1 - 1}$. Note in particular that $\mathcal{D}^1{G}$ is a group that admits a filtration of length $n_1 - 1 < n - 1$. Since $\mathcal{D}^1{G}$ is a normal subgroup of $G_{n_1}$, $\mathcal{D}^1{G} / G_{n_1 - 1}$ is abelian, so that, by induction, the derived series of $\mathcal{D}^1{G}$ eventually becomes trivial, i.e.\ $\mathcal{D}^1{G}$ is solvable. By definition of the derived series, this means that $G$ is solvable.
+\end{proof}
+
+A highly improbable result about connected solvable groups embedded into $\GL{}{V}$ (for some finite-dimensional vector space $V$) is that they happen to have a common eigenvector.
+
+\begin{theorem}[Lie-Kolchin Theorem]
+    Let $G$ be a connected solvable subgroup of $\GL{}{V}$, where $0 \neq V$ is a finite-dimensional $K$-vector space. Then $G$ has a common eigenvector in $V$.
+\end{theorem}
+
+    A proof is given in~\cite[Section~17.6]{humphreys_linear_1975}. A strong consequence of this theorem is that any connected solvable subgroup of $G$ can be simultaneously triangularized. Indeed, the existence of a common eigenvector guarantees that there exists a basis of $V$ such that the first column of every matrix in $G$ has empty entries, except for the first one. Using an inductive argument on the lower right matrices, we can continue the triangularization.
+
+\subsubsection{Borel subgroups}
+A Borel subgroup is a subgroup of an algebraic group satisfying many interesting characteristics of algebraic groups. They are foundational in the study of these, as they give rise to projective spaces.
+
+\begin{defn}
+    Let $G$ be an algebraic group. A subgroup $B \leq G$ is a \emph{Borel subgroup} if it is connected, solvable and maximal with respect to inclusion among subgroups that are solvable and connected.
+\end{defn}
+
+Being connected and solvable are two conditions that are preserved by taking the Zariski closure of a subgroup, so that a Borel subgroup is always closed.
+
+The main reason to care at all about Borel subgroups of an algebraic group $G$ is that their corresponding quotient group naturally inherits the structure of a projective variety, and they are the smallest sugbgroups of $G$ having this property. Furthermore, they are all conjugate to one another.
+
+\begin{theorem}
+    Let $B$ be a Borel subgroup of $G$. The space $G/B$ is a projective variety, and all Borel subgroups of $G$ are conjugate to $B$.
+
+    Furthermore, any subgroup $P \leq G$ such that $G/P$ is projective contains a Borel subgroup. Such subgroups are called \emph{parabolic}.
+\end{theorem}
+
+A proof of this theorem is found in~\cite[Section~21.3]{humphreys_linear_1975}, and essentially relies on the existence of a fixed point of the action of a Borel subgroup on a projective (or, more generally, complete) variety. This fact will furthermore allow a more concrete look at how Borel subgroups are conjugate to one another.
+
+\begin{theorem}[Fixed Point Theorem]\label{prop:fixed_pt}
+    Let $G$ be a connected solvable algebraic group, and $X$ be a nonempty projective variety on which $G$ acts. Then $G$ has a fixed point in $X$.
+\end{theorem}
+
+Let us expand on the use of this theorem in the proof. We will assume that, for a specific Borel subgroup $S$ of $G$, we can prove that $G/S$ is projective. Let $B$ be another Borel subgroup of $G$. By the Fixed Point Theorem, $B$ has a fixed point in $G/S$, i.e.~there is a class $gS \in G/S$ such that $BgS = gS$. Equivalently, $g^{-1} B g \subseteq S$. The conjugate of a Borel subgroup is also a Borel subgroup. By maximality of Borel subgroups, the inclusion must be an equality, i.e. $g^{-1} B g = S$. In particular, all Borel subgroups are conjugate, and the space $G/S$ classifies the Borel subgroups of $G$. In fact, this classification is $1-1$.
+
+\begin{theorem}\label{thm:GB_space}
+    Let $G$ be an algebraic group. $\mathfrak{B}$ be the collection of all its Borel subgroup, and $B$ be a Borel subgroup of $G$, There is a $1-1$ correspondance between $\mathfrak{B}$ and the projective space $G/B$
+\end{theorem}
+In order to prove this result, we need a fundamental result about the normalizer of a Borel subgroup, called the normalizer theorem.
+\begin{theorem}[Normalizer theorem]
+    Let $B$ be a Borel subgroup of $G$. Then $B = N_G(B)$.
+\end{theorem}
+A proof is found in\cite[Section~23.1]{humphreys_linear_1975}.
+
+\begin{proof}[Proof of \cref{thm:GB_space}]
+    This proof follows discussions in~\cite[Section~21.3]{humphreys_linear_1975} and~\cite[Section~23.3]{humphreys_linear_1975}.
+    Let us define a map $\phi: \mathfrak{B} \rightarrow G/B$. Let $B'$ be a Borel subgroup of $G$. By the fixed point theorem, there is a fixed point $gB \in G/B$ by the action of $B'$. We set $\phi(B') = gB \in G/B$. Note this is well-defined. Indeed, assume there is another fixed point $hB \in G/B$. Then $g B g^{-1} = B' = h B h^{-1}$, so $B = g^{-1} h B {(g^{-1}h)}^{-1}$. In particular, $g^{-1} h \in N_G(B)$. By the normalizer theorem, $N_G(B) = B$, so that $g^{-1} h \in B$, and $g B = h B$ in $G/B$, so that the fixed point is actually unique, and $\phi$ is well-defined. \\
+    It is surjective because, for any $gB$ in $G/B$, $g B g^{-1}$ is a valid preimage. It is furthermore injective. Indeed, let $B', B''$ be two Borel subgroups such that $\phi(B') = \phi(B'')$. By definition of $\phi$, this means that $B'$ and $B''$ fix the same point $g B$. Thus $B' = g B g^{-1} = B''$.
+\end{proof}
+
+\subsubsection{Some computations}
+Let $G = \SLnC$ be the group of $n \times n$ matrices of determinant $1$ over $\CC$. Let $B \leq G$ be the subgroup consisting of upper triangular matrices of determinant $1$. Since $B$ is generated by the subgroups $U_{ij}$ ($j > i$) and $H_k$ ($1 \leq k \leq n-1$) (see \cref{subsubection:connectivity}), $B$ is connected. Furthermore, it is closed in $G$ since it is defined by the equations ${(a_{ij} = 0)}_{i > j}$. 
+
+Note that $B$ is also solvable. Indeed, consider the filtration of $B$ given by
+\[ e = U^{(n-1)} \lhd \cdots \lhd U^{(1)} \lhd U^{(0)} \lhd B, \]
+where $U^{(i)}$ is the subgroup of $B$ consisting of matrices with ones on the diagonal, and zero entries on the first $i$ super-diagonals. Each successive quotient can be identified with a product of copies of $\CC^*$, so that they are indeed abelian. Finally, using the Lie-Kolchin theorem, it is maximal since any connected solvable subgroup of $\SLnC$ is conjugate to a subgroup of $B$, and conjugation preserves dimension.
+
+Consequently, $B$ is a Borel subgroup of $\SLnC$, called the \emph{standard Borel subgroup} of $\SLnC$. As was discussed in~\cref{subsubsection:homogeneous_motivation}, the quotient space $\SLnC/B$ is the flag variety $\flag{\CC^n}$, which is indeed a projective variety. 
+
+Let $B'$ be another Borel subgroup of $\SLnC$. Since $B'$ acts on $\flag{\CC^n}$ and is by definition connected and solvable, using the Fixed Point theorem, there is a flag $F \in \flag{\CC^n}$ such that $B'$ is the stabilizer of $F$. Since the orbit of the standard flag $F_{\textnormal{std}}$ via the action of $\SLnC$ is the whole space, there is an element $g \in G$ such that $g \cdot F_{\textnormal{std}} = F$. In particular,
+\begin{align*}
+B' &= \textnormal{Stab}_{\SLnC}(F) = \left\{h \in \SLnC ~\middle|~ h \cdot F = F \right\} \\ 
+&= \left\{h \in \SLnC ~\middle|~ h \cdot (g \cdot F_\textnormal{std}) = g \cdot F_\textnormal{std} \right\} \\
+&= \left\{h \in \SLnC ~\middle|~ (g^{-1} \cdot h \cdot g) \cdot F_\textnormal{std} =  F_\textnormal{std} \right\} \\
+& = \left\{h \in \SLnC ~\middle|~ g^{-1} \cdot h \cdot g \in B \right\} .
+\end{align*} 
+
+This equality precisely means that $B' \subseteq g B g^{-1}$. By maximality of $B'$, we conclude that $B' = g B g^{-1}$, so that $B'$ is indeed conjugate to the standard Borel subgroup.
+
+As a concrete example, let $B_-$ denote the Borel subgroup of lower triangular matrices of determinant $1$, and let $I_-$ be the anti-diagonal matrix with ones on the diagonal going up, and a $-1$ in the upper right corner if $n$ is even. Then $B_- = I_- B {(I_-)}^{-1}$.
+
+In the case of $\SLnC$, the parabolic subgroups and different flag varieties take a very explicit combinatorial description. We detail the computations in the case $n=3$, with the standard Borel subgroup $B$. Parabolic subgroups of $\SLnC$ containing $B$ stabilize specific partial subgflags of the fundamental flag. They are nested as follows.
+
+% https://q.uiver.app/#q=WzAsNCxbMCwxLCJcXGJlZ2lue3BtYXRyaXh9KiAmICogJiAqIFxcXFwgMCAmICogJiAqIFxcXFwgMCAmICogJiAqIFxcZW5ke3BtYXRyaXh9Il0sWzEsMCwiXFxiZWdpbntwbWF0cml4fSogJiAqICYgKiBcXFxcIDAgJiAqICYgKiBcXFxcIDAgJiAwICYgKiBcXGVuZHtwbWF0cml4fSJdLFsyLDEsIlxcYmVnaW57cG1hdHJpeH0qICYgKiAmICogXFxcXCAqICYgKiAmICogXFxcXCAwICYgMCAmICogXFxlbmR7cG1hdHJpeH0iXSxbMSwyLCJcXGJlZ2lue3BtYXRyaXh9KiAmICogJiAqIFxcXFwgKiAmICogJiAqIFxcXFwgKiAmICogJiAqIFxcZW5ke3BtYXRyaXh9Il0sWzEsMCwiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzEsMiwiIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzAsMywiIiwyLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV0sWzIsMywiIiwwLHsic3R5bGUiOnsiYm9keSI6eyJuYW1lIjoibm9uZSJ9LCJoZWFkIjp7Im5hbWUiOiJub25lIn19fV1d
+\[\begin{tikzcd}[ampersand replacement=\&, sep = small]
+	\& B = \begin{array}{c} \begin{pmatrix}* & * & * \\ 0 & * & * \\ 0 & 0 & * \end{pmatrix} \end{array} \& \\
+	P_1 = \begin{array}{c} \begin{pmatrix}* & * & * \\ 0 & * & * \\ 0 & * & * \end{pmatrix} \end{array} \&\& \begin{array}{c} \begin{pmatrix}* & * & * \\ * & * & * \\ 0 & 0 & * \end{pmatrix}  \end{array} = P_2 \\
+	\& \SL{3}{\CC} = \begin{array}{c} \begin{pmatrix}* & * & * \\ * & * & * \\ * & * & * \end{pmatrix} \end{array}
+	\arrow[draw=none, from=1-2, to=2-1, sloped, "\scalebox{2}{$\subseteq$}"{description}]
+	\arrow[draw=none, from=1-2, to=2-3, sloped ,"\scalebox{2}{$\supseteq$}"{description}]
+	\arrow[draw=none, from=2-1, to=3-2, sloped ,"\scalebox{2}{$\supseteq$}"{description}]
+	\arrow[draw=none, from=2-3, to=3-2, sloped ,"\scalebox{2}{$\subseteq$}"{description}]
+\end{tikzcd}\]
+
+By the orbit-stabilizer theorem, a partial flag variety is associated to each of them. For $B$, it is precisely the full flag variety $\flag{\CC^3}$. $P_1$ stabilizes the flag  $0 \subseteq \vspan{e_1} \subseteq \CC^3$, so that its partial flag variety contains flags of type $0 \subseteq V_1 \subseteq \CC^3$, for vector spaces $V_1$ of dimension $1$. $P_2$ stabilizes flags of type $0 \subseteq \vspan{e_1,e_2} \subseteq \CC^3$, so that its flag variety is parametrized by vector spaces of dimension $2$. Finally, $\SL{3}{\CC}$ stabilizes only the trivial flag $0 \subseteq \CC^3$, so that its flag variety is trivial.
+
+\subsection{Weights and roots of an algebraic group}
+
+
+\subsubsection{Lie algebra of an algebraic group}
+
+Let $G$ be an algebraic group. A $K$-derivation is a function $\delta:  k[G] \rightarrow k[G]$ that is $k$-linear and respects the Leibniz rule, i.e. 
+\[ \delta(f \cdot g) = \delta(f) \cdot g + f \cdot \delta(g) \]
+for all $f, g \in k[G]$. The space of $K$-derivations of $k[G]$ is written $\textnormal{Der}(k[G])$.
+
+Recall that $G$ acts on $k[G]$ by left translation. One may therefore consider the subspace of $\textnormal{Der}(k[G])$ consisting of left-invariant derivations, which motivates the following definition.
+
+\begin{defn}
+    Let $G$ be an algebraic group. The \emph{Lie algebra of G}, denoted $\mathfrak{g}$, is the space
+    \[ \mathcal{L}(G) = \left\{\delta \in \textnormal{Der}(k[G]) ~\middle|~ \lambda_g \delta = \delta \lambda_g \textnormal{ for all } g \in k[G]\right\}.\]
+\end{defn}
+
+This space is closed under addition and the standard bracket operation $[\delta, \delta'] = \delta \delta' - \delta' \delta$, so that it is indeed a Lie algebra.
+
+It can be shown that this space is actually isomorphic to the tangent space at the neutral element $\mathcal{T}{(G)}_e$. Consequently, any morphism of algebraic groups $\phi: G \to G'$ induces a morphism on their Lie algebras via the differential, namely $d \phi_e: \mathfrak{g} \to \mathfrak{g}'$, which we will denote for conciseness $d \phi$.
+
+Recall (\cref{subsubsection:actions}) the definition of the inner automorphism $\Inner{g} : G \to G$. Taking its differential yields a map from $\mathfrak{g}$ to $\mathfrak{g}$, which we denote $\Ad{g}$, and which is an automorphism of $\mathfrak{g}$. This in turns gives a map $\Ad{}: G \rightarrow \textnormal{Aut}(\mathfrak{g}) \subseteq \GL{}{\mathfrak{g}}$, which is called the \emph{adjoint representation} of $G$.
+
+In case $G$ is a subgroup of $\GL{n}{K}$, the adjoint representation is very explicit:
+\begin{lemma}
+    Let $g \in \GL{n}{K}$, $x \in \mathfrak{gl}_n(K)$. Then $\Ad{g} (x) = g x g^{-1}$.
+\end{lemma}
+This result is shown in~\cite[Section~10.3]{humphreys_linear_1975}.
+
+\subsubsection{Character group and weights of an algebraic group}
+While the theory of weights can be studied in general for so-called $d$-groups, it will only be of interest to us to study it specifically in the case of tori of an algebraic group.
+
+\begin{defn}
+    Let $G$ be an algebraic group.
+    A closed subgroup $T \leq G$ is called \emph{a torus} if it is isomorphic to $\D{n}{K} < \GL{n}{K}$ for some $n \in \ZZ_{>0}$. It is \emph{maximal} if it is contained in no other torus
+\end{defn}
+
+Equivalently, a torus is a subgroup that is connected and diagonalizable (i.e.~admits a closed embedding into some $\D{n}{K}$). Both properties are preserved by morphisms of algebraic groups, so that the image of a torus is also a torus.
+
+Note that the subgroup of $\SL{n}{K}$ consisting of diagonal matrices is isomorphic to $\D{n-1}{K}$. Indeed, imposing the determinant being $1$ uniquely determines the last value of the diagonal.
+
+Clearly, a torus is connected and solvable (since $\Gm$ is connected and solvable, and $\D{n}{K}$ is a product of $\Gm$), so that every torus is contained in at least one Borel subgroup of $G$.
+
+Maximal tori are particularly well-behaved in the case of connected solvable algebraic groups, and give to such a group the structure of a semi-direct product.
+
+\begin{theorem}
+    Let $G$ be a connected solvable algebraic group.\\
+    The set of all its unipotent elements $G_u$ is a closed connected normal subgroup of $G$. Furthermore, all maximal tori of $G$ are conjugate and, if $T$ is one of them, $G = T \ltimes G_u$.
+\end{theorem}
+A proof is given in~\cite[Section~19.3]{humphreys_linear_1975}. This implies in particular that any Borel subgroup can be seen as a semi-direct product of a maximal torus and a unipotent group. Furthermore, since all maximal tori of a Borel subgroup are conjugate, and all Borel subgroups are conjugate, all maximal tori of an algebraic group are conjugate.
+
+Since tori are diagonalizable, their representation theory is completely reducible into one-dimensional subspaces. This motivates the study of characters, which serve as the labels for these one-dimensional components.
+\begin{defn}
+    Let $G$ be an algebraic group.
+    The \emph{character group} of $G$, denoted $\X{G}$, is the group of morphisms $\chi: G \rightarrow \Gm$.
+\end{defn}
+
+Note it is indeed a group, with multiplication given pointwise. For ease of notation, and since the group is abelian, the group operation will be denoted additively. The neutral element is given by sending every $g \in G$ to $1 \in \Gm$, and the inverse of a character $\chi \in \X{G}$ is given by $\iota \circ \chi$.
+
+\begin{exmp}[The character group of $\SL{n}{K}$]
+    One may show that, if $n \geq 2$, then ${\SL{n}{K} = (\SL{n}{K}, \SL{n}{K})}$. This is because the set of elementary matrices $E_n(K)$ generates $\SL{n}{K}$,  and $E_n(K) \subseteq (\SL{n}{K}, \SL{n}{K})$. As a consequence, notice that if $\chi \in \X{\SL{n}{K}}$, then, for any commutator $M N M^{-1} N^{-1} \in (\SL{n}{K}, \SL{n}{K})$, 
+    \[\chi(M N M^{-1} N^{-1}) = \chi(M) \chi(N) \chi{(M)}^{-1} \chi{(N)}^{-1} = 1\]
+    since $\Gm$ is commutative. Since $\SL{n}{K}$ is generated by commutators, any character is trivial. Consequently, $\X{\SL{n}{K}} = 1$.
+\end{exmp}
+
+While the character group of $\SL{n}{K}$ is trivial, the character group of a maximal torus ${T \subset \SL{n}{K}}$ is rich and forms the basis for the weight theory. The restriction of a representation of $G$ to a maximal torus $T$ decomposes into a direct sum of eigenspaces, each corresponding to a character of $T$.
+
+\begin{defn}\textnormal{\cite[Section~16.4]{humphreys_linear_1975}} 
+    Let $V$ be a $K$-vector space and $T \subseteq \GL{}{V}$ be a torus. Let $\alpha \in \X{T}$ be a character. Define the subspace $V_{\alpha}$ of $V$ as
+    \[ V_{\alpha} = \left\{v \in V ~\middle|~ t. v = \alpha(t).v \text{ for all } t \in T \right\}.\]
+    The character $\alpha$ is called a \emph{weight} of $T$ in $V$ if $V_{\alpha} \neq 0$.
+
+    Let $G$ be an algebraic group, $T \subseteq G$ a torus. The group $\Ad{T}$ is a torus in $\GL{}{\mathfrak{g}}$. Its non-zero weights are called the \emph{roots of $G$ relative to $T$}, denoted $\Phi(G,T)$.
+\end{defn}
+The name of root isn't arbitrary, and is chosen because the roots of a semisimple group with respect to a maximal torus actually form a root system. Furthermore, any choice of maximal torus in a semisimple group yields the same root system, as they are all conjugate.
+
+\begin{exmp}[Weigts and roots of $\SLnC$]
+    Let $G = \SLnC$ and let $T$ be the subgroup of diagonal matrices. Any element $t \in T$ can be written as $t = \text{diag}(t_1, \ldots, t_n)$ with $\prod t_i = 1$. The character group $\X{T}$ is a free abelian group of rank $n-1$, generated by the projection maps $\varepsilon_i: t \mapsto t_i$ for $i = 1, \ldots, n-1$. Note that the last projection $\varepsilon_n$ is given by $- (\varepsilon_1 + \cdots + \varepsilon_{n-1})$.\\
+    Consider the standard representation $V = \CC^n$. The action of $T$ on the standard basis vectors $e_i$ is given by $t \cdot e_i = t_i e_i = \varepsilon_i(t) e_i$. Thus, the weights of $V$ are precisely $\varepsilon_1, \ldots, \varepsilon_n$.\\
+Now consider the adjoint representation on $\mathfrak{g} = \mathfrak{sl}_n(\CC)$, the algebra of matrices with trace zero. The basis elements are $e_{ij}$ (matrix with 1 at $(i,j)$ and 0 elsewhere) for $i \neq j$, and $h_k = e_{kk} - e_{k+1, k+1}$. The action of an element $t \in T$ on the basis elements is $t e_{ij} t^{-1} = t_i t_j^{-1} e_{ij}$, while its action on $h_k$ is $t h_k t^{-1} = h_k$ since diagonal matrices commute. Thus, the weights of the adjoint representation are $\alpha_{ij} = \varepsilon_i - \varepsilon_j$ for $i \neq j$, with the associated vector space $V_{\alpha_{ij}}$ being spanned by $e_{ij}$.
+\end{exmp}
+
+\begin{exmp}[Comparing roots of $\SL{2}{\CC}$ and $\textnormal{PGL}(2)(\CC)$]
+    To see why it is interesting to study algebraic groups instead of only studying their Lie algebra, consider the algebraic groups $\SL{2}{\CC}$ and $\textnormal{PGL}(2)(\CC) = \GL{2}{\CC}/\CC*$. It is well-known that their Lie algebras are the same, namely $\mathfrak{sl}(2)(\CC)$. The computations in the previous example allow us to see that the roots of $\SL{2}{\CC}$ are $\pm  (\varepsilon_1 - \varepsilon_2) $. Since $\varepsilon_2 = - \varepsilon_1$, using the isomorphism $X(T) = \ZZ$, these roots are actually $\pm 2$. On the other hand, the same computations for $\textnormal{PGL}(2)(\CC)$ yield that its roots are $\pm 1$. This is because, wheras the torus of $\SL{2}{\CC}$ is given by diagonal matrices of the form $\begin{pmatrix}
+        \lambda & 0 \\
+        0 & 1/\lambda
+    \end{pmatrix}$, the torus in $\textnormal{PGL}(2)(\CC)$ consists instead of equivalence classes of matrices of the form $\begin{pmatrix}
+        \lambda & 0 \\
+        0 & 1
+    \end{pmatrix}$.
+
+\end{exmp}
+
+\subsubsection{The root system}
+
+So far, the roots of $G$ relative to $T$ have been defined as characters in $X(T)$. To study them geometrically — and in particular to define an inner product and a notion of positivity — we embed them into a real vector space.
+
+\paragraph{Extending scalars.}
+
+Since $T \cong {\Gm}^{l}$ for $l = \dim T$ (the \emph{rank} of $G$), the character group $X(T)$ is a free abelian group of rank $l$~\cite[Section~16.2]{humphreys_linear_1975}. Extending scalars to $\RR$ yields the real vector space
+\[
+E = X(T) \otimes_{\ZZ} \RR \cong \RR^{l},
+\]
+into which $X(T)$ embeds as a full-rank lattice via $\chi \mapsto \chi \otimes 1$. In particular, the roots $\Phi = \Phi(G,T) \subset X(T)$ may be viewed as a finite subset of $E$.
+
+\paragraph{The Weyl group.}
+
+The normalizer $N_G(T)$ of $T$ in $G$ acts on $T$ by conjugation. Since $G$ is connected reductive and $T$ is maximal, the centralizer satisfies $C_G(T) = T$~\cite[Section~26.2]{humphreys_linear_1975}. The quotient
+\[
+W = N_G(T)/T
+\]
+is therefore a finite group, called the \emph{Weyl group} of $G$ with respect to $T$. It acts on $X(T)$ via $(\sigma \cdot \chi)(t) = \chi(n^{-1}tn)$ for any representative $n \in N_G(T)$ of $\sigma \in W$; this is well-defined since $T$ acts trivially on $X(T)$. Extending by linearity gives a faithful action of $W$ on $E$ by $\RR$-linear automorphisms.
+
+    For $G = \SL{n}{K}$ with $T$ the diagonal torus, an element $n \in N_G(T)$ must permute the coordinate characters $\varepsilon_i$. One can show that $W \cong \mathfrak{S}_n$, the symmetric group acting on $X(T)$ by permuting the indices: $\sigma \cdot \varepsilon_i = \varepsilon_{\sigma(i)}$.
+
+\paragraph{Abstract root systems.}
+
+The structure formed by the roots admits a clean axiomatic description.
+
+\begin{defn}
+    Let $E$ be a finite-dimensional real vector space equipped with an inner product $(\cdot, \cdot)$. A \emph{root system} in $E$ is a finite subset $\Phi \subset E \setminus \{0\}$ satisfying the following axioms:
+    \begin{enumerate}
+        \item $\Phi$ spans $E$;
+        \item for each $\alpha \in \Phi$, the reflection
+        \[
+        \sigma_\alpha : E \to E, \qquad \sigma_\alpha(\lambda) = \lambda - \frac{2(\lambda,\alpha)}{(\alpha,\alpha)}\,\alpha
+        \]
+        preserves $\Phi$;
+        \item for all $\alpha, \beta \in \Phi$, the \emph{Cartan integer} $\langle \beta, \alpha^\vee \rangle := \dfrac{2(\beta,\alpha)}{(\alpha,\alpha)}$ lies in $\ZZ$.
+    \end{enumerate}
+    The element $\alpha^\vee = \dfrac{2\alpha}{(\alpha,\alpha)}$ is the \emph{coroot} of $\alpha$, and the subgroup of $\GL{}{E}$ generated by all reflections $\sigma_\alpha$ is the \emph{Weyl group} of $\Phi$.
+\end{defn}
+
+Note that axiom (2) forces $-\alpha \in \Phi$ whenever $\alpha \in \Phi$ (since $\sigma_\alpha(\alpha) = -\alpha$), so roots come in pairs $\pm\alpha$.
+
+\paragraph{The root system of $G$.}
+
+We can now state the fundamental structural result, shown in~\cite[Section~27.1-27.2]{humphreys_linear_1975}.
+
+\begin{theorem}\label{thm:root_system}
+    Let $G$ be a connected semisimple algebraic group with maximal torus $T$. The roots $\Phi(G,T) \subset E$ form a root system in $E$, and its Weyl group is naturally isomorphic to $W = N_G(T)/T$.
+\end{theorem}
+
+\begin{exmp}[The root system of $\SL{n}{K}$]\label{ex:sln_roots}
+For $G = \SL{n}{K}$ with diagonal torus $T$, the character group $X(T) = \ZZ\varepsilon_1 \oplus \cdots \oplus \ZZ\varepsilon_{n-1}$ (with $\varepsilon_n = -(\varepsilon_1 + \cdots + \varepsilon_{n-1})$) embeds into
+\[
+E = \bigl\{(x_1,\ldots,x_n) \in \RR^n ~\big|~ x_1 + \cdots + x_n = 0\bigr\}.
+\]
+The roots $\Phi = \{\varepsilon_i - \varepsilon_j \mid i \neq j\}$ span this hyperplane, and the restriction of the standard inner product on $\RR^n$ is $W$-invariant. Since $(\varepsilon_i - \varepsilon_j, \varepsilon_i - \varepsilon_j) = 2$, each coroot satisfies ${(\varepsilon_i - \varepsilon_j)}^\vee = \varepsilon_i - \varepsilon_j$, and the reflection $\sigma_{\varepsilon_i - \varepsilon_j}$ swaps $\varepsilon_i$ and $\varepsilon_j$ --- corresponding to the transposition $(ij) \in \mathfrak{S}_n \cong W$.
+\end{exmp}

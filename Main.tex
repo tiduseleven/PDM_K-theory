@@ -1,0 +1,45 @@
+\documentclass[11pt, a4paper]{article}
+% chktex-file 18
+%in that file you will find the packages and other macro needed like \R for the real number set. 
+\input{Preamble}
+
+\date{\today}
+\addbibresource{biblio.bib}
+\begin{document}
+
+%this creates the title page. You must complete the information there
+\hypersetup{pageanchor=false} 
+\input{Titlepage}
+
+\clearpage
+\pagestyle{empty}
+\tableofcontents
+\clearpage
+\hypersetup{pageanchor=true} % to start numbering after title and ToC pages
+\pagenumbering{arabic}
+\setcounter{page}{1}
+
+\pagestyle{plain}
+\sloppypar{}
+
+\include{introduction}
+
+\include{algebraic_variety}
+
+\include{algebraic_groups}
+
+\include{highest_weight}
+
+\include{borel_weil}
+
+\clearpage
+\begin{appendices}
+
+\end{appendices}    
+\clearpage
+
+\printbibliography{}
+
+
+\end{document}
+
