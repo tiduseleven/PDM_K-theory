@@ -18,53 +18,40 @@
 \usepackage[title,titletoc]{appendix}
 \usepackage{booktabs}
 \usepackage{enumitem} 
+\usepackage{nicefrac}
 \usepackage[]{hyperref}
 \usepackage[capitalize]{cleveref}
 \usepackage{comment}
-\crefname{theorem}{Proposition}{Propositions}
+\crefname{theorem}{Theorem}{Theorems}
 
+% new commands
 
-\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
-\renewcommand{\phi}{\varphi}
 \newcommand{\eqtext}[1]{\ensuremath{\stackrel{#1}{=}}}
 \newcommand{\leqtext}[1]{\ensuremath{\stackrel{#1}{\leq}}}
+\newcommand{\Fab}[1]{\textnormal{F}_{\textnormal{ab}} \left(#1\right)}
+\newcommand{\Proj}[1]{\mathcal{P}\left(#1\right)}
+\newcommand{\GL}[1]{\textnormal{GL}\left(#1 \right)}
+\newcommand{\E}[1]{\textnormal{E}\left(#1\right)}
+\newcommand{\Iso}[1]{\textnormal{Iso}\left(#1\right)}
+% Paragraph environments
+
 \theoremstyle{plain}
-\newtheorem{theorem}{Proposition}[section]
+\newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \theoremstyle{definition}
 \newtheorem{exmp}[theorem]{Example}
 \newtheorem{defn}[theorem]{Definition}
 \theoremstyle{remark}
 \newtheorem{remark}[theorem]{Remark}
-\DeclareMathOperator{\im}{Im}
+
+% Symbols
+
 \newcommand{\NN}{\mathbb{N}}
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\EE}{\mathbb{E}}
 \newcommand{\CC}{\mathbb{C}}
 \newcommand{\PP}{\mathbb{P}}
-\newcommand{\Gm}{\mathbb{G}_m}
-\newcommand{\Ga}{\mathbb{G}_a}
-\newcommand{\Gr}{\mathfrak{G}}
-\newcommand{\affn}[2]{\mathbb{A}^{#1}_{#2}}
-\newcommand{\ank}{\affn{n}{K}}
-\newcommand{\proj}[2]{\mathbb{P}^{#1}_{#2}}
-\newcommand{\SL}[2]{\textnormal{SL}_{#1}\left(#2\right)}
-\newcommand{\GL}[2]{\textnormal{GL}_{#1}\left(#2\right)}
-\newcommand{\D}[2]{\textnormal{D}_{#1}\left(#2\right)}
-\newcommand{\T}[2]{\textnormal{N}_{#1}\left(#2\right)}
-\newcommand{\SLnC}{\SL{n}{\CC}}
-\newcommand{\pnk}{\proj{n}{K}}
-\newcommand{\B}[2]{\textnormal{B}_{#1}\left(#2\right)}
-\newcommand{\X}[1]{\textnormal{X}\left(#1\right)}
-\newcommand{\Ad}[1]{\textnormal{Ad}~#1}
-\DeclareMathOperator{\Inner}{Int}
-\DeclareMathOperator{\Adjoint}{Ad}
-\newcommand{\Sym}[2]{\textnormal{Sym}_{#1}\left(#2\right)}
-\newcommand{\vspan}[1]{\textnormal{span}\left(#1\right)}
-\newcommand{\orbit}[2]{\textnormal{Orb}_{#1}\left(#2\right)}
-\newcommand{\stab}[2]{\textnormal{Stab}_{#1}\left(#2 \right)}
-\newcommand{\flag}[1]{\mathfrak{F}\left(#1\right)}
 
-\newcommand{\epl}{\varepsilon}
-
+% Math operators
+\DeclareMathOperator{\Ob}{Ob}
