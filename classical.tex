@@ -63,7 +63,17 @@ Recall the construction of the classifying space of a group.
 Since $\GL{R}$ is a group, we may construct its classifying space $\B \GL{R}$ and apply the $+$-construction to this space to obtain $\B \GL{R}^+$. Since the largest perfect subgroup of $\pi_1(\B \GL{R}) = \GL{R}$ is $E(R)$, we obtain by definition that 
 \[ \pi_1(\B \GL{R}^+) = \nicefrac{\GL{R}}{E(R)} = K_1(R). \]
 
-$\text{GL}(R)$
+This motivates the following definition
 
-$\text{GL}\lparen R\rparen$
+\begin{defn}
+    Let $R$ be a ring. The \emph{$K$-theory space} of $R$ is defined as
+    \[ K(R) = K_0(R) \times \B \GL{R}^+, \]
+    where $K_0(R)$ is given the discrete topology.
+    The \emph{$K$-theory groups} of $R$ are the homotopy groups of $K(R)$, i.e.
+    \[ K_i(R) = \pi_i(K(R)). \]
+\end{defn}
+
+Since $\B \GL{R}^+$ is connected, we se that $\pi_0(K(R)) = K_0(R)$, so that this definition agrees with the classical lower $K$-groups.
+
+
 \subsection{Waldhausen categories}
