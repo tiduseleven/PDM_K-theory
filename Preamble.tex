@@ -28,11 +28,17 @@
 
 \newcommand{\eqtext}[1]{\ensuremath{\stackrel{#1}{=}}}
 \newcommand{\leqtext}[1]{\ensuremath{\stackrel{#1}{\leq}}}
-\newcommand{\Fab}[1]{\textnormal{F}_{\textnormal{ab}} \left(#1\right)}
-\newcommand{\Proj}[1]{\mathcal{P}\left(#1\right)}
-\newcommand{\GL}[1]{\textnormal{GL}\left(#1 \right)}
-\newcommand{\E}[1]{\textnormal{E}\left(#1\right)}
-\newcommand{\Iso}[1]{\textnormal{Iso}\left(#1\right)}
+\newcommand{\Fab}[1]{\textnormal{F}_{\textnormal{ab}} \lparen#1\rparen}
+\newcommand{\Proj}[1]{\mathcal{P}\lparen#1\rparen}
+\newcommand{\GL}[1]{\text{GL}\lparen#1 \rparen}
+\newcommand{\E}[1]{\textnormal{E}\lparen#1\rparen}
+\newcommand{\Iso}[1]{\textnormal{Iso}\lparen#1\rparen}
+
+% Source - https://tex.stackexchange.com/a/618860
+% Posted by David Carlisle, modified by community. See post 'Timeline' for change history
+% Retrieved 2026-10-06, License - CC BY-SA 4.0
+
+
 % Paragraph environments
 
 \theoremstyle{plain}
@@ -55,3 +61,4 @@
 
 % Math operators
 \DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\B}{B}
