@@ -1,0 +1,64 @@
+\section[The K-theory of categories with covering families]{The $K$-theory of categories with covering families}
+In an effort to bring the tools of algebraic $K$-theory to combinatorial settings, such as graphs, Bohmann et al. introduced in 2024 the notion of categories with covering families, to which one may associate a spectrum that properly captures the expected properties of $K$-theory.
+
+\subsection{Categories with covering families}
+As the name suggests, a covering family will encapsulate the notion of an object being covered by one more many other objects. This motivates the following definition.
+
+\begin{defn}
+    Let $\CC$ be a category. A multi-morphism in $\CC$ is an object $B \in \Ob\CC$ with a finite set of morphisms with codomain $B$
+    \[ \left\{ f_i : A_i \to B \right\}_{i \in I}. \]
+\end{defn}
+
+To have a suitable notion of category with covering families, one may intuitively want to have at least a covering family for each object, as well as having some notion of composition of covering families.
+
+\begin{defn}
+    Let $\CC$ be a category. A \emph{covering family structure} on $\CC$ is a collection of multi-morphisms, called \emph{covering families}, such that
+    \begin{itemize}
+        \item for each $A \in \Ob \CC$, the singleton containing the identity $\left\{ A \xto{\Id{A}} A\right\}$ is a covering family;
+        \item Given a covering family
+            \[ \left\{ g_j : B_j \to C \right\}_{j \in J} \]
+            and, for each $j \in J$, a covering family
+            \[ \left\{ f_{ij} : C_{ij} \to B_j \right\}_{i \in I_j},\]
+            then the collection of all composites
+            \[ \left\{ g_j \circ f_{ij} :  \to A \right\}_{j \in J, i \in I_j} \]
+            is a covering family.
+    \end{itemize}
+
+    A \emph{category with covering families} is a small category $\CC$, a covering family structure on $\CC$ and a distinguished basepoint $* \in \Ob \CC$, such that
+    \begin{itemize}
+        \item $\Hom{*}{*} = \{\Id{*}\}$ and $\Hom{C}{*} = \varnothing$ for any $C \neq *$;
+        \item for every finite set $I$, the family $\{* \to *\}_{i \in I}$ is a covering family.
+    \end{itemize}
+\end{defn}
+
+\begin{remark}
+    While the additionnal requirements of a category with covering families seen arbitrary, they are necessary for the whole theory to be well-founded. Furthermore, any category can be given a basepoint in two different ways:
+    \begin{itemize}
+        \item Adding a disjoint basepoint $*$, such that $\Hom{*}{*} = \{\Id{*}\}$ and $\Hom{*}{C} = \Hom{C}{*} = \varnothing$ for any $C \neq *$, giving the category $C_+$
+        \item Adding an initial basepoint $*$, such that $\Hom{*}{C}$ has a single morphism for any $C \in \Ob\CC$ and $\Hom{C}{*} = \varnothing$ for any $C \neq *$, forming the category $C_*$.
+    \end{itemize}
+    In the latter case, the covering family structure needs to be redefined, so that, for any $C \in \Ob\CC_*$, a collection of maps to $C$ is a covering family if and only if it arises from a covering family in $\CC$ to which a finite collection of morphisms $\{ * \to C \}$ was added.
+\end{remark}
+
+\begin{exmp}
+    Let $X$ be a topological space and let $\CC$ be the category consisting of open sets, with morphisms given by inclusions. Then $\CC$ naturally inherits a covering families structure by declaring that $\{U_i \subseteq U\}_{i \in I}$ is a covering family if and only if $\bigcup_{i \in I} U_i = U$. Here, the distinguished basepoint is naturally the empty set. More generally, a Grothendieck site inherits a structure of category with covering families.
+\end{exmp}
+
+\begin{exmp}[ADD CITATION]
+    Let $\Gamma_{\leq n}$ be the category of finite graphs with $n$ or less edges, with morphisms given by inclusions of subgraphs. More precisely, objects are given by pairs of sets $(V,E)$ with an injective map $\partial \to \textnormal{Pair}(V)$, where $\textnormal{Pair}(V)$ is the set of unordered pairs of distinct elements of $V$. A morphism $(V,E, \partial) \to (V',E', \partial')$ is then given by injective maps $f_V : V \to V'$ and $f_E : E \to E'$ such that $\partial'(f_E(e)) = f_V(\partial(e))$.
+
+    There is a natural covering family structure on $\Gamma_{\leq n}$ given by:
+    \begin{itemize}
+        \item for every finite set $I$, the set $\{\varnothing = \varnothing\}_{i\in I}$ is a covering family;
+        \item A collection $\{\iota_i : G_i \to G\}_{i \in I}$ is a covering family if and only if each $G_i$ is a subraph of $G$ such that $\iota_i$ is simply the inclusion, the intersections $G_i \cap G_j$ contain no edges if $i\neq j$, and $G = \bigcup_{i \in I} G_i$.
+    \end{itemize}
+    The basepoint can be chosen to be the empty graph, so that $\Gamma_{\leq n}$ is a category with covering families.
+\end{exmp}
+
+While the two previous examples naturally arise from the intuition of a cover, there are many other ways to obtain covering family structures in other contexts.
+
+\begin{exmp}
+    Let $A$ be a (discrete) abelian group. Consider the category $\mathcal{E} A$ whose objects are elements of $A$ and such that any two objects are connected with a unique morphism. This category inherits a covering families structure by letting $\{a_i \to a\}_{i \in I}$ be a covering family if and only if $\sum_{i \in I} a_i = a$. Since this category does not have a candidate for a distinguished basepoint, we may add a basepoint as described above to get the categories with covering families $\mathcal{E} A_*$ and $\mathcal{E} A_+$.
+\end{exmp}
+
+

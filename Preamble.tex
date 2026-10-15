@@ -33,7 +33,9 @@
 \newcommand{\GL}[1]{\text{GL}\lparen#1 \rparen}
 \newcommand{\E}[1]{\textnormal{E}\lparen#1\rparen}
 \newcommand{\Iso}[1]{\textnormal{Iso}\lparen#1\rparen}
-
+\newcommand{\xto}[1]{\xrightarrow{#1}}
+\newcommand{\Id}[1]{\textnormal{Id}_{#1}}
+\newcommand{\Hom}[2]{\textnormal{Hom}\lparen #1 , #2 \rparen}
 % Source - https://tex.stackexchange.com/a/618860
 % Posted by David Carlisle, modified by community. See post 'Timeline' for change history
 % Retrieved 2026-10-06, License - CC BY-SA 4.0
@@ -45,9 +47,9 @@
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
 \theoremstyle{definition}
-\newtheorem{exmp}[theorem]{Example}
 \newtheorem{defn}[theorem]{Definition}
 \theoremstyle{remark}
+\newtheorem{exmp}[theorem]{Example}
 \newtheorem{remark}[theorem]{Remark}
 
 % Symbols
@@ -56,7 +58,7 @@
 \newcommand{\ZZ}{\mathbb{Z}}
 \newcommand{\RR}{\mathbb{R}}
 \newcommand{\EE}{\mathbb{E}}
-\newcommand{\CC}{\mathbb{C}}
+\newcommand{\CC}{\mathcal{C}}
 \newcommand{\PP}{\mathbb{P}}
 
 % Math operators
