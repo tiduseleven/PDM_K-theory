@@ -29,6 +29,8 @@ To have a suitable notion of category with covering families, one may intuitivel
         \item $\Hom{*}{*} = \{\Id{*}\}$ and $\Hom{C}{*} = \varnothing$ for any $C \neq *$;
         \item for every finite set $I$, the family $\{* \to *\}_{i \in I}$ is a covering family.
     \end{itemize}
+
+    The category $\CatFam$ is the category whose objects are categories with covering families and whose morphisms are basepoint-preserving functors which send covering families to covering families.
 \end{defn}
 
 \begin{remark}
@@ -61,4 +63,42 @@ While the two previous examples naturally arise from the intuition of a cover, t
     Let $A$ be a (discrete) abelian group. Consider the category $\mathcal{E} A$ whose objects are elements of $A$ and such that any two objects are connected with a unique morphism. This category inherits a covering families structure by letting $\{a_i \to a\}_{i \in I}$ be a covering family if and only if $\sum_{i \in I} a_i = a$. Since this category does not have a candidate for a distinguished basepoint, we may add a basepoint as described above to get the categories with covering families $\mathcal{E} A_*$ and $\mathcal{E} A_+$.
 \end{exmp}
 
+To any category with covering families corresponds its category of covers which, as the name suggests, encapsulates the notion of coverings in its morphisms.
 
+\begin{defn}
+    Let $\CC$ be a category with covering families. Its \emph{category of covers} $W(\CC)$ is given by
+        \begin{itemize}
+            \item Objects: finite collections $\left\{A_{i}\right\}_{i \in I}$ of non-distinguished objects;
+            \item Morphisms: A map $f : \left\{A_i\right\}_{i \in I} \to \{B_j\}_{j \in J}$ is a map $f : I \to J$ and maps $f_i : A_i \to B_{f(i)}$ such that 
+            \[ \{ f_i : A_i \to B_j \}_{i \in f^{-1}(j)} \]
+            is a covering family for each $j \in J$.
+        \end{itemize}
+\end{defn}
+
+In particular, morphisms in $W(\CC)$ describe how a collection of non-distinguished objects in $\CC$ may cover another collection of objects in $\CC$.
+
+The construction above yields a functor
+\[ W(-) : \CatFam \to \Cat \]
+because functors in $\CatFam$ preserve both basepoint and covering families.
+
+Since categories with covering families have a basepoint, the category $\CatFam$ naturally inherits an action from the monoidal category of pointed sets. Notice a pointed set $(X, x_0)$ can be seen as a category whose morphisms are identities and a unique morphism $x_0 \to a$ for any element $a \in X$.
+
+\begin{propdef}[Smash product of category with covering families]
+    Let $(\CC, C_0)$ be a category with covering families. There is a functor
+        \[ - \wedge \CC : \FinSet_* \to \CatFam \]
+    which sends a finite pointed set $(X, x_0)$ to the category $X \wedge \CC$, whose objects are
+    \[ \Ob{X \wedge \CC} = \left( \Ob{X} \times \Ob{\CC} \right) \big/ \left({\Ob{X} \vee \Ob{\CC}} \right) \]
+    and morphisms are induced by those of $X \times \CC$.
+\end{propdef}
+
+\begin{proof}
+    There is a natural basepoint in $X \wedge \CC$ given by the class of $(x_0, C_0)$ in $X \wedge \CC$. For an element $(x, C) \in \Ob{X} \times \Ob{\CC}$, denote by $[x, C]$ its class in $X \wedge \CC$. To give $X \wedge \CC$ a covering family structure, we declare that $\left\{[x_i, C_i] \to [x, C]\right\}_{i \in I}$ is a covering family if and only if $x_i = x$ or $x_i = x_0$ for each $i \in I$, and $\{C_i \to C\}_{i \in I}$ is a covering family in $\CC$. This is to be understood as covering families being contained in a single copy of $\CC$, with the basepoint being contained in every copy of $\CC$. Thus, this gives a covering family structure inherited from the one of $\CC$.
+
+    As for the functoriality, let $f : (X, x_0) \to (Y, y_0)$ be a map of based sets, i.e.~such that $f(x_0) = y_0$. It induces a functor $f_* : X \wedge \CC \to Y \wedge \CC$ by letting $f([x, C]) = [f(x), C]$ and, for a morphism $(a, b): [x, C] \to [x', C']$, letting $f((a,b)) = (f(a), b)$, with $f(a)$ defined as the unique morphism from $f(x)$ to $f(x')$.
+
+    To see it preserves covering families, \textbf{blablabla}
+\end{proof}
+
+The way to associate a $K$-theory to a category with covering families will arise from a more general spectrum construction, which we will now detail.
+
+\subsection[Gamma-spaces and their symmetric spectrum]{$\Gamma$-spaces and their symmetric spectrum}
