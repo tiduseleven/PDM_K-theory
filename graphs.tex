@@ -1,7 +1,7 @@
 \section[The K-theory of categories with covering families]{The $K$-theory of categories with covering families}
 In an effort to bring the tools of algebraic $K$-theory to combinatorial settings, such as graphs, Bohmann et al. introduced in 2024 the notion of categories with covering families, to which one may associate a spectrum that properly captures the expected properties of $K$-theory.
 
-\subsection{Categories with covering families}
+\subsection{Categories with covering families}\label{subsection:covering}
 As the name suggests, a covering family will encapsulate the notion of an object being covered by one more many other objects. This motivates the following definition.
 
 \begin{defn}
@@ -66,7 +66,7 @@ While the two previous examples naturally arise from the intuition of a cover, t
 To any category with covering families corresponds its category of covers which, as the name suggests, encapsulates the notion of coverings in its morphisms.
 
 \begin{defn}
-    Let $\CC$ be a category with covering families. Its \emph{category of covers} $W(\CC)$ is given by
+    Let $\CC$ be a category with covering families. Its \emph{category of covers} $\W{\CC}$ is given by
         \begin{itemize}
             \item Objects: finite collections $\left\{A_{i}\right\}_{i \in I}$ of non-distinguished objects;
             \item Morphisms: A map $f : \left\{A_i\right\}_{i \in I} \to \{B_j\}_{j \in J}$ is a map $f : I \to J$ and maps $f_i : A_i \to B_{f(i)}$ such that 
@@ -75,10 +75,10 @@ To any category with covering families corresponds its category of covers which,
         \end{itemize}
 \end{defn}
 
-In particular, morphisms in $W(\CC)$ describe how a collection of non-distinguished objects in $\CC$ may cover another collection of objects in $\CC$.
+In particular, morphisms in $\W{\CC}$ describe how a collection of non-distinguished objects in $\CC$ may cover another collection of objects in $\CC$.
 
 The construction above yields a functor
-\[ W(-) : \CatFam \to \Cat \]
+\[ W : \CatFam \to \Cat \]
 because functors in $\CatFam$ preserve both basepoint and covering families.
 
 Since categories with covering families have a basepoint, the category $\CatFam$ naturally inherits an action from the monoidal category of pointed sets. Notice a pointed set $(X, x_0)$ can be seen as a category whose morphisms are identities and a unique morphism $x_0 \to a$ for any element $a \in X$.
@@ -99,6 +99,43 @@ Since categories with covering families have a basepoint, the category $\CatFam$
     To see it preserves covering families, \textbf{blablabla}
 \end{proof}
 
-The way to associate a $K$-theory to a category with covering families will arise from a more general spectrum construction, which we will now detail.
+The way to associate a $K$-theory to a category with covering families will arise from a more general spectrum construction, which we will now detail. 
 
 \subsection[Gamma-spaces and their symmetric spectrum]{$\Gamma$-spaces and their symmetric spectrum}
+
+\begin{defn}
+    Let $\Gamma$ denote the category consisting of finite sets. A morphism from $X$ to $Y$ consists of a map $f : X \to \mathcal{P}(Y)$ such that $f(x) \cap f(x') = \varnothing$ whenever $x \neq x'$. The composition of two maps $f: X \to \mathcal{P}(Y)$ and $g: Y \to \mathcal{P}(Z)$ is given by ${(g \circ f) (x) = \bigcup_{y \in f(x)} g(y)}$.
+
+    A $\Gamma$-space is a functor $A : \op{\Gamma} \to \Top_*$ such that $A(\varnothing)$ is contractible. It is \emph{special} if the map
+    \[ p : A(\textbf{n}) \to A(\textbf{1}) \times \cdots \times A(\textbf{1}),\]
+    induced by each inclusion $i_k \textbf{1} \hookrightarrow \textbf{n}$ given by $i_k(1) = \{k\}$, is a homotopy equivalence. It is \emph{very special} if it is special and $\pi_0 A(\textbf{1})$ is an abelian group.
+\end{defn} 
+
+While this is the classical perspective on $\Gamma$-spaces as presented in \cite{segal_categories_1974}, there is another way to equivalently describe $\op{\Gamma}$ which is more straightforward.
+
+\begin{prop}
+    The opposite category of $\Gamma$ is equivalent to the category $\FinSet_*$ of finite pointed set.
+\end{prop}
+\begin{proof}
+    We construct a functor $F : \op{\Gamma} \to \FinSet_*$ that is fully faithful and essentially surjective, proving both categories are indeed equivalent
+
+    For a finite set $X \in \Ob{\op{\Gamma}}$, define $F(X) := X \sqcup \{*\}$, with $*$ the distinguished basepoint of $F(X)$. For a map $\op{f} : Y \to X$ in $\op{\Gamma}$ coming from a morphism $f : X \to \mathcal{P} (Y)$ with the images of elements of $X$ pairwise disjoint, for an element $y \in Y \sqcup \{*\}$ we define $F(\op{f})(y)$ as either the only $x$ such that $y \in f(x)$ or $*$ if it is contained in no image.
+
+    This indeed gives a functor. That identites are sent to identites is clear by the addition of the disjoint basepoint, and composition is preserved since the maps $f : X \to \mathcal{P} (Y)$ have disjoint images, thus no choices have to be made.
+
+    The functor $F$ is clearly essentially surjective. For a finite pointed set $(X, x_0)$ the set $X \setminus \{x_0\}$ is sent to $F(X) = (X \setminus \{x_0\}) \sqcup \{*\}$, which is in bijection with $(X, x_0)$ via a bijection that preserves basepoints.
+
+    It is furthermore faithful. Indeed, consider two maps $f, f' : X \to \mathcal{P} (Y)$ such that there exists an $x \in X$ where $f(x) \neq f'(x)$. Without loss of generality, assume there is an element $y \in Y$ that is in $f(x)$ but not in $f'(x)$. Then, $F(\op{f})(y) = x$ yet $F(\op{f'})(y) \neq x$, so $F(\op{f}) \neq F(\op{f'})$.
+
+    Finally, it is full. Indeed, let $f : Y \sqcap \{*\} \to X \sqcap\{*\}$ be a pointed map. We define $g : X \to \mathcal{P}(Y)$ as $g(x) := f^{-1}(x) \cap X$. By definition of $F$, we conclude that $F(\op{g})(y) = f(y)$.
+\end{proof}
+
+Thus, by the previous isomorphism, a $\Gamma$-space may be seen as a covariant functor $A : \FinSet_* \to \Top_*$ such that $A(\textbf{0})$ is contractible. The conditions of being special and very special naturally translate to this version of the definition as well.
+
+In \cref{subsection:covering}, we constructed two different functors. First, for a given category with covering families $\CC$, the functor $- \wedge \CC : \FinSet_* \to \CatFam$. Then, the functor $W : \CatFam \to \Cat$ sending a category with covering families to its category of covers. Thus, for a given category with covering families $\CC$, composing both functors gives a functor from the category of finite pointed sets to the category of small categories. We may then take the geometric realization of the nerve of the resulting category, giving a functor
+
+\[ \abs{N_{\bullet}(\W{- \wedge \CC})} : \FinSet_* \to \Top_*. \]
+
+Since $\textbf{0}$ consists only of the basepoint, the product $\Ob{\textbf{0}} \times \Ob{\CC}$ coincides with $\Ob{\textbf{0}} \vee \Ob{\CC}$, so that $\textbf{0} \wedge \CC$ is trivial. Consequently, so is its category of covers $\W{\textbf{0} \wedge \CC}$. 
+
+

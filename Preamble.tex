@@ -35,7 +35,11 @@
 \newcommand{\Iso}[1]{\textnormal{Iso}\lparen#1\rparen}
 \newcommand{\xto}[1]{\xrightarrow{#1}}
 \newcommand{\Id}[1]{\textnormal{Id}_{#1}}
-\newcommand{\Hom}[2]{\textnormal{Hom}\lparen #1 , #2 \rparen}
+\newcommand{\Hom}[2]{\textnormal{Hom}\lparen{}  #1 , #2 \rparen}
+\newcommand{\op}[1]{#1^{\textnormal{op}}}
+\newcommand{\abs}[1]{\left| #1 \right|}
+\newcommand{\W}[1]{\mathcal{W}\lparen #1 \rparen}
+\newcommand{\Ob}[1]{\Obmathop{\lparen #1 \rparen}}
 % Source - https://tex.stackexchange.com/a/618860
 % Posted by David Carlisle, modified by community. See post 'Timeline' for change history
 % Retrieved 2026-10-06, License - CC BY-SA 4.0
@@ -46,6 +50,7 @@
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[section]
 \newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{prop}[theorem]{Proposition}
 \theoremstyle{definition}
 \newtheorem{defn}[theorem]{Definition}
 \newtheorem{propdef}[theorem]{Proposition/Definition}
@@ -64,7 +69,8 @@
 \newcommand{\CatFam}{\textbf{CatFam}}
 \newcommand{\Cat}{\textbf{Cat}}
 \newcommand{\FinSet}{\textbf{FinSet}}
+\newcommand{\Top}{\textbf{Top}}
 
 % Math operators
-\DeclareMathOperator{\Ob}{Ob}
+\DeclareMathOperator{\Obmathop}{Ob}
 \DeclareMathOperator{\B}{B}
