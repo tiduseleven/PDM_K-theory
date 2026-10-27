@@ -59,8 +59,8 @@ To have a suitable notion of category with covering families, one may intuitivel
 
 While the two previous examples naturally arise from the intuition of a cover, there are many other ways to obtain covering family structures in other contexts.
 
-\begin{example}
-    Let $A$ be a (discrete) abelian group. Consider the category $\mathcal{E} A$ whose objects are elements of $A$ and such that any two objects are connected with a unique morphism. This category inherits a covering families structure by letting $\{a_i \to a\}_{i \in I}$ be a covering family if and only if $\sum_{i \in I} a_i = a$. Since this category does not have a candidate for a distinguished basepoint, we may add a basepoint as described above to get the categories with covering families $\mathcal{E} A_*$ and $\mathcal{E} A_+$.
+\begin{example}\label{example:EA}
+    Let $A$ be a discrete abelian group. Consider the category $\mathcal{E} A$ whose objects are elements of $A$ and such that any two objects are connected with a unique morphism. This category inherits a covering families structure by letting $\{a_i \to a\}_{i \in I}$ be a covering family if and only if $\sum_{i \in I} a_i = a$. Since this category does not have a candidate for a distinguished basepoint, we may add a basepoint as described above to get the categories with covering families $\mathcal{E} A_*$ and $\mathcal{E} A_+$.
 \end{example}
 
 To any category with covering families corresponds its category of covers which, as the name suggests, encapsulates the notion of coverings in its morphisms.
@@ -130,7 +130,9 @@ While this is the classical perspective on $\Gamma$-spaces as presented in \cite
 
     It is furthermore faithful. Indeed, consider two maps $f, f' : X \to \mathcal{P} (Y)$ such that there exists an $x \in X$ where $f(x) \neq f'(x)$. Without loss of generality, assume there is an element $y \in Y$ that is in $f(x)$ but not in $f'(x)$. Then, $F(\op{f})(y) = x$ yet $F(\op{f'})(y) \neq x$, so $F(\op{f}) \neq F(\op{f'})$.
 
-    Finally, it is full. Indeed, let $f : Y \sqcap \{*\} \to X \sqcap\{*\}$ be a pointed map. We define $g : X \to \mathcal{P}(Y)$ as $g(x) := f^{-1}(x) \cap X$. By definition of $F$, we conclude that $F(\op{g})(y) = f(y)$.
+    Finally, it is full. Indeed, let $f : Y \sqcup \{*\} \to X \sqcup\{*\}$ be a pointed map. We define $g : X \to \mathcal{P}(Y)$ as $g(x) := f^{-1}(x) \cap X$. By definition of $F$, we conclude that $F(\op{g})(y) = f(y)$.
+
+    Since essentially surjective, fully faithful functors are equivalences of categories, the categories $\op{\Gamma}$ and $\FinSet_*$ are equivalent.
 \end{proof}
 
 Thus, by the previous isomorphism, a $\Gamma$-space may be seen as a covariant functor $A : \FinSet_* \to \Top_*$ such that $A(\textbf{0})$ is contractible. The conditions of being special and very special naturally translate to this version of the definition as well.
@@ -142,5 +144,66 @@ In \cref{subsection:covering}, we constructed two different functors. First, for
 \[ \abs{N_{\bullet}(\W{- \wedge \CC})} : \FinSet_* \to \Top_*. \]
 
 Since $\textbf{0}$ consists only of the basepoint, the product $\Ob{\textbf{0}} \times \Ob{\CC}$ coincides with $\Ob{\textbf{0}} \vee \Ob{\CC}$, so that $\textbf{0} \wedge \CC$ is trivial. Consequently, so is its category of covers $\W{\textbf{0} \wedge \CC}$. 
+
+
+As a fundamental example of a spectrum coming from a category with covering families, let us consider again the category $\mathcal{E} A_*$ from \cref{example:EA}.
+
+\begin{proposition}\label{prop:EM-spectrum}
+    Let $A$ be a discrete abelian group. The spectrum associated to the category with covering families $\mathcal{E} A_*$ is the Eilenberg-MacLane spectrum of $A$.
+\end{proposition}
+
+To show this, we will use a result about realizations of categories due to Quillen. It makes use of the slice category.
+
+\begin{definition}
+    Let $S : \mathcal{A} \to \mathcal{C}$ and $T : \mathcal{A} \to \mathcal{C}$ be two functors. The \emph{comma category} $S \downarrow T$ is the category whose objects are triples $(A, B, f)$ with $A \in \Ob{A}$, $B \in \Ob{B}$ and $f : S(A) \to T(B)$. A morphism from $(A, B, f)$ to $(A', B', f')$ is given by a pair of morphisms $(f,g)$ where $f: A \to A'$ and $g : B \to B'$ such that the following diagram commutes
+
+    % https://q.uiver.app/#q=WzAsNCxbMCwwLCJTKEEpIl0sWzEsMCwiUyhBJykiXSxbMCwxLCJUKEIpIl0sWzEsMSwiVChCJykiXSxbMCwxLCJTKGcpIl0sWzAsMiwiZiIsMl0sWzIsMywiVChoKSIsMl0sWzEsMywiZiciXV0=
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+        {S(A)} \& {S(A')} \\
+        {T(B)} \& {T(B')}
+        \arrow["{S(g)}", from=1-1, to=1-2]
+        \arrow["f"', from=1-1, to=2-1]
+        \arrow["{f'}", from=1-2, to=2-2]
+        \arrow["{T(h)}"', from=2-1, to=2-2]
+    \end{tikzcd}\]
+\end{definition}
+
+\begin{example}
+    Let $F : \CC \to \DD$ be a functor and $D \in \Ob{\DD}$ be a fixed object. There is a functor $D : \DD \to \DD$ sending each object to $D$ and each morphism to $\Id{d}$. The comma category $F / d$ is then given by pairs $(C, f)$ where $f$ is a morphism from $F(C)$ to $D$. A morphism $g : (C, f) \to (C', f')$ is then given by a morphism $g : C \to C'$ such that the following diagram commutes
+    % https://q.uiver.app/#q=WzAsMyxbMCwwLCJGKEEpIl0sWzIsMCwiRihBJykiXSxbMSwyLCJEIl0sWzAsMSwiRihnKSJdLFswLDIsImYiLDJdLFsxLDIsImYnIl1d
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped]
+        {F(A)} \&\& {F(A')} \\
+        \\
+        \& D
+        \arrow["{F(g)}", from=1-1, to=1-3]
+        \arrow["f"', from=1-1, to=3-2]
+        \arrow["{f'}", from=1-3, to=3-2]
+    \end{tikzcd}\]
+    Such a comma category is usually written $F/D$.
+    
+    Taking $F = \Id{\DD}$ gives rise to what is called the \emph{slice category} $D/d$.
+\end{example}
+
+\begin{theorem}[Quillen's theorem A]
+    Let $F : \CC \to \DD$ be a functor. If, for every $D \in \Ob{D}$, the realization of the comma category $\abs{N_{\bullet}(F/D)}$ is contractible, the induced functor $\abs{N_{\bullet}(\CC)} \to \abs{N_{\bullet}(\DD)}$ is a weak homotopy equivalence.
+\end{theorem}
+
+\begin{proof}[Proof of \cref{prop:EM-spectrum}]
+    We follow the proof from~\cite[Lemma~7.1]{bohmann_trace_2024}.
+
+    Consider the map $F : \FinSet_* \to \Top$ defined by sending a finite pointed set $(X,*)$ to the set 
+    \[ X \otimes A := \bigoplus_{x \in X \setminus \{*\}} A \]
+    equipped with the discrete topology. This is a special $\Gamma$-space. First, it is a functor. A map $f : (X,x_0) \to (Y,y_0)$ induces a map $f_* : X \otimes A \to Y \otimes A$ by sending an element 
+    \[\sum_{x \in X \setminus \{x_0\}} a_x x\]
+    to the element 
+    \[\sum_{x \in X \setminus f^{-1}(y_0)} a_x f(x).\]
+    The composition is associative by associativity of the sum. Furthermore, $F(*) = \varnothing$, making it a $\Gamma$-space. Finally, there is an obvious homeomorphism $F(\textbf{n}) \cong F(\textbf{1}) \times \cdots \times F(\textbf{1})$, since $F(\textbf{n}) \cong A^n$ and $F(\textbf{1}) \cong A$ and both sides have the discrete topology, so that it is special.
+
+    The spectrum associated to this $\Gamma$-space is actually the Eilenberg-MacLane spectrum $HA$. \textbf{still not proved}
+
+    To show the spectrum associated to $\mathcal{E} A_*$ is the Eilenberg-MacLane spectrum of $A$, we will show both $\Gamma$-spaces are equivalent. First, let $U(X \otimes A)$ denote the set $X \otimes A$ seen as a discrete category, i.e. the category whose objects are elements of $X \otimes A$ and the only morphisms are the identity. There is a functor
+    \[ \Sigma : \W{X \wedge \mathcal{E} A_*} \to U(X \otimes A) \]
+    given by sending a finite set $\{(x_i, a_i)\}_{i \in I}$ to the element $\sum_{i \in I} a_i x_i$. The functoriality of this amounts to morphisms in $\W{X \wedge \mathcal{E} A_*}$ being coverings of such a finite set, by the definiton of a covering in $\mathcal{E} A_*$
+\end{proof}
 
 
