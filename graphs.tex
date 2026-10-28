@@ -169,7 +169,7 @@ To show this, we will use a result about realizations of categories due to Quill
 \end{definition}
 
 \begin{example}
-    Let $F : \CC \to \DD$ be a functor and $D \in \Ob{\DD}$ be a fixed object. There is a functor $D : \DD \to \DD$ sending each object to $D$ and each morphism to $\Id{d}$. The comma category $F / d$ is then given by pairs $(C, f)$ where $f$ is a morphism from $F(C)$ to $D$. A morphism $g : (C, f) \to (C', f')$ is then given by a morphism $g : C \to C'$ such that the following diagram commutes
+    Let $F : \CC \to \DD$ be a functor and $D \in \Ob{\DD}$ be a fixed object. There is a functor $D : \DD \to \DD$ sending each object to $D$ and each morphism to $\Id{D}$. The comma category $F / D$ is then given by pairs $(C, f)$ where $f$ is a morphism from $F(C)$ to $D$. A morphism $g : (C, f) \to (C', f')$ is then given by a morphism $g : C \to C'$ such that the following diagram commutes
     % https://q.uiver.app/#q=WzAsMyxbMCwwLCJGKEEpIl0sWzIsMCwiRihBJykiXSxbMSwyLCJEIl0sWzAsMSwiRihnKSJdLFswLDIsImYiLDJdLFsxLDIsImYnIl1d
     \[\begin{tikzcd}[ampersand replacement=\&,cramped]
         {F(A)} \&\& {F(A')} \\
@@ -181,7 +181,7 @@ To show this, we will use a result about realizations of categories due to Quill
     \end{tikzcd}\]
     Such a comma category is usually written $F/D$.
     
-    Taking $F = \Id{\DD}$ gives rise to what is called the \emph{slice category} $D/d$.
+    Taking $F = \Id{\DD}$ gives rise to what is called the \emph{slice category} $\DD/d$.
 \end{example}
 
 We are now ready to state Quillen's theorem A

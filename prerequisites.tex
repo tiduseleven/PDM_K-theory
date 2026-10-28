@@ -45,15 +45,39 @@ The simplest example of a simplicial set comes naturally from the Hom-sets of th
     \[ \Hom[\Delta]{-}{\textbf{n}} : \op{\Delta} \to \Set. \]
 \end{example}
 
-The standard $n$-simplices are fundamental to understand simplicial sets. In fact, they are essentially a way to understand all simplicial sets.
+From a simplicial set $X$, we may construct a category 
 
-\begin{proposition}\label{prop:sset_as_colimit}
+\begin{definition}
+    Let $X$ be a simplicial set. The \emph{category of simplices} of $X$, denote $\delta \downarrow X$, has objects natural transformations $\Delta^n \to X$ for all $n \geq 0$, and maps given by natural transformations $\Delta^n \to \Delta^m$ that fit in the commutative diagram
+
+    % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXERlbHRhXm4iXSxbMiwwLCJcXERlbHRhXm0iXSxbMSwyLCJYIl0sWzAsMV0sWzAsMl0sWzEsMl1d
+    \[\begin{tikzcd}[ampersand replacement=\&,cramped, sep=small]
+        {\Delta^n} \&\& {\Delta^m} \\
+        \\
+        \& X
+        \arrow[from=1-1, to=1-3]
+        \arrow[from=1-1, to=3-2]
+        \arrow[from=1-3, to=3-2]
+    \end{tikzcd}\]
+\end{definition}
+
+Standard simplices are an essential tool to understand general simplicial sets, and will be necessary for geometric interpretation.
+
+\begin{proposition}[ADD REF TO GOERSS]\label{prop:sset_as_colimit}
     Let $X$ be a simplicial set. There is a bijection
     \[ X_n \cong \Hom[\sSet]{\Delta^n}{X}. \]
     Furthermore, the simplicial set $X$ is obtained via the colimit
-    \[ X \cong \lim_{\Delta^n \to X} \Delta^n. \]
+    \[ X \cong \lim_{\Delta^n \to X} \Delta^n \]
+    taken in the category of simplices $\Delta \downarrow X$
 \end{proposition}
-\textbf{To be further understood}
+
+\begin{proof}
+    Let $\textbf{n} \in \Delta$. By the Yoneda lemma, there is a bijection
+    \[ X_n = X(\textbf{n}) \cong \Hom[\Cat]{\Hom[\op{\Delta}]{\textbf{n}}{-}}{X} \cong \Hom[\Cat]{\Hom[\Delta]{-}{\textbf{n}}}{X}, \]
+    meaning there is a bijection $ X_n \cong \Hom[\sSet]{\Delta^n}{X}$.
+    
+    The second part is a consequence of the density theorem for presheaves. \textbf{Add more details}
+\end{proof}
 
 Every category gives rise to a simplicial set by chains of composable morphisms.
 
