@@ -184,6 +184,8 @@ To show this, we will use a result about realizations of categories due to Quill
     Taking $F = \Id{\DD}$ gives rise to what is called the \emph{slice category} $D/d$.
 \end{example}
 
+We are now ready to state Quillen's theorem A
+
 \begin{theorem}[Quillen's theorem A]
     Let $F : \CC \to \DD$ be a functor. If, for every $D \in \Ob{D}$, the realization of the comma category $\abs{N_{\bullet}(F/D)}$ is contractible, the induced functor $\abs{N_{\bullet}(\CC)} \to \abs{N_{\bullet}(\DD)}$ is a weak homotopy equivalence.
 \end{theorem}
@@ -203,7 +205,14 @@ To show this, we will use a result about realizations of categories due to Quill
 
     To show the spectrum associated to $\mathcal{E} A_*$ is the Eilenberg-MacLane spectrum of $A$, we will show both $\Gamma$-spaces are equivalent. First, let $U(X \otimes A)$ denote the set $X \otimes A$ seen as a discrete category, i.e. the category whose objects are elements of $X \otimes A$ and the only morphisms are the identity. There is a functor
     \[ \Sigma : \W{X \wedge \mathcal{E} A_*} \to U(X \otimes A) \]
-    given by sending a finite set $\{(x_i, a_i)\}_{i \in I}$ to the element $\sum_{i \in I} a_i x_i$. The functoriality of this amounts to morphisms in $\W{X \wedge \mathcal{E} A_*}$ being coverings of such a finite set, by the definiton of a covering in $\mathcal{E} A_*$
+    given by sending a finite set $\{(x_i, a_i)\}_{i \in I}$ to the element $\sum_{i \in I} a_i x_i$. The functoriality of this amounts to morphisms in $\W{X \wedge \mathcal{E} A_*}$ being coverings of such a finite set and the definiton of a covering in $\mathcal{E} A_*$. By functoriality of the nerve and the geometric realization, this induces a map of $\Gamma$-spaces
+    \[ \abs{N_{\bullet}(- \wedge \mathcal{E} A_*)} \to \abs{N_{\bullet}(- \otimes A)}.\]
+    As discussed in \cref{example:discrete_cat_realisation}, the space $\abs{N_{\bullet}(X \otimes A)}$ is precisely $X \otimes A$ for any set $X$. Therefore, there is a map of $\Gamma$-spaces
+    \[ \abs{N_{\bullet}(- \wedge \mathcal{E} A_*)} \to - \otimes A. \]
+    This map induces a map of spectra
+    \[ K(\mathcal{E} A_*) \to HA. \]
+    To show both spectra are equivalent, we will use Quillen's theorem A on $\Sigma$. To this extent, let $d := \sum_{j \in J} a_j x_j$ be an element of $U(X \otimes A)$. Since $U(X \otimes A)$ is discrete, the comma category $\Sigma / d$ is then given by the full subcategory of $W(X \wedge \mathcal{E} A_*)$ whose objects are Finite sets $\{(x'_i, a'_i)\}_{i \in I}$ such that $\sum_{i \in I} a'_i x'_i = d$. This category has a terminal object, namely $d$. By \cref{proposition:terminal_implies_contractible}, the geometric realization $\abs{N_{\bullet}(\Sigma / d)}$ is contractible. Thus, by Quillen's theorem A, the functor $\Sigma$ induces a weak homotopy equivalence of realizations $\abs{N_{\bullet}(W(X \wedge \mathcal{E} A_*))} \to U(X \otimes A)$. This consequently induces an equivalence of spectra $K(\mathcal{E} A_*) \simeq H A$.
+    
 \end{proof}
 
 
