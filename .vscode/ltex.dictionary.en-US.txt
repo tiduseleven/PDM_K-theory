@@ -4,3 +4,10 @@ colimits
 Functoriality
 simplicial
 endofunctors
+coface
+codegeneracy
+codegeneracies
+functoriality
+colimit
+Yoneda
+presheaves

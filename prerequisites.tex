@@ -1,7 +1,7 @@
 \section{Just enough category theory to be dangerous}
-As this thesis stongly relies on many notions in category theory, we present here some tools that will be used throughout.
+As this thesis strongly relies on many notions in category theory, we present here some tools that will be used throughout.
 
-\subsection{Simplicial objects and geometric realisations}
+\subsection{Simplicial objects and geometric realizations}
 Simplices prominently arise in many aspects of algebraic topology, such as simplicial complexes to singular (co-)homology. They may be regarded all together as a category which gives rise to interesting geometric structures.
 
 \begin{definition}
@@ -28,10 +28,10 @@ The reason for naming the generators coface and codegeneracy maps is that they w
 \begin{definition}
     Let $\CC$ be a category. A \emph{simplicial object} in $\CC$ is a functor $S: \op{\Delta} \to \CC$. We denote $C_n$ for the object $S(\textbf{n})$.
 
-    The images of codegeneracy maps are called \emph{degeneracy maps} and the images of coface maps are called \emph{face maps}.
+    The images of codegeneracy maps $\delta_i : \textbf{n+1} \to \textbf{n}$ are called \emph{degeneracy maps} $d_i : C_{n+1} \to C_n$ and the images of coface maps $\sigma_i : \textbf{n} \to \textbf{n+1}$ are called \emph{face maps} $s_i : C_{n+1} \to C_{n}$.
 
 
-    A \emph{simplicial set} is a simplicial object in the category of sets. The category of simplicial sets with natural transformations between them is denoted $\sSet$. 
+    A \emph{simplicial set} is a simplicial object in the category of sets. The category of simplicial sets with natural transformations between them is denoted $\sSet$. For a simplicial set $X$, the elements of $X_n$ that are in the image of a degeneracy map are called degeneracies, while those that are in the image of a face map are called faces.
     
     A \emph{simplicial space} is a simplicial object in the category of topological spaces.
 \end{definition}
@@ -84,6 +84,8 @@ Every category gives rise to a simplicial set by chains of composable morphisms.
 \begin{definition}
     Let $\CC$ be a small category. The \emph{nerve} of the category $\CC$ is the simplicial set $N_{\bullet}(\CC)$, where $N_k(\CC)$ is the set of all $k$-tuples of composable morphisms 
     \[ A_0 \to A_1 \to \cdots \to A_k. \]
+    In degree $0$, the nerve is the set of objects of $\CC$.
+
     The degeneracy map $\sigma_i : N_k(\CC) \to N_{k+1}(\CC)$ sends a $k$-tuple of composable morphisms
     \[ A_0 \to \cdots \to A_k \]
     to the $(k+1)$-tuple where we add the morphism $A_i \xto{\Id{A_i}} A_i$.
@@ -98,13 +100,13 @@ Every category gives rise to a simplicial set by chains of composable morphisms.
 Taking the nerve is a functor from the category of small categories to the category of simplicial sets.
 
 \begin{example}[The nerve of a discrete category]
-    Let $X$ be a set. Let $U(X)$ denote the discrete category whose objects are elements of $X$. Since the only morphisms of this category are identites, the nerve of $U(X)$ is given degree-wise by
+    Let $X$ be a set. Let $U(X)$ denote the discrete category whose objects are elements of $X$. Since the only morphisms of this category are identities, the nerve of $U(X)$ is given degree-wise by
     \[ N_{k}(U(X)) = \{(id_{x})_{i = 1}^{k} | x \in X \}.\]
     In particular, for $k \geq 2$, every $k$-simplex is obtained via a degeneracy map.
 \end{example}
 
 
-By thinking of the standard $n$-simplex as the $n$-dimensional simplex in euclidean space, each simplicial set can then be interpreted as a topological space using \cref{prop:sset_as_colimit}
+By thinking of the standard $n$-simplex as the $n$-dimensional simplex in Euclidean space, each simplicial set can then be interpreted as a topological space using \cref{prop:sset_as_colimit}
 
 \begin{definition}
     The \emph{geometric realization} is a functor
@@ -153,22 +155,40 @@ Using both nerve and geometric realization allows for the construction of a func
 \[ \abs{N_{\bullet}(-)} : \Cat \to \Top, \]
 called the \emph{geometric realization} of a category.
 
+\begin{example}{The interval category}
+    Consider the interval category $\{0 \to 1 \}$. Its nerve in degree $n$ is given by $n$-tuples of composable morphisms. Since there is only a single non-identity morphism, this is given by sequences of $k$ copies of $\Id{0}$, one copy of $o \to 1$ (if $k$ is neither $0$ nor $n$), and $n - k$ copies of $\Id{1}$. In particular, every simplex in degree greater or equal to $2$ is degenerate, and the only non-degenerate simplex in degree $1$ is the morphism $0 \to 1$ linking the $0$-simplices $0$ and $1$. The geometric realization $\catreal{\{0 \to 1 \}}$ is thus obtained by glueing two $0$-dimensional simplices (i.e. two points) by a single $1$-dimensional simplex, yielding a closed interval $[0,1]$.
+\end{example}
+
 \begin{example}[Discrete categories, continued]\label{example:discrete_cat_realisation}
     Recall the nerve of the category $U(X)$ for a set $X$ is given degree-wise by $k$-fold copies of the identities. In particular, the morphisms in $\Delta \downarrow N_{\bullet}()$
 \end{example}
 
-\textbf{Develop how natural transformations between functors induce homotopies between the continuous maps obtained via geometric realization}
+Just like functors between categories become continuous maps between their realizations, natural transformations directly translate geometrically as well.
+
+\begin{proposition}
+    Let $\tau: F \to G$ be a natural transformation between the functors $F : \CC \to \DD$ and $G : \CC \to \DD$. Then $\tau$ induces a homotopy between the induced continuous maps $f : \abs{N_{\bullet}(\CC)} \to \abs{N_{\bullet}(\DD)}$ and $g : \abs{N_{\bullet}(\CC)} \to \abs{N_{\bullet}(\DD)}$.
+\end{proposition}
+
+\begin{proof}
+    A natural transformation may be seen as a functor
+    \[ \tau: \CC \times \{0 \to 1 \} \to \DD. \]
+    Indeed, we may define $\tau(C, 0) = F(C)$ and $\tau(C, 1) = G(C)$ as its effect on objects, and $\tau(f, 0 \to 1) = \tau_D \circ F(f) = G(f) \circ \tau_C$. It therefore induces a continuous map
+    \[ \catreal{\tau} : \catreal{\CC \times \{0 \to 1\}} \to \catreal{\DD}. \]
+    Since geometric realization preserves products (\textbf{need to show}) and using example \textbf{Example about interval category}, the domain is actually
+    \[ \catreal{\CC \times \{0 \to 1\}} \cong \catreal{\CC} \times \catreal{\{0 \to 1\}} \cong \catreal{\CC} \times I, \]
+    so $\catreal{\tau}$ is a homotopy.
+\end{proof}
 
 
 
 As a direct use of the link between natural transformations and homotopies, we obtain the following result
 
 \begin{proposition}\label{proposition:terminal_implies_contractible}
-    Let $\CC$ be a category with a terminal object $*$. Then the geometric realization of $\CC$ is contractible.
+    Let $\CC$ be a category with an initial or terminal object $*$. Then the geometric realization of $\CC$ is contractible.
 \end{proposition}
 
 \begin{proof}
-    Consider the endofunctors $\Id{\CC} : \CC \to \CC$ and $* : \CC \to \CC$, where $*$ sends every object to $*$ and each morphism to $\Id{*}$. There is a natural transformation $\tau : \Id{\CC} \to *$ given by sending every object $C \in \Ob{\CC}$ to the unique morphism $C \to *$. This is indeed a natural transformation by the uniqueness of the morphisms $C \to *$ for a given object $C \in \Ob{\CC}$. 
+    We consider the case where $\CC$ has a terminal object. Consider the endofunctors $\Id{\CC} : \CC \to \CC$ and $* : \CC \to \CC$, where $*$ sends every object to $*$ and each morphism to $\Id{*}$. There is a natural transformation $\tau : \Id{\CC} \to *$ given by sending every object $C \in \Ob{\CC}$ to the unique morphism $C \to *$. This is indeed a natural transformation by the uniqueness of the morphisms $C \to *$ for a given object $C \in \Ob{\CC}$. 
     
     Consequently, this induces a homotopy between $\Id{} : \abs{N_{\bullet}(\CC)} \to \abs{N_{\bullet}(\CC)}$ and the constant map $* : \abs{N_{\bullet}(\CC)} \to \abs{N_{\bullet}(\CC)}$, which means that the space $\abs{N_{\bullet}(\CC)}$ is contractible.
 \end{proof}
