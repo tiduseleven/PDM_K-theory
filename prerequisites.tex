@@ -45,7 +45,7 @@ The simplest example of a simplicial set comes naturally from the Hom-sets of th
     \[ \Hom[\Delta]{-}{\textbf{n}} : \op{\Delta} \to \Set. \]
 \end{example}
 
-From a simplicial set $X$, we may construct a category 
+From a simplicial set $X$, we may construct a category arising from maps between the standard simplices and $X$.
 
 \begin{definition}
     Let $X$ be a simplicial set. The \emph{category of simplices} of $X$, denote $\delta \downarrow X$, has objects natural transformations $\Delta^n \to X$ for all $n \geq 0$, and maps given by natural transformations $\Delta^n \to \Delta^m$ that fit in the commutative diagram
@@ -115,14 +115,46 @@ By thinking of the standard $n$-simplex as the $n$-dimensional simplex in euclid
     \[ \abs{X} = \lim_{\Delta^n \to X} \abs{\Delta^{n}}. \]
 \end{definition}
 
-Among other things, this allows the construction of a functor from the category of small categories to topological spaces
-\[ \abs{N_{\bullet}(-)} : \Cat \to \Top, \]
-called the \emph{geometric realisation} of a category.
-
 Intuitively, the realization of a simplicial set is understood as sending each $n$-simplex to the $n$-dimensional simplex, and glueing them along the face and degeneracy maps.
 
+Studying maps between the realizations of the standard simplices and topological spaces naturally returns to the category of simplices, and yields an adjunction.
+
+\begin{propdef}
+    There is a functor $S : \Top \to \sSet$ sending a topological space $T$ to the simplicial set $S(T)$, called the \emph{singular set} of $T$, given degree-wise by
+    \[ (S(T))_n = \Hom[\Top]{\abs{\Delta^n}}{T}. \]
+    Furthermore, there is an adjunction
+    \[ \abs{ - } \dashv S(-) \]
+\end{propdef}
+
+\begin{proof}
+    To see $S(T)$ is a simplicial set, notice a map $f : \textbf{n} \to \textbf{m}$ induces a map $f: \Delta^m \to \Delta^n$ given by pre-composition. Functoriality of geometric realization then yields a continuous map $f : \abs{\Delta^m} \to \abs{\Delta^n}$. Using pre-composition, this gives a map
+    \[ (S(T))_m = \Hom[\Top]{\abs{\Delta^m}}{T} \to \Hom[\Top]{\abs{\Delta^n}}{T} = (S(T))_n . \]
+
+    To show the adjunction, notice that
+
+    \begin{align*}
+    \Hom[\Top]{\abs{X}}{T} &\overset{(1)}{\cong} \lim_{\Delta^n \to X} \Hom[\Top]{\abs{\Delta^n}}{T} \\
+    &\overset{(2)}{\cong} \lim_{\Delta^n \to X} \Hom[\sSet]{\Delta^n}{S(T)} \\
+    &\cong \Hom[\sSet]{X}{S(T)}.
+    \end{align*}
+
+    The first bijection amounts to the contravariant Hom-functor sends colimits to limits.
+    \textbf{Develop second bijection}
+\end{proof}
+
+\begin{remark}
+    Since geometric realization is a left adjoint, it preserves colimits.
+
+    Furthermore, there is a functor from simplicial sets to simplicial groups taking a simplicial set $X$ to the simplicial group $\ZZ X$ given degree-wise by $\ZZ X_n$. In this way, the homology groups of $\ZZ S(T)$ are precisely the singular homology groups of $T$.
+\end{remark}
+
+
+Using both nerve and geometric realization allows for the construction of a functor from the category of small categories to topological spaces
+\[ \abs{N_{\bullet}(-)} : \Cat \to \Top, \]
+called the \emph{geometric realization} of a category.
+
 \begin{example}[Discrete categories, continued]\label{example:discrete_cat_realisation}
-    Recall the nerve of the category $U(X)$ for a set $X$ is given degree-wise by $k$-fold copies of the identities. 
+    Recall the nerve of the category $U(X)$ for a set $X$ is given degree-wise by $k$-fold copies of the identities. In particular, the morphisms in $\Delta \downarrow N_{\bullet}()$
 \end{example}
 
 \textbf{Develop how natural transformations between functors induce homotopies between the continuous maps obtained via geometric realization}

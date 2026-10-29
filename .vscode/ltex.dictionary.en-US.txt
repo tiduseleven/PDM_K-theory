@@ -1,0 +1,6 @@
+realisation
+contravariant
+colimits
+Functoriality
+simplicial
+endofunctors

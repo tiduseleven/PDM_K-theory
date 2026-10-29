@@ -40,10 +40,28 @@
 \newcommand{\abs}[1]{\left| #1 \right|}
 \newcommand{\W}[1]{\mathcal{W}\lparen #1 \rparen}
 \newcommand{\Ob}[1]{\Obmathop{\lparen #1 \rparen}}
-% Source - https://tex.stackexchange.com/a/618860
-% Posted by David Carlisle, modified by community. See post 'Timeline' for change history
-% Retrieved 2026-10-06, License - CC BY-SA 4.0
 
+\makeatletter
+\newcommand{\colim@}[2]{%
+  \vtop{\m@th\ialign{##\cr
+    \hfil$#1\operator@font colim$\hfil\cr
+    \noalign{\nointerlineskip\kern1.5\ex@}#2\cr
+    \noalign{\nointerlineskip\kern-\ex@}\cr}}%
+}
+\newcommand{\colim}{%
+  \mathop{\mathpalette\colim@{\rightarrowfill@\textstyle}}\nmlimits@
+}
+
+\newcommand{\lim@}[2]{%
+  \vtop{\m@th\ialign{##\cr
+    \hfil$#1\operator@font lim$\hfil\cr
+    \noalign{\nointerlineskip\kern1.5\ex@}#2\cr
+    \noalign{\nointerlineskip\kern-\ex@}\cr}}%
+}
+\renewcommand{\lim}{%
+  \mathop{\mathpalette\lim@{\leftarrowfill@\textstyle}}\nmlimits@
+}
+\makeatother
 
 % Paragraph environments
 
