@@ -11,3 +11,6 @@ functoriality
 colimit
 Yoneda
 presheaves
+Hom-sets
+resp
+Hom-functor
