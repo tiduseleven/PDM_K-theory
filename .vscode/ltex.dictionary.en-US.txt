@@ -14,3 +14,12 @@ presheaves
 Hom-sets
 resp
 Hom-functor
+Quillen
+Waldhausen
+Dévissage
+cofibration
+pushout
+cofibrations
+coproducts
+pushouts
+functorial

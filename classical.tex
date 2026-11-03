@@ -37,7 +37,7 @@ Similarly, the group $K_1(R)$ comes with the quotient map $\tilde{\delta}: \GL{R
 \subsubsection[Higher K-groups: Quillen's approach]{Higher $K$-groups: Quillen's approach}
 While the intuition behind $K_0$ and $K_1$ naturally leads to their definition, it is at first sight unclear what the right notion would give rise to higher $K$-groups. Some work has been done in order to construct $K_2$ explicitly (see for example~\cite[Chapter~3, Section~5]{weibel_k-book_nodate}), which can be seen as a universal Steinberg Symbol in the case of fields (see~\cite[Chapter~3, Section~6]{weibel_k-book_nodate}), but higher $K$-groups have not yet found such explicit descriptions.
 
-Instead, they can be realised through a plethora of different constructions which happen to coincide. We detail here the classical topological construction due to Quillen, as described in~\cite[Chapter~5]{berrick_approach_1982}.
+Instead, they can be realized through a plethora of different constructions which happen to coincide. We detail here the classical topological construction due to Quillen, as described in~\cite[Chapter~5]{berrick_approach_1982}.
 
 The main idea of the construction is to express $K$-theory as homotopy groups of a specific topological space. The space in question arises from the so-called $+$-construction.
 
@@ -73,11 +73,141 @@ This motivates the following definition
     \[ K_i(R) = \pi_i(K(R)). \]
 \end{definition}
 
-Since $\B \GL{R}^+$ is connected, we se that $\pi_0(K(R)) = K_0(R)$, so that this definition agrees with the classical lower $K$-groups.
+Since $\B \GL{R}^+$ is connected, we see that $\pi_0(K(R)) = K_0(R)$, so that this definition agrees with the classical lower $K$-groups.
 
 
 \subsection{Waldhausen categories}
+A lot of work has been done to generalize $K$-theory to many categories. While it is not feasible to define it on every category, a rudimentary framework, known as Waldhausen categories, encapsulates what is required for the theory to make sense.
 
+\subsubsection{Essential definitions}
+
+\begin{definition}
+    Let $\CC$ be a category, with two classes of morphisms $\co{\CC}$ and $\we{\CC}$. Elements of $\co{\CC}$ are called \emph{cofibrations} and denoted $A \rightarrowtail B$. Elements of $\we{\CC}$ are called \emph{weak equivalences} and denoted $A \xto{\sim} B$. The triple $(\CC, \co{\CC}, \we{\CC})$ is a \emph{Waldhausen category} if it satisfies the following properties:
+    \begin{itemize}
+        \item[{[C$0$]}] $\CC$ has a zero object, i.e. an initial-terminal object, denoted $0$;
+        \item[{[C$1$]/[W$1$]}] Isomorphisms are cofibrations and weak equivalences;
+        \item[{[C$2$]/[W$2$]}] $\co{\CC}$ and $\we{\CC}$ are closed under composition;
+        \item[{[C$3$]}] For all $C \in \Ob{\CC}$, the morphism $0 \to A$ is in $\co{\CC}$;
+        \item[{[C$4$]}] If $A \rightarrowtail B$ is a cofibration, then the pushout $B \cup_A C$ along any map $A \to C$ exists and the induced map $C \to B \cup_A C$ is also a cofibration;
+        \item[{[W$3$]}] For every commutative diagram
+            % https://q.uiver.app/#q=WzAsNixbMSwwLCJBIl0sWzIsMCwiQiJdLFswLDAsIkMiXSxbMCwxLCJDJyJdLFsxLDEsIkEnIl0sWzIsMSwiQiciXSxbMCwxLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtb25vIn19fV0sWzAsMl0sWzIsMywiXFxzaW0iLDJdLFswLDQsIlxcc2ltIiwyXSxbMSw1LCJcXHNpbSJdLFs0LDUsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1vbm8ifX19XSxbNCwzXV0=
+            \[\begin{tikzcd}
+                C & A & B \\
+                {C'} & {A'} & {B'}
+                \arrow["\sim"', from=1-1, to=2-1]
+                \arrow[from=1-2, to=1-1]
+                \arrow[tail, from=1-2, to=1-3]
+                \arrow["\sim"', from=1-2, to=2-2]
+                \arrow["\sim", from=1-3, to=2-3]
+                \arrow[from=2-2, to=2-1]
+                \arrow[tail, from=2-2, to=2-3]
+            \end{tikzcd}\]
+            the induced map $B \cup_A C \to B' \cup_A' C'$ is a weak equivalence.
+    \end{itemize}
+
+    We denote $\Wald$ the category of small Waldhausen categories with exact functors between them, i.e.~functors that preserve zero object, cofibrations, weak equivalences and pushouts along cofibrations.
+\end{definition}
+
+When clear from context, we will not specify the classes $\co{\CC}$ and $\we{\CC}$.
+
+By the properties of cofibrations, certain constructions always exist in Waldhausen categories. First, for a given cofibration $A \rightarrowtail B$, there is a pushout $B \cup_A 0$ where the second morphism is the unique map $A \to 0$, which will be denoted $B/A$. This fits into a \emph{cofibration sequence} denoted $A \rightarrowtail B \twoheadrightarrow B/A$.
+
+Then, coproducts also exist as the pushout of the morphisms $A \leftarrowtail 0 \rightarrowtail B$, and will be denoted $A \sqcup B$.
+
+The meaning of Waldhausen categories is deeply embedded in topology, the point being to extend the tools from $K$-theory to spaces. Nevertheless, this framework also captures classical $K$-theory, since the category of finitely generated projective modules over a ring $R$ may be given the structure of a Waldhausen category.
+
+\begin{proposition}
+    Let $R$ be a ring. Let $\PP(R)$ denote the category of finitely generated projective modules over $R$. Let $\co{\PP(R)}$ be the set of all injective morphisms between projective modules and $\we{\PP(R)}$ be the set of all isomorphisms. Then $(\PP(R), \co{\PP(R)}, \we{\PP(R)})$ is a Waldhausen category.
+\end{proposition}
+
+\begin{proof}
+    The zero-object is simply the zero module. It is then clear that $0 \to P$ is injective for any projective module, thus it is a cofibration. By definition, all isomorphisms are weak equivalences. They are furthermore cofibrations since they are injective. It is also clear that composition of both isomorphisms and injective morphisms once again gives and isomorphism or an injective morphism.  This shows $[C0]$, $[C1]$, $[C2]$, $[W1]$ and $[W2]$.
+    
+    To show $[C4]$, let $f : P \rightarrowtail Q$ be an injective map and $g : P \to R$ be any map. The pushout of $f$ along $g$ is given by
+    \[ Q \cup_P R = \frac{Q \oplus R}{\{(f(p), -g(p)) | p \in P\}}.\]
+    The map $f': R \to Q \cup_P R$ then sends an element $r$ to its class ${(0, r) + \{(f(p), -g(p)) | p \in P\}}$. The kernel consists of elements $r \in R$ such that $(0, r)$ is in the set $\{(f(p), -g(p)) | p \in P\}$. In particular, for $f(p)$ to be $0$, $p$ must be $0$ (since $f$ is injective). Thus, the only element in the kernel is $-g(0) = 0$, i.e.~$f'$ is a cofibration. This shows $[C3]$.
+
+    The last axiom $[W3]$ can easily be proven using the universal property of the pushout, since weak equivalences here are isomorphisms and therefore admit an inverse map.
+\end{proof}
+
+This proof naturally extends to the framework of abelian categories, and more generally to that of exact categories.
+
+To give rise to a notion of $K$-theory on Waldhausen categories, we will proceed by obtaining a suitable simplicial object, giving rise to a geometric realization.
+
+\begin{definition}
+    Let $\CC$ be a Waldhausen category. For $n \geq 0$, let $S_n \CC$ denote the category whose objects are sequences of length $n$ composable cofibrations
+    \[ 0 = A_0 \rightarrowtail A_1 \rightarrowtail \cdots \rightarrowtail A_n\]
+    with a compatible choice of quotients $A_ij = A_j/A_i$ ($0 < i < j \leq n$) that fits in the commutative diagram
+    % https://q.uiver.app/#q=WzAsMTQsWzAsMCwiQV8xIl0sWzEsMCwiQV8yIl0sWzIsMCwiQV8zIl0sWzMsMCwiXFxjZG90cyJdLFs0LDAsIkFfbiJdLFsxLDEsIkFfezEyfSJdLFsyLDEsIkFfezEzfSJdLFsyLDIsIkFfezIzfSJdLFszLDIsIlxcY2RvdHMiXSxbNCwyLCJBX3sybn0iXSxbNCwxLCJBX3sxbn0iXSxbMywxLCJcXGNkb3RzIl0sWzQsMywiXFx2ZG90cyJdLFs0LDQsIkFfe24tMSxufSJdLFswLDEsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1vbm8ifX19XSxbMSwyLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtb25vIn19fV0sWzIsMywiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibW9ubyJ9fX1dLFszLDQsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1vbm8ifX19XSxbMSw1XSxbMiw2XSxbNSw2LCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtb25vIn19fV0sWzYsN10sWzcsOCwiIiwxLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibW9ubyJ9fX1dLFs4LDksIiIsMSx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1vbm8ifX19XSxbNCwxMF0sWzEwLDldLFs2LDExLCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtb25vIn19fV0sWzExLDEwLCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtb25vIn19fV0sWzksMTJdLFsxMiwxM11d
+    \[\begin{tikzcd}[cramped]
+        {A_1} & {A_2} & {A_3} & \cdots & {A_n} \\
+        & {A_{12}} & {A_{13}} & \cdots & {A_{1n}} \\
+        && {A_{23}} & \cdots & {A_{2n}} \\
+        &&&& \vdots \\
+        &&&& {A_{n-1,n}}
+        \arrow[tail, from=1-1, to=1-2]
+        \arrow[tail, from=1-2, to=1-3]
+        \arrow[from=1-2, to=2-2]
+        \arrow[tail, from=1-3, to=1-4]
+        \arrow[from=1-3, to=2-3]
+        \arrow[tail, from=1-4, to=1-5]
+        \arrow[from=1-5, to=2-5]
+        \arrow[tail, from=2-2, to=2-3]
+        \arrow[tail, from=2-3, to=2-4]
+        \arrow[from=2-3, to=3-3]
+        \arrow[tail, from=2-4, to=2-5]
+        \arrow[from=2-5, to=3-5]
+        \arrow[tail, from=3-3, to=3-4]
+        \arrow[tail, from=3-4, to=3-5]
+        \arrow[from=3-5, to=4-5]
+        \arrow[from=4-5, to=5-5]
+    \end{tikzcd}\]
+    Morphisms are defined as maps of chains of morphisms.
+\end{definition}
+
+\begin{remark}
+    The classical way to define the $S_{\bullet}$-construction, due to Waldhausen (\textbf{add cite}), is formulated quite differently and allows for a more functorial approach. Let $\Ar{\textbf{n}}$ denote the arrow category of the poset category $0 < 1 < \cdots < n$. Elements thereof are thus given by arrows $i \to j$ (which we will denote $i / j$) whenever $i \leq j$, and there is a unique morphism $i/j \to i'/j'$ if and only if $i \leq i'$ and $j \leq j'$. Elements of $S_n \CC$ can then be seen as functors $A : \Ar{\textbf{n}} \to \CC$, where $A(i/j) := A_{i,j}$, such that
+    \begin{itemize}
+        \item The object $A_{i,i}$ is the zero-object for all $0 \leq i \leq n$;
+        \item For every triple $0 \leq i \leq j \leq k \leq n$, the map $A_{i,j} \to A_{i, k}$ is a cofibration and the sequence $A_{i,j} \rightarrowtail A_{i,k} \twoheadrightarrow A_{j,k}$ is a cofibration sequence.
+    \end{itemize}
+    The morphisms are then natural transformations between these functors.
+
+    It is clear by the notation we used that both definitions are equivalent.
+\end{remark}
+
+The assignment of a category for each non-negative integer hints at an underlying structure of a simplicial object in the category of small categories, which we indeed have.
+
+\begin{proposition}
+    Let $\CC$ be a Waldhausen category The $S_{\bullet}$-construction on $\CC$ yields a functor $S_{\bullet} \CC : \op{\Delta}  \to \Wald$, where $S_n \CC$ is as described above. This is therefore a $S_{\bullet} \CC$ is a simplicial Waldhausen category.
+\end{proposition}
+
+\begin{proof}
+    Sending a poset category $\textbf{n}$ to its arrow category $\Ar{\textbf{n}}$ can be seen as a functor $\Ar{} : \Delta \to \Cat$. In that sense, we have a functor $S_{\bullet} \CC : \op{\Delta} \to \Cat$, by then taking the functors on $\Ar{\textbf{n}}$ satisfying the properties listed above. This is exactly a simplicial category. 
+
+    Let us show each $S_{n} \CC$ inherits the structure of a Waldhausen category. For this, we will reuse the definition using chains of composable cofibrations. A weak equivalence between two elements $A_{\bullet}$ and $B_{\bullet}$ is given by a map $A_{\bullet} \to B_{\bullet}$ such that $A_{i} \to B_{i}$ is a weak equivalence for each $i$. The glueing lemma assures this implies each $A_{ij} \to B_{ij}$ is a weak equivalence. 
+    
+    The cofibrations in both $S_{0} \CC = *$ and $S_{1} \CC \cong \CC$ are clear since $*$ has as only morphism an isomorphism and $\CC$ is by definition a Waldhausen category. The category $S_2 \CC$, whose elements are cofibration sequences $A_1 \rightarrowtail A_2 \twoheadrightarrow A_{12}$, may also be given cofibrations directly. A morphism from $A_1 \to A_2 \to A_{12}$ to $A_1' \to A_2' \to A_{12}'$ is a cofibration if and only if $A_1 \to A_1'$, $A_{12} \to A_{12}'$ and the induced map $A_1' \cup_{A_1} A_2 \to A_2'$ are cofibrations.
+
+    To define cofibrations on $S_n \CC$, let $A_\bullet \to B_\bullet$ be a map in $S_n \CC$. It is a cofibration if and only if, for all $0 \leq i < j < k \leq n$, the map of cofibration sequences
+    % https://q.uiver.app/#q=WzAsNixbMCwwLCJBX3tpan0iXSxbMSwwLCJBX3tqa30iXSxbMiwwLCJBX3tpa30iXSxbMCwxLCJCX3tpan0iXSxbMSwxLCJCX3tqa30iXSxbMiwxLCJCX3tpa30iXSxbMCwxLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtb25vIn19fV0sWzEsMiwiIiwwLHsic3R5bGUiOnsiaGVhZCI6eyJuYW1lIjoiZXBpIn19fV0sWzAsM10sWzEsNF0sWzIsNV0sWzMsNCwiIiwxLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibW9ubyJ9fX1dLFs0LDUsIiIsMSx7InN0eWxlIjp7ImhlYWQiOnsibmFtZSI6ImVwaSJ9fX1dXQ==
+    \[\begin{tikzcd}
+        {A_{ij}} & {A_{jk}} & {A_{ik}} \\
+        {B_{ij}} & {B_{jk}} & {B_{ik}}
+        \arrow[tail, from=1-1, to=1-2]
+        \arrow[from=1-1, to=2-1]
+        \arrow[two heads, from=1-2, to=1-3]
+        \arrow[from=1-2, to=2-2]
+        \arrow[from=1-3, to=2-3]
+        \arrow[tail, from=2-1, to=2-2]
+        \arrow[two heads, from=2-2, to=2-3]
+    \end{tikzcd}\]
+    is a cofibration in $S_2 \CC$.
+    
+    We will not check that these structures indeed satisfy the axioms of a Waldhausen category, but merely state it as a fact. Likewise, a full proof would require showing the face maps and degeneracy maps given by $S_{\bullet} \CC : \op{\Delta} \to \Wald$ indeed preserve the Waldhausen structure, but we omit this part as well, and only give an explicit description of the maps.
+
+    The degeneracy map $d_i : S_{n+1} \CC \to S_n \CC$ is obtained by omitting the $i$-th row and column of 
+\end{proof}
 
 \subsection[Expected properties of K-theory spectra]{Expected properties of $K$-theory spectra}
 There are numerous standard results about the algebraic $K$-theory of a ring that naturally translate to more general settings. Consequently, they are a good baseline to describe what is and isn't a good notion of $K$-theory.
