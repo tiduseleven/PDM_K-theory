@@ -1,0 +1,5 @@
+- [ ] Change most the theory from Top to sSet
+- [ ] Explain why sSet is sufficient (weak equivalence)
+- [ ] Develop homotopy theory and smash product in sSet
+- [ ] Add bullets to simplicial sets
+- [ ] Maybe talk about monoidal structures?

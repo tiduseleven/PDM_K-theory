@@ -23,3 +23,15 @@ cofibrations
 coproducts
 pushouts
 functorial
+surjective
+Bohmann
+codomain
+basepoint
+basepoint-preserving
+Grothendieck
+subgraphs
+subgraph
+monoidal
+basepoints
+Eilenberg-MacLane
+bisimplicial

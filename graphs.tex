@@ -34,7 +34,7 @@ To have a suitable notion of category with covering families, one may intuitivel
 \end{definition}
 
 \begin{remark}
-    While the additionnal requirements of a category with covering families seen arbitrary, they are necessary for the whole theory to be well-founded. Furthermore, any category can be given a basepoint in two different ways:
+    While the additional requirements of a category with covering families seen arbitrary, they are necessary for the whole theory to be well-founded. Furthermore, any category can be given a basepoint in two different ways:
     \begin{itemize}
         \item Adding a disjoint basepoint $*$, such that $\Hom{*}{*} = \{\Id{*}\}$ and $\Hom{*}{C} = \Hom{C}{*} = \varnothing$ for any $C \neq *$, giving the category $C_+$
         \item Adding an initial basepoint $*$, such that $\Hom{*}{C}$ has a single morphism for any $C \in \Ob\CC$ and $\Hom{C}{*} = \varnothing$ for any $C \neq *$, forming the category $C_*$.
@@ -47,12 +47,12 @@ To have a suitable notion of category with covering families, one may intuitivel
 \end{example}
 
 \begin{example}[ADD CITATION]
-    Let $\Gamma_{\leq n}$ be the category of finite graphs with $n$ or less edges, with morphisms given by inclusions of subgraphs. More precisely, objects are given by pairs of sets $(V,E)$ with an injective map $\partial \to \textnormal{Pair}(V)$, where $\textnormal{Pair}(V)$ is the set of unordered pairs of distinct elements of $V$. A morphism $(V,E, \partial) \to (V',E', \partial')$ is then given by injective maps $f_V : V \to V'$ and $f_E : E \to E'$ such that $\partial'(f_E(e)) = f_V(\partial(e))$.
+    Let $\Gamma_{\leq n}$ be the category of finite graphs with $n$ or fewer edges, with morphisms given by inclusions of subgraphs. More precisely, objects are given by pairs of sets $(V,E)$ with an injective map $\partial \to \textnormal{Pair}(V)$, where $\textnormal{Pair}(V)$ is the set of unordered pairs of distinct elements of $V$. A morphism $(V,E, \partial) \to (V',E', \partial')$ is then given by injective maps $f_V : V \to V'$ and $f_E : E \to E'$ such that $\partial'(f_E(e)) = f_V(\partial(e))$.
 
     There is a natural covering family structure on $\Gamma_{\leq n}$ given by:
     \begin{itemize}
         \item for every finite set $I$, the set $\{\varnothing = \varnothing\}_{i\in I}$ is a covering family;
-        \item A collection $\{\iota_i : G_i \to G\}_{i \in I}$ is a covering family if and only if each $G_i$ is a subraph of $G$ such that $\iota_i$ is simply the inclusion, the intersections $G_i \cap G_j$ contain no edges if $i\neq j$, and $G = \bigcup_{i \in I} G_i$.
+        \item A collection $\{\iota_i : G_i \to G\}_{i \in I}$ is a covering family if and only if each $G_i$ is a subgraph of $G$ such that $\iota_i$ is simply the inclusion, the intersections $G_i \cap G_j$ contain no edges if $i\neq j$, and $G = \bigcup_{i \in I} G_i$.
     \end{itemize}
     The basepoint can be chosen to be the empty graph, so that $\Gamma_{\leq n}$ is a category with covering families.
 \end{example}
@@ -124,7 +124,7 @@ While this is the classical perspective on $\Gamma$-spaces as presented in \cite
 
     For a finite set $X \in \Ob{\op{\Gamma}}$, define $F(X) := X \sqcup \{*\}$, with $*$ the distinguished basepoint of $F(X)$. For a map $\op{f} : Y \to X$ in $\op{\Gamma}$ coming from a morphism $f : X \to \mathcal{P} (Y)$ with the images of elements of $X$ pairwise disjoint, for an element $y \in Y \sqcup \{*\}$ we define $F(\op{f})(y)$ as either the only $x$ such that $y \in f(x)$ or $*$ if it is contained in no image.
 
-    This indeed gives a functor. That identites are sent to identites is clear by the addition of the disjoint basepoint, and composition is preserved since the maps $f : X \to \mathcal{P} (Y)$ have disjoint images, thus no choices have to be made.
+    This indeed gives a functor. That identities are sent to identities is clear by the addition of the disjoint basepoint, and composition is preserved since the maps $f : X \to \mathcal{P} (Y)$ have disjoint images, thus no choices have to be made.
 
     The functor $F$ is clearly essentially surjective. For a finite pointed set $(X, x_0)$ the set $X \setminus \{x_0\}$ is sent to $F(X) = (X \setminus \{x_0\}) \sqcup \{*\}$, which is in bijection with $(X, x_0)$ via a bijection that preserves basepoints.
 
@@ -137,13 +137,39 @@ While this is the classical perspective on $\Gamma$-spaces as presented in \cite
 
 Thus, by the previous isomorphism, a $\Gamma$-space may be seen as a covariant functor $A : \FinSet_* \to \Top_*$ such that $A(\textbf{0})$ is contractible. The conditions of being special and very special naturally translate to this version of the definition as well.
 
+To get a spectrum out of a $\Gamma$-space, we progressively expand both the domain and the co-domain of a $\Gamma$-space $A$ to obtain a new functor
+\[A : \Sp \to \Sp.\]
 
+First, a $\Gamma$-space may be extended to a functor $A : \Set_* \to \sSet_*$ by letting
+\[ A(X) = \colim_{\substack{Y \subset X\\ Y \in \FinSet_*}} A(Y) \]
+for any pointed set $X \in \Set_*$. It may further be extended to have as codomain $\sSet_*$ by taking the diagonal of the pointed bisimplicial set $A(X_\bullet)$. Notice this is indeed a bisimplicial set, as the composition of $A$ with $X : \op{\Delta} \to \Set_*$ produces a functor from $\op{\Delta}$ to the category of pointed simplicial sets. Concretely, $A(X_\bullet)$ is defined at level $n$ as
+\[ (A(X_\bullet))_n = (A(X_n))_n. \]
+
+Notice, for $X_\bullet,Y_\bullet \in \Ob{\sSet_*}$, there is a natural map of simplicial sets $X_\bullet \wedge A(Y_\bullet) \to A(X_\bullet \wedge Y_\bullet)$ by taking an element $x \wedge y \in X_n \wedge (A(Y_n))_n$ to the \textbf{Yeah this is not clear yet lol}. This allows for the extension of $A$ to a functor from spectra to spectra. For a spectrum $X^{\bullet}$ (where $X^n$ is a simplicial set), we define $A(X^{\bullet})$ degree-wise by
+\[ (A(X^{\bullet}))^{n} = A(X^n),\]
+with the structural maps as described above
+\[ S^1 \wedge A(X^n) \to A(S^1 \wedge X^n) \to A(X^{n+1}) \]
+where the last map is obtained by applying $A$ to the structural map $S^1 \wedge X^n \to X^{n+1}$ of the spectrum $X^{\bullet}$.
+
+As we have progressively extended $\Gamma$-spaces to an endomorphism of the category of spectra, we may study its effect on the unit of the category of spectra, namely the sphere spectrum.
+
+\begin{definition}
+    Let $A$ be a $\Gamma$-space. The \emph{spectrum associated to $A$} is the image of the sphere spectrum by $A$. It is given degree-wise by
+    \[ A(\mathbb{S})_n = A((S^n)),\]
+    where $S^n$ denotes the $n$-dimensional sphere as a simplicial set.
+\end{definition}
+
+\subsection{The spectrum associated to a category with covering families}
 
 In \cref{subsection:covering}, we constructed two different functors. First, for a given category with covering families $\CC$, the functor $- \wedge \CC : \FinSet_* \to \CatFam$. Then, the functor $W : \CatFam \to \Cat$ sending a category with covering families to its category of covers. Thus, for a given category with covering families $\CC$, composing both functors gives a functor from the category of finite pointed sets to the category of small categories. We may then take the geometric realization of the nerve of the resulting category, giving a functor
 
 \[ \abs{N_{\bullet}(\W{- \wedge \CC})} : \FinSet_* \to \Top_*. \]
 
-Since $\textbf{0}$ consists only of the basepoint, the product $\Ob{\textbf{0}} \times \Ob{\CC}$ coincides with $\Ob{\textbf{0}} \vee \Ob{\CC}$, so that $\textbf{0} \wedge \CC$ is trivial. Consequently, so is its category of covers $\W{\textbf{0} \wedge \CC}$. 
+Since $\textbf{0}$ consists only of the basepoint, the product $\Ob{\textbf{0}} \times \Ob{\CC}$ coincides with $\Ob{\textbf{0}} \vee \Ob{\CC}$, so that $\textbf{0} \wedge \CC$ is trivial. Consequently, so is its category of covers $\W{\textbf{0} \wedge \CC}$. Therefore, this functor  is a $\Gamma$-space, to which we may associate a spectrum. 
+
+\begin{definition}
+    Let $\CC$ be a category with covering families. The $K$-theory spectrum of $\CC$, denoted $K(\CC)$, is the spectrum associated to the $\Gamma$-space $\abs{N_{\bullet}(\W{- \wedge \CC})}$.
+\end{definition}
 
 
 As a fundamental example of a spectrum coming from a category with covering families, let us consider again the category $\mathcal{E} A_*$ from \cref{example:EA}.
@@ -205,7 +231,7 @@ We are now ready to state Quillen's theorem A
 
     To show the spectrum associated to $\mathcal{E} A_*$ is the Eilenberg-MacLane spectrum of $A$, we will show both $\Gamma$-spaces are equivalent. First, let $U(X \otimes A)$ denote the set $X \otimes A$ seen as a discrete category, i.e. the category whose objects are elements of $X \otimes A$ and the only morphisms are the identity. There is a functor
     \[ \Sigma : \W{X \wedge \mathcal{E} A_*} \to U(X \otimes A) \]
-    given by sending a finite set $\{(x_i, a_i)\}_{i \in I}$ to the element $\sum_{i \in I} a_i x_i$. The functoriality of this amounts to morphisms in $\W{X \wedge \mathcal{E} A_*}$ being coverings of such a finite set and the definiton of a covering in $\mathcal{E} A_*$. By functoriality of the nerve and the geometric realization, this induces a map of $\Gamma$-spaces
+    given by sending a finite set $\{(x_i, a_i)\}_{i \in I}$ to the element $\sum_{i \in I} a_i x_i$. The functoriality of this amounts to morphisms in $\W{X \wedge \mathcal{E} A_*}$ being coverings of such a finite set and the definition of a covering in $\mathcal{E} A_*$. By functoriality of the nerve and the geometric realization, this induces a map of $\Gamma$-spaces
     \[ \abs{N_{\bullet}(- \wedge \mathcal{E} A_*)} \to \abs{N_{\bullet}(- \otimes A)}.\]
     As discussed in \cref{example:discrete_cat_realisation}, the space $\abs{N_{\bullet}(X \otimes A)}$ is precisely $X \otimes A$ for any set $X$. Therefore, there is a map of $\Gamma$-spaces
     \[ \abs{N_{\bullet}(- \wedge \mathcal{E} A_*)} \to - \otimes A. \]
