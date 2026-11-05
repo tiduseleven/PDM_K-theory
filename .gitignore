@@ -332,3 +332,7 @@ TSWLatexianTemp*
 
 # random Insync files
 *.insyncdl
+
+#vscode config
+
+.vscode/
