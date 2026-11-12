@@ -3,3 +3,4 @@
 - [ ] Develop homotopy theory and smash product in sSet
 - [ ] Add bullets to simplicial sets
 - [ ] Maybe talk about monoidal structures?
+- [ ] Develop the results about K0, localization and devissage in categories with covering families.

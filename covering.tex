@@ -241,4 +241,41 @@ We are now ready to state Quillen's theorem A
     
 \end{proof}
 
+\subsection[A good notion of K-theory]{A good notion of $K$-theory}
+For this construction to properly encapsulate $K$-theory, we expect it to fulfill the properties listed in \cref{subsection:properties_of_k_theory}. Indeed, the most fundamental results already hold. While they were originally proved for assemblers in \cite{zakharevich2016ktheoryassemblers}, they made no use of the additional specific structure of an assembler, which may inherently be seen as a category with covering family.
 
+In the context of Waldhausen categories, many of the results had to do with cofibration sequences, which were a key structural element of such categories. Similarly, the analogous results for categories with covering families will be related to covering families.
+
+\subsubsection[The free abelian group approach to the 0-th K-group]{The free abelian group approach to the $0$-th $K$-group}
+Much like $K_0(R)$ is obtained as a quotient of the free abelian group over isomorphism classes of finitely generated projective modules, a nearly identical presentation exists for categories with covering families.
+
+\begin{proposition}[Proposition $3.8$ in \cite{bohmann_trace_2024}]
+    Let $\CC$ be a category with covering families. There is an isomorphism
+    \[ K_0(\CC) \cong \frac{\ZZ[\Ob{\CC}]}{[A] = [\sum_{i \in I} A_i]} \]
+    where the equivalence relation is taken over all covering families $\{A_i \to A\}_{i \in I}$.
+\end{proposition}
+
+\begin{proof}
+\end{proof}
+
+\subsubsection{Dévissage}
+While Dévissage traditionally uses filtrations to restrict $K$-theory to a smaller subcategory, we will in this context require the subcategory to properly cover objects of the full category. For the result to hold, we need an additional condition on the category with covering families.
+
+\begin{definition}
+    Let $\CC$ be a category with covering families. A covering family $\{ f_i : A_i \to A\}_{i \in I}$ is a \emph{refinement} of a covering family $\{ g_j : B_j \to A\}$ if, for every $i \in I$, there exists $j \in J$ and $h_i : A_i \to B_j$ such that $f_i = g_j \circ h_i$. We say that $\CC$ \emph{has refinements} if any pair of covering families
+    \[ \{A_i \to A\}_{i \in I} \quad \text{and} \quad \{A'_j \to A\}_{j \in J} \]
+    admit a common refinement.
+\end{definition}
+
+Admitting  a common refinement is an intuitive property that we expect two covering families to have, much like open coverings of a topological space admit common refinements.
+
+\begin{theorem}[Theorem $2.8$ in \cite{calle_combinatorial_2025}]
+    Let $\CC$ be a category with covering families that has refinements. Suppose that $i : \DD \to \CC$ is an inclusion of a full subcategory with covering families. If every object $C \in \Ob{\CC}$ admits a covering family $\{D_i \to C\}_{i \in I}$ where each $D_i \in \Ob{\DD}$, then
+    \[ K(i) : K(\DD) \xto{\sim} K(\CC) \]
+    is an equivalence of spectra.
+\end{theorem}
+\begin{proof}
+    
+\end{proof}
+
+\subsubsection{Localization}
