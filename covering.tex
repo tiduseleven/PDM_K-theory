@@ -43,7 +43,7 @@ To have a suitable notion of category with covering families, one may intuitivel
 \end{remark}
 
 \begin{example}
-    Let $X$ be a topological space, and let $\CC$ be the category consisting of its open sets, with morphisms given by inclusions. Then $\CC$ naturally inherits a covering families structure by declaring that $\{U_i \subseteq U\}_{i \in I}$ is a covering family if and only if $\bigcup_{i \in I} U_i = U$. Here, the distinguished basepoint is naturally the empty set. More generally, a Grothendieck site inherits a structure of category with covering families.
+    Let $X$ be a topological space, and let $\CC$ be the category consisting of its open sets, with morphisms given by inclusions. Then $\CC$ naturally inherits a covering families structure by declaring that $\{U_i \subseteq U\}_{i \in I}$ is a covering family if and only if $\bigcup_{i \in I} U_i = U$. Here, the distinguished basepoint is naturally the empty set. More generally, a Grothendieck site inherits a structure of category with covering families (see \cite[Chapter~2, Definition~1.1.5]{grothendieck1963topos}).
 \end{example}
 
 \begin{example}[ADD CITATION]
@@ -151,7 +151,7 @@ with the structural maps as described above
 \[ S^1 \wedge A(X^n) \to A(S^1 \wedge X^n) \to A(X^{n+1}) \]
 where the last map is obtained by applying $A$ to the structural map $S^1 \wedge X^n \to X^{n+1}$ of the spectrum $X^{\bullet}$.
 
-As we have progressively extended $\Gamma$-spaces to endomorphisms of the category of spectra, we may study its effect on the unit of the category of spectra, namely the sphere spectrum $\mathbb{S}$.
+As we have progressively extended $\Gamma$-spaces to endomorphisms of the category of spectra, we may study its effect on the unit of the category of spectra, namely the sphere spectrum $\mathbb{S}$ seen as a symmetric spectrum.
 
 \begin{definition}
     Let $A$ be a $\Gamma$-space. The \emph{spectrum associated to $A$} is the image of the sphere spectrum under $A$. It is given degree-wise by
@@ -210,7 +210,7 @@ To show this, we will use a result about realizations of categories due to Quill
     Taking $F = \Id{\DD}$ gives rise to what is called the \emph{slice category} $\DD/D$.
 \end{example}
 
-We are now ready to state Quillen's Theorem A.
+We are now ready to state Quillen's Theorem A \cite{quillen_higher_1973}.
 
 \begin{theorem}[Quillen's Theorem A]
     Let $F : \CC \to \DD$ be a functor. If, for every $D \in \Ob{D}$, the realization of the comma category $\abs{N_{\bullet}(F/D)}$ is contractible, the induced functor $\abs{N_{\bullet}(\CC)} \to \abs{N_{\bullet}(\DD)}$ is a weak homotopy equivalence.
@@ -244,7 +244,9 @@ We are now ready to state Quillen's Theorem A.
 \end{proof}
 
 \subsection[A good notion of K-theory]{A good notion of $K$-theory}
-For this construction to properly encapsulate $K$-theory, we expect it to fulfill the properties listed in \cref{subsection:properties_of_k_theory}. Indeed, the most fundamental desired properties already hold. While they were originally proved for assemblers in \cite{zakharevich2016ktheoryassemblers}, the proofs made no use of the additional specific structure of an assembler, which may inherently be seen as a category with covering family.
+For this construction to properly encapsulate $K$-theory, we expect it to fulfill the properties listed in \cref{subsection:properties_of_k_theory}. These results were originally proved for assemblers in \cite{zakharevich2016ktheoryassemblers}, where assemblers are originally defined. Since assemblers are naturally categories with covering families satisfying extra axioms, there is a forgetful functor
+\[ U : \textbf{Asm} \to \CatFam\]
+from the category of assemblers to the category of categories with covering families. Since the proofs make no use of the additional specific structure of an assembler, the results hold for all categories with covering families.
 
 In the context of Waldhausen categories, many of the results we saw concerned cofibration sequences, which are a key structural element of such categories. Similarly, the analogous results for categories with covering families will be related to covering families.
 
@@ -271,7 +273,7 @@ While Dévissage traditionally uses filtrations to restrict $K$-theory to a smal
 
 Admitting  a common refinement is an intuitive property that we expect two covering families to have, much like open coverings of a topological space admit common refinements.
 
-\begin{theorem}[Theorem $2.8$ in \cite{calle_combinatorial_2025}]
+\begin{theorem}[Theorem $2.8$ in \cite{calle_combinatorial_2025}]\label{theorem:devissage}
     Let $\CC$ be a category with covering families that has refinements. Suppose that $i : \DD \to \CC$ is an inclusion of a full subcategory with covering families. If every object $C \in \Ob{\CC}$ admits a covering family $\{D_i \to C\}_{i \in I}$ where each $D_i \in \Ob{\DD}$, then
     \[ K(i) : K(\DD) \xto{\sim} K(\CC) \]
     is an equivalence of spectra.

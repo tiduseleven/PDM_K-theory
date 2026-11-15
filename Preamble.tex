@@ -30,8 +30,8 @@
 \newcommand{\leqtext}[1]{\ensuremath{\stackrel{#1}{\leq}}}
 \newcommand{\Fab}[1]{\textnormal{F}_{\textnormal{ab}} \lparen#1\rparen}
 \newcommand{\Proj}[1]{\mathcal{P}\lparen#1\rparen}
-\newcommand{\GL}[1]{\text{GL}\lparen#1 \rparen}
-\newcommand{\E}[1]{\textnormal{E}\lparen#1\rparen}
+\newcommand{\GL}[2][ ]{\text{GL}_{#1}\lparen#2 \rparen}
+\newcommand{\E}[2][ ]{\textnormal{E}_{#1}\lparen#2\rparen}
 \newcommand{\Iso}[1]{\textnormal{Iso}\lparen#1\rparen}
 \newcommand{\xto}[1]{\xrightarrow{#1}}
 \newcommand{\Id}[1]{\textnormal{Id}_{#1}}
@@ -69,27 +69,7 @@
 \newcommand{\Sp}{\textbf{Sp}}
 \newcommand{\FinGraph}{\textbf{FinGraph}}
 
-\makeatletter
-\newcommand{\colim@}[2]{%
-  \vtop{\m@th\ialign{##\cr
-    \hfil$#1\operator@font colim$\hfil\cr
-    \noalign{\nointerlineskip\kern1.5\ex@}#2\cr
-    \noalign{\nointerlineskip\kern-\ex@}\cr}}%
-}
-\newcommand{\colim}{%
-  \mathop{\mathpalette\colim@{\rightarrowfill@\textstyle}}\nmlimits@
-}
-
-\newcommand{\lim@}[2]{%
-  \vtop{\m@th\ialign{##\cr
-    \hfil$#1\operator@font lim$\hfil\cr
-    \noalign{\nointerlineskip\kern1.5\ex@}#2\cr
-    \noalign{\nointerlineskip\kern-\ex@}\cr}}%
-}
-\renewcommand{\lim}{%
-  \mathop{\mathpalette\lim@{\leftarrowfill@\textstyle}}\nmlimits@
-}
-\makeatother
+\newcommand{\colim}{\mathop{\mathrm{colim}}\limits}
 
 % Paragraph environments
 

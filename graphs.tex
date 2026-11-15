@@ -27,4 +27,9 @@ As a first way to define a covering family structure on the category $\FinGraph_
 
 It is clear that this yields a category with covering families. Indeed, for a covering family $\{f_j : G_j \to G\}_{j \in J}$ and given covering families $\{g_{i,j} : G_{i,j} \to G_{j}\}_{i \in I_j}$, the composites $\{f_j \circ g_{i,j} : G_{i,j} \to G \}_{j \in J, i \in I_j}$ covers $G$ fully with edge-disjoint subgraphs.
 
-Making good use of 
+Making good use of \cref{theorem:devissage}, we may gather information about the $K$-theory of any restriction to the graphs of $\FinGraph_{\leq n}$ by better understanding the $K$-theory of $\FinGraph_{\leq 1}$.
+
+\begin{proposition}
+    The category $\FinGraph_{\leq n}$ with the covering family structure described above has refinements and each graph $(V,E, \delta) \in \Ob{\FinGraph_{\leq n}}$ admits a cover by elements of $\FinGraph_{\leq 1}$. In particular, there is an equivalence of spectra
+    \[ K(\FinGraph_{\leq n}) \simeq K(\FinGraph_{\leq 1}).\]
+\end{proposition}

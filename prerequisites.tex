@@ -28,12 +28,12 @@ Simplices prominently arise in many aspects of algebraic topology, from simplici
 The reason for naming the generators coface and codegeneracy maps is that they will represent face and degeneracy maps between geometric simplices, i.e. projecting an $(n+1)$-simplex onto one of its faces and embedding an $n$-simplex as the face of an $(n+1)$-simplex.
 
 \begin{definition}
-    Let $\CC$ be a category. A \emph{simplicial object} in $\CC$ is a functor $C: \op{\Delta} \to \CC$. We denote $C_n$ for the object $C(\textbf{n})$.
+    Let $\CC$ be a category. A \emph{simplicial object} in $\CC$ is a functor $C_{\bullet}: \op{\Delta} \to \CC$. We denote $C_n$ for the object $C_{\bullet}(\textbf{n})$.
 
     The images of codegeneracy maps $\delta_i : \textbf{n+1} \to \textbf{n}$ are called \emph{degeneracy maps} $d_i : C_{n+1} \to C_n$ and the images of coface maps $\sigma_i : \textbf{n} \to \textbf{n+1}$ are called \emph{face maps} $s_i : C_{n+1} \to C_{n}$.
 
 
-    A \emph{simplicial set} is a simplicial object in the category of sets. The category of simplicial sets with natural transformations between them is denoted $\sSet$. For a simplicial set $X$, the elements of $X_n$ that are in the image of a degeneracy map are called degeneracies, while those that are in the image of a face map are called faces.
+    A \emph{simplicial set} is a simplicial object in the category of sets. The category of simplicial sets with natural transformations between them is denoted $\sSet$. For a simplicial set $X_{\bullet}$, the elements of $X_n$ that are in the image of a degeneracy map are called degeneracies, while those that are in the image of a face map are called faces.
     
     A \emph{simplicial space} is a simplicial object in the category of topological spaces.
 \end{definition}
@@ -47,16 +47,16 @@ The simplest example of a simplicial set comes naturally from the Hom-sets of th
     \[ \Hom[\Delta]{-}{\textbf{n}} : \op{\Delta} \to \Set. \]
 \end{example}
 
-From a simplicial set $X$, we may construct a category arising from maps between the standard simplices and $X$.
+From a simplicial set $X_{\bullet}$, we may construct a category arising from maps between the standard simplices and $X_{\bullet}$.
 
 \begin{definition}
-    Let $X$ be a simplicial set. The \emph{category of simplices} of $X$, denote $\Delta \downarrow X$, has as objects natural transformations $\Delta^n \to X$ for all $n \geq 0$, and maps given by natural transformations $\Delta^n \to \Delta^m$ that fit in the commutative diagram
+    Let $X_{\bullet}$ be a simplicial set. The \emph{category of simplices} of $X_{\bullet}$, denote $\Delta \downarrow X_{\bullet}$, has as objects natural transformations $\Delta^n \to X_{\bullet}$ for all $n \geq 0$, and maps given by natural transformations $\Delta^n \to \Delta^m$ that fit in the commutative diagram
 
     % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXERlbHRhXm4iXSxbMiwwLCJcXERlbHRhXm0iXSxbMSwyLCJYIl0sWzAsMV0sWzAsMl0sWzEsMl1d
     \[\begin{tikzcd}[ampersand replacement=\&,cramped, sep=small]
         {\Delta^n} \&\& {\Delta^m.} \\
         \\
-        \& X
+        \& X_{\bullet}
         \arrow[from=1-1, to=1-3]
         \arrow[from=1-1, to=3-2]
         \arrow[from=1-3, to=3-2]
@@ -66,17 +66,17 @@ From a simplicial set $X$, we may construct a category arising from maps between
 Standard simplices are an essential tool to understand general simplicial sets and will be necessary for geometric interpretation.
 
 \begin{proposition}[ADD REF TO GOERSS]\label{prop:sset_as_colimit}
-    Let $X$ be a simplicial set. There is a bijection
-    \[ X_n \cong \Hom[\sSet]{\Delta^n}{X}. \]
+    Let $X_{\bullet}$ be a simplicial set. There is a bijection
+    \[ X_n \cong \Hom[\sSet]{\Delta^n}{X_{\bullet}}. \]
     Furthermore, the simplicial set $X$ is obtained via the colimit
-    \[ X \cong \colim_{\Delta^n \to X} \Delta^n \]
-    taken in the category of simplices $\Delta \downarrow X$
+    \[ X_{\bullet} \cong \colim_{\Delta^n \to X_{\bullet}} \Delta^n \]
+    taken in the category of simplices $\Delta \downarrow X_{\bullet}$
 \end{proposition}
 
 \begin{proof}
     Let $\textbf{n} \in \Delta$. By the Yoneda lemma, there is a bijection
-    \[ X_n = X(\textbf{n}) \cong \Hom[\Cat]{\Hom[\op{\Delta}]{\textbf{n}}{-}}{X} \cong \Hom[\Cat]{\Hom[\Delta]{-}{\textbf{n}}}{X}, \]
-    meaning there is a bijection $ X_n \cong \Hom[\sSet]{\Delta^n}{X}$.
+    \[ X_n = X_{\bullet}(\textbf{n}) \cong \Hom[\Cat]{\Hom[\op{\Delta}]{\textbf{n}}{-}}{X_{\bullet}} \cong \Hom[\Cat]{\Hom[\Delta]{-}{\textbf{n}}}{X_{\bullet}}, \]
+    meaning there is a bijection $ X_n \cong \Hom[\sSet]{\Delta^n}{X_{\bullet}}$.
     
     The second part is a consequence of the density theorem for presheaves. \textbf{Add more details}
 \end{proof}
@@ -118,7 +118,7 @@ By thinking of the standard $n$-simplex as the $n$-dimensional simplex in Euclid
     that is defined on the standard $n$-simplices as
     \[ \abs{\Delta^n} = \left\{\left(x_0, \ldots, x_n\right) \in \RR^{n+1} \middle| \sum_{i = 0}^{n} x_i = 1 \right\}. \]
     For an arbitrary simplicial set $X_\bullet \in \Ob{\sSet}$, it is defined as the colimit
-    \[ \abs{X} = \colim_{\Delta^n \to X_\bullet} \abs{\Delta^{n}}. \]
+    \[ \abs{X_{\bullet}} = \colim_{\Delta^n \to X_\bullet} \abs{\Delta^{n}}. \]
 \end{definition}
 
 Any map $\alpha : \textbf{m} \to \textbf{n}$ gives a natural map $\Delta^m \to \Delta^n$ by post-composition. In particular, applying then geometric realization gives a map $\alpha_* : \abs{\Delta^m} \to \abs{\Delta^n}$. For a codegeneracy map $\sigma_i : \textbf{n} \to \textbf{n+1}$, the induced map of spaces $\sigma_{i*} : \abs{\Delta^{n+1}} \to \abs{\Delta^n}$ is the projection onto the $i$-th face of $\Delta^{n+1}$. Similarly, a coface map $\delta_i : \textbf{n+1} \to \textbf{n}$ gives a map $\delta_{i*} : \abs{\Delta^n} \to \abs{\Delta^{n+1}}$ embedding the topological $n$-simplex into the $i$-th face of $\Delta^{n+1}$.
@@ -134,7 +134,7 @@ Intuitively, the realization of a simplicial set is understood as sending each $
 \end{proposition}
 
 \begin{proof}[Sketch of proof]
-    Recall that elements of $X_n$ are in bijection with natural transformations $\Delta^n \to X$. In particular elements of $\Delta \downarrow X$ all correspond to some $x \in X_n$. In particular, the colimit $\colim_{\Delta^n \to X} \Delta^n$ identifies $\Delta^n \to X$ (corresponding to $x \in X_n$) with $\Delta^m \to X$ (corresponding to $y \in X_m$) if there is a map $\alpha : \textbf{n} \to \textbf{m}$ such that $X_{\bullet}(\alpha)(x) = y$. This is precisely the same type of identification made by the equivalence relation $(x, \alpha_{*}(\xi)) \sim (X_{\bullet}(\alpha)(x), \xi)$.
+    Recall that elements of $X_n$ are in bijection with natural transformations $\Delta^n \to X_{\bullet}$. In particular elements of $\Delta \downarrow X_{\bullet}$ all correspond to some $x \in X_n$. In particular, the colimit $\colim_{\Delta^n \to X_{\bullet}} \Delta^n$ identifies $\Delta^n \to X_{\bullet}$ (corresponding to $x \in X_n$) with $\Delta^m \to X_{\bullet}$ (corresponding to $y \in X_m$) if there is a map $\alpha : \textbf{n} \to \textbf{m}$ such that $X_{\bullet}(\alpha)(x) = y$. This is precisely the same type of identification made by the equivalence relation $(x, \alpha_{*}(\xi)) \sim (X_{\bullet}(\alpha)(x), \xi)$.
 \end{proof}
 
 \begin{remark}
@@ -159,9 +159,9 @@ Studying maps between the realizations of the standard simplices and topological
     To establish the adjunction, observe that
 
     \begin{align*}
-    \Hom[\Top]{\abs{X}}{T} &\overset{(1)}{\cong} \lim_{\Delta^n \to X} \Hom[\Top]{\abs{\Delta^n}}{T} \\
-    &\overset{(2)}{\cong} \lim_{\Delta^n \to X} \Hom[\sSet]{\Delta^n}{S(T)} \\
-    &\cong \Hom[\sSet]{X}{S(T)}.
+    \Hom[\Top]{\abs{X_{\bullet}}}{T} &\overset{(1)}{\cong} \lim_{\Delta^n \to X_{\bullet}} \Hom[\Top]{\abs{\Delta^n}}{T} \\
+    &\overset{(2)}{\cong} \lim_{\Delta^n \to X_{\bullet}} \Hom[\sSet]{\Delta^n}{S(T)} \\
+    &\cong \Hom[\sSet]{X_{\bullet}}{S(T)}.
     \end{align*}
 
     The first bijection amounts to the contravariant Hom-functor sending colimits to limits.
@@ -172,7 +172,7 @@ Studying maps between the realizations of the standard simplices and topological
 \begin{remark}
     Since geometric realization is a left adjoint, it preserves colimits.
 
-    Furthermore, there is a functor from simplicial sets to simplicial groups taking a simplicial set $X$ to the simplicial abelian group $\ZZ X$ given degree-wise by $\ZZ X_n$. In this way, the homology groups of $\ZZ S(T)$ are precisely the singular homology groups of $T$.
+    Furthermore, there is a functor from simplicial sets to simplicial groups taking a simplicial set $X_{\bullet}$ to the simplicial abelian group $\ZZ X_{\bullet}$ given degree-wise by $\ZZ X_n$. In this way, the homology groups of $\ZZ S(T)$ are precisely the singular homology groups of $T$. \textbf{would need to develop simplicial abelian groups}
 \end{remark}
 
 
