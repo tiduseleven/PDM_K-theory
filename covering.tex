@@ -1,53 +1,53 @@
 \section[The K-theory of categories with covering families]{The $K$-theory of categories with covering families}
-In an effort to bring the tools of algebraic $K$-theory to combinatorial settings, such as graphs, Bohmann et al. introduced in 2024 the notion of categories with covering families, to which one may associate a spectrum that properly captures the expected properties of $K$-theory.
+In an effort to bring the tools of algebraic $K$-theory to combinatorial settings, such as graphs, Bohmann et al. introduced in 2024 the notion of \emph{categories with covering families}, to which one may associate a spectrum that properly captures the expected properties of $K$-theory.
 
 \subsection{Categories with covering families}\label{subsection:covering}
-As the name suggests, a covering family will encapsulate the notion of an object being covered by one more many other objects. This motivates the following definition.
+As the name suggests, a covering family will encapsulate the notion of an object being covered by one or more other objects. This motivates the following definition.
 
 \begin{definition}
-    Let $\CC$ be a category. A multi-morphism in $\CC$ is an object $B \in \Ob\CC$ with a finite set of morphisms with codomain $B$
+    Let $\CC$ be a category. A \emph{multi-morphism} in $\CC$ is an object $B \in \Ob\CC$ together with a finite set of morphisms with codomain $B$
     \[ \left\{ f_i : A_i \to B \right\}_{i \in I}. \]
 \end{definition}
 
-To have a suitable notion of category with covering families, one may intuitively want to have at least a covering family for each object, as well as having some notion of composition of covering families.
+To have a suitable notion of category with covering families, one may intuitively want to have at least one covering family for each object, as well as having some notion of composition of covering families.
 
 \begin{definition}
     Let $\CC$ be a category. A \emph{covering family structure} on $\CC$ is a collection of multi-morphisms, called \emph{covering families}, such that
     \begin{itemize}
         \item for each $A \in \Ob \CC$, the singleton containing the identity $\left\{ A \xto{\Id{A}} A\right\}$ is a covering family;
-        \item Given a covering family
+        \item given a covering family
             \[ \left\{ g_j : B_j \to C \right\}_{j \in J} \]
             and, for each $j \in J$, a covering family
             \[ \left\{ f_{ij} : C_{ij} \to B_j \right\}_{i \in I_j},\]
             then the collection of all composites
-            \[ \left\{ g_j \circ f_{ij} :  \to A \right\}_{j \in J, i \in I_j} \]
+            \[ \left\{ g_j \circ f_{ij} :  C_{ij}\to A \right\}_{j \in J, i \in I_j} \]
             is a covering family.
     \end{itemize}
 
-    A \emph{category with covering families} is a small category $\CC$, a covering family structure on $\CC$ and a distinguished basepoint $* \in \Ob \CC$, such that
+    A \emph{category with covering families} consists of a small category $\CC$, a covering family structure on $\CC$, and a distinguished basepoint $* \in \Ob \CC$, such that
     \begin{itemize}
         \item $\Hom{*}{*} = \{\Id{*}\}$ and $\Hom{C}{*} = \varnothing$ for any $C \neq *$;
         \item for every finite set $I$, the family $\{* \to *\}_{i \in I}$ is a covering family.
     \end{itemize}
 
-    The category $\CatFam$ is the category whose objects are categories with covering families and whose morphisms are basepoint-preserving functors which send covering families to covering families.
+    The category $\CatFam$ is the category whose objects are categories with covering families and whose morphisms are basepoint-preserving functors that send covering families to covering families.
 \end{definition}
 
 \begin{remark}
-    While the additional requirements of a category with covering families seen arbitrary, they are necessary for the whole theory to be well-founded. Furthermore, any category can be given a basepoint in two different ways:
+    While the additional requirements of a category with covering families might seem arbitrary, they are necessary for the whole theory to be well-founded. Furthermore, any category can be given a basepoint in two different ways:
     \begin{itemize}
-        \item Adding a disjoint basepoint $*$, such that $\Hom{*}{*} = \{\Id{*}\}$ and $\Hom{*}{C} = \Hom{C}{*} = \varnothing$ for any $C \neq *$, giving the category $C_+$
-        \item Adding an initial basepoint $*$, such that $\Hom{*}{C}$ has a single morphism for any $C \in \Ob\CC$ and $\Hom{C}{*} = \varnothing$ for any $C \neq *$, forming the category $C_*$.
+        \item adding a disjoint basepoint $*$, such that $\Hom{*}{*} = \{\Id{*}\}$ and $\Hom{*}{C} = \Hom{C}{*} = \varnothing$ for any $C \neq *$, giving the category $C_+$;
+        \item adding an initial basepoint $*$, such that $\Hom{*}{C}$ has a single morphism for any $C \in \Ob\CC$ and $\Hom{C}{*} = \varnothing$ for any $C \neq *$, forming the category $C_*$.
     \end{itemize}
     In the latter case, the covering family structure needs to be redefined, so that, for any $C \in \Ob\CC_*$, a collection of maps to $C$ is a covering family if and only if it arises from a covering family in $\CC$ to which a finite collection of morphisms $\{ * \to C \}$ was added.
 \end{remark}
 
 \begin{example}
-    Let $X$ be a topological space and let $\CC$ be the category consisting of open sets, with morphisms given by inclusions. Then $\CC$ naturally inherits a covering families structure by declaring that $\{U_i \subseteq U\}_{i \in I}$ is a covering family if and only if $\bigcup_{i \in I} U_i = U$. Here, the distinguished basepoint is naturally the empty set. More generally, a Grothendieck site inherits a structure of category with covering families.
+    Let $X$ be a topological space, and let $\CC$ be the category consisting of its open sets, with morphisms given by inclusions. Then $\CC$ naturally inherits a covering families structure by declaring that $\{U_i \subseteq U\}_{i \in I}$ is a covering family if and only if $\bigcup_{i \in I} U_i = U$. Here, the distinguished basepoint is naturally the empty set. More generally, a Grothendieck site inherits a structure of category with covering families.
 \end{example}
 
 \begin{example}[ADD CITATION]
-    Let $\Gamma_{\leq n}$ be the category of finite graphs with $n$ or fewer edges, with morphisms given by inclusions of subgraphs. More precisely, objects are given by pairs of sets $(V,E)$ with an injective map $\partial \to \textnormal{Pair}(V)$, where $\textnormal{Pair}(V)$ is the set of unordered pairs of distinct elements of $V$. A morphism $(V,E, \partial) \to (V',E', \partial')$ is then given by injective maps $f_V : V \to V'$ and $f_E : E \to E'$ such that $\partial'(f_E(e)) = f_V(\partial(e))$.
+    Let $\Gamma_{\leq n}$ be the category of finite graphs with $n$ or fewer edges, with morphisms given by inclusions of subgraphs. More precisely, objects are given by pairs of sets $(V,E)$ equipped with an injective map $\partial: E \to \textnormal{Pair}(V)$, where $\textnormal{Pair}(V)$ is the set of unordered pairs of distinct elements of $V$. A morphism $(V,E, \partial) \to (V',E', \partial')$ is then given by injective maps $f_V : V \to V'$ and $f_E : E \to E'$ such that $\partial'(f_E(e)) = f_V(\partial(e))$.
 
     There is a natural covering family structure on $\Gamma_{\leq n}$ given by:
     \begin{itemize}
@@ -69,7 +69,7 @@ To any category with covering families corresponds its category of covers which,
     Let $\CC$ be a category with covering families. Its \emph{category of covers} $\W{\CC}$ is given by
         \begin{itemize}
             \item Objects: finite collections $\left\{A_{i}\right\}_{i \in I}$ of non-distinguished objects;
-            \item Morphisms: A map $f : \left\{A_i\right\}_{i \in I} \to \{B_j\}_{j \in J}$ is a map $f : I \to J$ and maps $f_i : A_i \to B_{f(i)}$ such that 
+            \item Morphisms: A morphism $f : \left\{A_i\right\}_{i \in I} \to \{B_j\}_{j \in J}$ consists of a map $f : I \to J$ and maps $f_i : A_i \to B_{f(i)}$ such that 
             \[ \{ f_i : A_i \to B_j \}_{i \in f^{-1}(j)} \]
             is a covering family for each $j \in J$.
         \end{itemize}
@@ -78,15 +78,15 @@ To any category with covering families corresponds its category of covers which,
 In particular, morphisms in $\W{\CC}$ describe how a collection of non-distinguished objects in $\CC$ may cover another collection of objects in $\CC$.
 
 The construction above yields a functor
-\[ W : \CatFam \to \Cat \]
+\[ \W{} : \CatFam \to \Cat \]
 because functors in $\CatFam$ preserve both basepoint and covering families.
 
-Since categories with covering families have a basepoint, the category $\CatFam$ naturally inherits an action from the monoidal category of pointed sets. Notice a pointed set $(X, x_0)$ can be seen as a category whose morphisms are identities and a unique morphism $x_0 \to a$ for any element $a \in X$.
+Since categories with covering families have a basepoint, the category $\CatFam$ naturally inherits an action of the monoidal category of pointed sets. Notice a pointed set $(X, x_0)$ can be seen as a category whose morphisms are identities and a unique morphism $x_0 \to a$ for any element $a \in X$.
 
 \begin{propdef}[Smash product of category with covering families]
     Let $(\CC, C_0)$ be a category with covering families. There is a functor
         \[ - \wedge \CC : \FinSet_* \to \CatFam \]
-    which sends a finite pointed set $(X, x_0)$ to the category $X \wedge \CC$, whose objects are
+    that sends a finite pointed set $(X, x_0)$ to the category $X \wedge \CC$, whose objects are
     \[ \Ob{X \wedge \CC} = \left( \Ob{X} \times \Ob{\CC} \right) \big/ \left({\Ob{X} \vee \Ob{\CC}} \right) \]
     and morphisms are induced by those of $X \times \CC$.
 \end{propdef}
@@ -94,33 +94,33 @@ Since categories with covering families have a basepoint, the category $\CatFam$
 \begin{proof}
     There is a natural basepoint in $X \wedge \CC$ given by the class of $(x_0, C_0)$ in $X \wedge \CC$. For an element $(x, C) \in \Ob{X} \times \Ob{\CC}$, denote by $[x, C]$ its class in $X \wedge \CC$. To give $X \wedge \CC$ a covering family structure, we declare that $\left\{[x_i, C_i] \to [x, C]\right\}_{i \in I}$ is a covering family if and only if $x_i = x$ or $x_i = x_0$ for each $i \in I$, and $\{C_i \to C\}_{i \in I}$ is a covering family in $\CC$. This is to be understood as covering families being contained in a single copy of $\CC$, with the basepoint being contained in every copy of $\CC$. Thus, this gives a covering family structure inherited from the one of $\CC$.
 
-    As for the functoriality, let $f : (X, x_0) \to (Y, y_0)$ be a map of based sets, i.e.~such that $f(x_0) = y_0$. It induces a functor $f_* : X \wedge \CC \to Y \wedge \CC$ by letting $f([x, C]) = [f(x), C]$ and, for a morphism $(a, b): [x, C] \to [x', C']$, letting $f((a,b)) = (f(a), b)$, with $f(a)$ defined as the unique morphism from $f(x)$ to $f(x')$.
+    As for the functoriality, let $f : (X, x_0) \to (Y, y_0)$ be a map of based sets, i.e.,~such that $f(x_0) = y_0$. It induces a functor $f_* : X \wedge \CC \to Y \wedge \CC$ by letting $f([x, C]) = [f(x), C]$ and, for a morphism $(a, b): [x, C] \to [x', C']$, letting $f((a,b)) = (f(a), b)$, with $f(a)$ defined as the unique morphism from $f(x)$ to $f(x')$.
 
     To see it preserves covering families, \textbf{blablabla}
 \end{proof}
 
-The way to associate a $K$-theory to a category with covering families will arise from a more general spectrum construction, which we will now detail. 
+The definition of the $K$-theory of a category with covering families will arise from a more general spectrum construction, which we will now study detail. 
 
 \subsection[Gamma-spaces and their symmetric spectrum]{$\Gamma$-spaces and their symmetric spectrum}
 
 \begin{definition}
-    Let $\Gamma$ denote the category consisting of finite sets. A morphism from $X$ to $Y$ consists of a map $f : X \to \mathcal{P}(Y)$ such that $f(x) \cap f(x') = \varnothing$ whenever $x \neq x'$. The composition of two maps $f: X \to \mathcal{P}(Y)$ and $g: Y \to \mathcal{P}(Z)$ is given by ${(g \circ f) (x) = \bigcup_{y \in f(x)} g(y)}$.
+    Let $\Gamma$ denote the category the objects of which are finite sets, while a morphism from $X$ to $Y$ consists of a map $f : X \to \mathcal{P}(Y)$ such that $f(x) \cap f(x') = \varnothing$ whenever $x \neq x'$. The composition of two maps $f: X \to \mathcal{P}(Y)$ and $g: Y \to \mathcal{P}(Z)$ is given by ${(g \circ f) (x) = \bigcup_{y \in f(x)} g(y)}$.
 
     Let ${\CC}$ be a pointed category with initial-terminal object $*$.
-    A $\Gamma$-object over $C$ is a functor $A : \op{\Gamma} \to \CC$ such that $A(\varnothing)$ is isomorphic to $*$.
+    A \emph{$\Gamma$-object} in $\CC$ is a functor $A : \op{\Gamma} \to \CC$ such that $A(\varnothing)$ is isomorphic to $*$.
     
-    A $\Gamma$-space is a $\Gamma$-object over $\Top_*$. It is \emph{special} if the map
+    A \emph{$\Gamma$-space} is a $\Gamma$-object in $\Top_*$. It is \emph{special} if the map
     \[ p : A(\textbf{n}) \to A(\textbf{1}) \times \cdots \times A(\textbf{1}),\]
-    induced by each inclusion $i_k \textbf{1} \hookrightarrow \textbf{n}$ given by $i_k(1) = \{k\}$, is a homotopy equivalence. It is \emph{very special} if it is special and $\pi_0 A(\textbf{1})$ is an abelian group.
+    induced by the inclusions $i_k: \textbf{1} \hookrightarrow \textbf{n}$ given by $i_k(1) = \{k\}$, is a homotopy equivalence. It is \emph{very special} if it is special, and $\pi_0 A(\textbf{1})$ is an abelian group.
 \end{definition} 
 
 While this is the classical perspective on $\Gamma$-spaces as presented in \cite{segal_categories_1974}, there is another way to equivalently describe $\op{\Gamma}$ which is more straightforward.
 
 \begin{proposition}
-    The opposite category of $\Gamma$ is equivalent to the category $\FinSet_*$ of finite pointed set.
+    The opposite category of $\Gamma$ is equivalent to the category $\FinSet_*$ of finite pointed sets and pointed set maps.
 \end{proposition}
 \begin{proof}
-    We construct a functor $F : \op{\Gamma} \to \FinSet_*$ that is fully faithful and essentially surjective, proving both categories are indeed equivalent
+    We construct a functor $F : \op{\Gamma} \to \FinSet_*$ that is fully faithful and essentially surjective, proving that both categories are indeed equivalent
 
     For a finite set $X \in \Ob{\op{\Gamma}}$, define $F(X) := X \sqcup \{*\}$, with $*$ the distinguished basepoint of $F(X)$. For a map $\op{f} : Y \to X$ in $\op{\Gamma}$ coming from a morphism $f : X \to \mathcal{P} (Y)$ with the images of elements of $X$ pairwise disjoint, for an element $y \in Y \sqcup \{*\}$ we define $F(\op{f})(y)$ as either the only $x$ such that $y \in f(x)$ or $*$ if it is contained in no image.
 
@@ -135,40 +135,40 @@ While this is the classical perspective on $\Gamma$-spaces as presented in \cite
     Since essentially surjective, fully faithful functors are equivalences of categories, the categories $\op{\Gamma}$ and $\FinSet_*$ are equivalent.
 \end{proof}
 
-Thus, by the previous isomorphism, a $\Gamma$-space may be seen as a covariant functor $A : \FinSet_* \to \Top_*$ such that $A(\textbf{0})$ is contractible. The conditions of being special and very special naturally translate to this version of the definition as well.
+A $\Gamma$-space may therefore be seen as a covariant functor $A : \FinSet_* \to \Top_*$ such that $A(\textbf{0})$ is contractible. The conditions of being special and very special naturally translate to this version of the definition as well.
 
-To get a spectrum out of a $\Gamma$-space, we progressively expand both the domain and the co-domain of a $\Gamma$-space $A$ to obtain a new functor
+To construct a spectrum from a $\Gamma$-space, we progressively expand both the domain and the co-domain of a $\Gamma$-space $A$ to obtain a new functor
 \[A : \Sp \to \Sp.\]
 
 First, a $\Gamma$-space may be extended to a functor $A : \Set_* \to \sSet_*$ by letting
 \[ A(X) = \colim_{\substack{Y \subset X\\ Y \in \FinSet_*}} A(Y) \]
-for any pointed set $X \in \Set_*$. It may further be extended to have as codomain $\sSet_*$ by taking the diagonal of the pointed bisimplicial set $A(X_\bullet)$. Notice this is indeed a bisimplicial set, as the composition of $A$ with $X : \op{\Delta} \to \Set_*$ produces a functor from $\op{\Delta}$ to the category of pointed simplicial sets. Concretely, $A(X_\bullet)$ is defined at level $n$ as
+for any pointed set $X \in \Set_*$. It may further be extended to have as domain and codomain $\sSet_*$, by taking the diagonal of the pointed bisimplicial set $A(X_\bullet)$. Notice this is indeed a bisimplicial set, as the composition of $A$ with $X : \op{\Delta} \to \Set_*$ produces a functor from $\op{\Delta}$ to the category of pointed simplicial sets. Concretely, $A(X_\bullet)$ is defined at level $n$ as
 \[ (A(X_\bullet))_n = (A(X_n))_n. \]
 
-Notice, for $X_\bullet,Y_\bullet \in \Ob{\sSet_*}$, there is a natural map of simplicial sets $X_\bullet \wedge A(Y_\bullet) \to A(X_\bullet \wedge Y_\bullet)$ by taking an element $x \wedge y \in X_n \wedge (A(Y_n))_n$ to the \textbf{Yeah this is not clear yet lol}. This allows for the extension of $A$ to a functor from spectra to spectra. For a spectrum $X^{\bullet}$ (where $X^n$ is a simplicial set), we define $A(X^{\bullet})$ degree-wise by
+For $X_\bullet,Y_\bullet \in \Ob{\sSet_*}$, there is a natural map of simplicial sets $$X_\bullet \wedge A(Y_\bullet) \to A(X_\bullet \wedge Y_\bullet),$$ given by taking an element $x \wedge y \in X_n \wedge (A(Y_n))_n$ to the \textbf{Yeah this is not clear yet lol}. This allows for the extension of $A$ to a functor from spectra to spectra. For a spectrum $X^{\bullet}$ (where $X^n$ is a simplicial set), we define $A(X^{\bullet})$ degree-wise by
 \[ (A(X^{\bullet}))^{n} = A(X^n),\]
 with the structural maps as described above
 \[ S^1 \wedge A(X^n) \to A(S^1 \wedge X^n) \to A(X^{n+1}) \]
 where the last map is obtained by applying $A$ to the structural map $S^1 \wedge X^n \to X^{n+1}$ of the spectrum $X^{\bullet}$.
 
-As we have progressively extended $\Gamma$-spaces to an endomorphism of the category of spectra, we may study its effect on the unit of the category of spectra, namely the sphere spectrum.
+As we have progressively extended $\Gamma$-spaces to endomorphisms of the category of spectra, we may study its effect on the unit of the category of spectra, namely the sphere spectrum $\mathbb{S}$.
 
 \begin{definition}
-    Let $A$ be a $\Gamma$-space. The \emph{spectrum associated to $A$} is the image of the sphere spectrum by $A$. It is given degree-wise by
+    Let $A$ be a $\Gamma$-space. The \emph{spectrum associated to $A$} is the image of the sphere spectrum under $A$. It is given degree-wise by
     \[ A(\mathbb{S})_n = A((S^n)),\]
     where $S^n$ denotes the $n$-dimensional sphere as a simplicial set.
 \end{definition}
 
 \subsection{The spectrum associated to a category with covering families}
 
-In \cref{subsection:covering}, we constructed two different functors. First, for a given category with covering families $\CC$, the functor $- \wedge \CC : \FinSet_* \to \CatFam$. Then, the functor $W : \CatFam \to \Cat$ sending a category with covering families to its category of covers. Thus, for a given category with covering families $\CC$, composing both functors gives a functor from the category of finite pointed sets to the category of small categories. We may then take the geometric realization of the nerve of the resulting category, giving a functor
+In \cref{subsection:covering}, we constructed two different functors. First, for a given category with covering families $\CC$, there is the functor $- \wedge \CC : \FinSet_* \to \CatFam$. We also considered the functor $\W{} : \CatFam \to \Cat$ sending a category with covering families to its category of covers. For a given category with covering families $\CC$, composing both functors gives a functor from the category of finite pointed sets to the category of small categories. We may then take the geometric realization of the nerve of the resulting category, leading to a functor
 
 \[ \abs{N_{\bullet}(\W{- \wedge \CC})} : \FinSet_* \to \Top_*. \]
 
 Since $\textbf{0}$ consists only of the basepoint, the product $\Ob{\textbf{0}} \times \Ob{\CC}$ coincides with $\Ob{\textbf{0}} \vee \Ob{\CC}$, so that $\textbf{0} \wedge \CC$ is trivial. Consequently, so is its category of covers $\W{\textbf{0} \wedge \CC}$. Therefore, this functor  is a $\Gamma$-space, to which we may associate a spectrum. 
 
 \begin{definition}
-    Let $\CC$ be a category with covering families. The $K$-theory spectrum of $\CC$, denoted $K(\CC)$, is the spectrum associated to the $\Gamma$-space $\abs{N_{\bullet}(\W{- \wedge \CC})}$.
+    Let $\CC$ be a category with covering families. The \emph{$K$-theory spectrum} of $\CC$, denoted $K(\CC)$, is the spectrum associated to the $\Gamma$-space $\abs{N_{\bullet}(\W{- \wedge \CC})}$.
 \end{definition}
 
 
@@ -181,7 +181,7 @@ As a fundamental example of a spectrum coming from a category with covering fami
 To show this, we will use a result about realizations of categories due to Quillen. It makes use of the slice category.
 
 \begin{definition}
-    Let $S : \mathcal{A} \to \mathcal{C}$ and $T : \mathcal{A} \to \mathcal{C}$ be two functors. The \emph{comma category} $S \downarrow T$ is the category whose objects are triples $(A, B, f)$ with $A \in \Ob{A}$, $B \in \Ob{B}$ and $f : S(A) \to T(B)$. A morphism from $(A, B, f)$ to $(A', B', f')$ is given by a pair of morphisms $(f,g)$ where $f: A \to A'$ and $g : B \to B'$ such that the following diagram commutes
+    Let $S : \mathcal{A} \to \mathcal{C}$ and $T : \mathcal{A} \to \mathcal{C}$ be two functors. The \emph{comma category} $S \downarrow T$ is the category whose objects are triples $(A, B, f)$ with $A \in \Ob{A}$, $B \in \Ob{B}$, and $f : S(A) \to T(B)$, a morphism in $\CC$. A morphism from $(A, B, f)$ to $(A', B', f')$ is given by a pair of morphisms $(g,h)$ where $g: A \to A'$ in $\mathcal A$ and $h : B \to B'$ in $\mathcal B$ such that the following diagram commutes.
 
     % https://q.uiver.app/#q=WzAsNCxbMCwwLCJTKEEpIl0sWzEsMCwiUyhBJykiXSxbMCwxLCJUKEIpIl0sWzEsMSwiVChCJykiXSxbMCwxLCJTKGcpIl0sWzAsMiwiZiIsMl0sWzIsMywiVChoKSIsMl0sWzEsMywiZiciXV0=
     \[\begin{tikzcd}[ampersand replacement=\&,cramped]
@@ -195,7 +195,7 @@ To show this, we will use a result about realizations of categories due to Quill
 \end{definition}
 
 \begin{example}
-    Let $F : \CC \to \DD$ be a functor and $D \in \Ob{\DD}$ be a fixed object. There is a functor $D : \DD \to \DD$ sending each object to $D$ and each morphism to $\Id{D}$. The comma category $F / D$ is then given by pairs $(C, f)$ where $f$ is a morphism from $F(C)$ to $D$. A morphism $g : (C, f) \to (C', f')$ is then given by a morphism $g : C \to C'$ such that the following diagram commutes
+    Let $F : \CC \to \DD$ be a functor and $D \in \Ob{\DD}$ be a fixed object. There is a functor $D : \DD \to \DD$ sending each object to $D$ and each morphism to $\Id{D}$. In the comma category $F\downarrow D$, more commonly denoted $F / D$, the objects can be seen as pairs $(C, f)$ where $f$ is a morphism from $F(C)$ to $D$. A morphism $g : (C, f) \to (C', f')$ is then given by a morphism $g : C \to C'$ such that the following diagram commutes.
     % https://q.uiver.app/#q=WzAsMyxbMCwwLCJGKEEpIl0sWzIsMCwiRihBJykiXSxbMSwyLCJEIl0sWzAsMSwiRihnKSJdLFswLDIsImYiLDJdLFsxLDIsImYnIl1d
     \[\begin{tikzcd}[ampersand replacement=\&,cramped]
         {F(A)} \&\& {F(A')} \\
@@ -205,14 +205,14 @@ To show this, we will use a result about realizations of categories due to Quill
         \arrow["f"', from=1-1, to=3-2]
         \arrow["{f'}", from=1-3, to=3-2]
     \end{tikzcd}\]
-    Such a comma category is usually written $F/D$.
     
-    Taking $F = \Id{\DD}$ gives rise to what is called the \emph{slice category} $\DD/d$.
+    
+    Taking $F = \Id{\DD}$ gives rise to what is called the \emph{slice category} $\DD/D$.
 \end{example}
 
-We are now ready to state Quillen's theorem A
+We are now ready to state Quillen's Theorem A.
 
-\begin{theorem}[Quillen's theorem A]
+\begin{theorem}[Quillen's Theorem A]
     Let $F : \CC \to \DD$ be a functor. If, for every $D \in \Ob{D}$, the realization of the comma category $\abs{N_{\bullet}(F/D)}$ is contractible, the induced functor $\abs{N_{\bullet}(\CC)} \to \abs{N_{\bullet}(\DD)}$ is a weak homotopy equivalence.
 \end{theorem}
 
@@ -229,7 +229,7 @@ We are now ready to state Quillen's theorem A
 
     The spectrum associated to this $\Gamma$-space is actually the Eilenberg-MacLane spectrum $HA$. \textbf{still not proved}
 
-    To show the spectrum associated to $\mathcal{E} A_*$ is the Eilenberg-MacLane spectrum of $A$, we will show both $\Gamma$-spaces are equivalent. First, let $U(X \otimes A)$ denote the set $X \otimes A$ seen as a discrete category, i.e. the category whose objects are elements of $X \otimes A$ and the only morphisms are the identity. There is a functor
+    To show the spectrum associated to $\mathcal{E} A_*$ is the Eilenberg-MacLane spectrum of $A$, we will show both $\Gamma$-spaces are equivalent. First, let $U(X \otimes A)$ denote the set $X \otimes A$ seen as a discrete category, i.e., the category whose objects are elements of $X \otimes A$ and the only morphisms are the identity. There is a functor
     \[ \Sigma : \W{X \wedge \mathcal{E} A_*} \to U(X \otimes A) \]
     given by sending a finite set $\{(x_i, a_i)\}_{i \in I}$ to the element $\sum_{i \in I} a_i x_i$. The functoriality of this amounts to morphisms in $\W{X \wedge \mathcal{E} A_*}$ being coverings of such a finite set and the definition of a covering in $\mathcal{E} A_*$. By functoriality of the nerve and the geometric realization, this induces a map of $\Gamma$-spaces
     \[ \abs{N_{\bullet}(- \wedge \mathcal{E} A_*)} \to \abs{N_{\bullet}(U(- \otimes A))}.\]
@@ -237,14 +237,16 @@ We are now ready to state Quillen's theorem A
     \[ \abs{N_{\bullet}(- \wedge \mathcal{E} A_*)} \to - \otimes A. \]
     This map induces a map of spectra
     \[ K(\mathcal{E} A_*) \to HA. \]
-    To show both spectra are equivalent, we will use Quillen's theorem A on $\Sigma$. To this extent, let $d := \sum_{j \in J} a_j x_j$ be an element of $U(X \otimes A)$. Since $U(X \otimes A)$ is discrete, the comma category $\Sigma / d$ is then given by the full subcategory of $W(X \wedge \mathcal{E} A_*)$ whose objects are Finite sets $\{(x'_i, a'_i)\}_{i \in I}$ such that $\sum_{i \in I} a'_i x'_i = d$. This category has a terminal object, namely $d$. By \cref{proposition:terminal_implies_contractible}, the geometric realization $\abs{N_{\bullet}(\Sigma / d)}$ is contractible. Thus, by Quillen's theorem A, the functor $\Sigma$ induces a weak homotopy equivalence of realizations $\abs{N_{\bullet}(W(X \wedge \mathcal{E} A_*))} \to U(X \otimes A)$. This consequently induces an equivalence of spectra $K(\mathcal{E} A_*) \simeq H A$.
+    To show both spectra are equivalent, we will use Quillen's theorem A on $\Sigma$. 
+    
+    To do so, let $d := \sum_{j \in J} a_j x_j$ be an element of $U(X \otimes A)$. Since $U(X \otimes A)$ is discrete, the comma category $\Sigma / d$ is  given by the full subcategory of $W(X \wedge \mathcal{E} A_*)$ whose objects are finite sets $\{(x'_i, a'_i)\}_{i \in I}$ such that $\sum_{i \in I} a'_i x'_i = d$. This category has a terminal object, namely $d$. By \cref{proposition:terminal_implies_contractible}, the geometric realization $\abs{N_{\bullet}(\Sigma / d)}$ is contractible. Thus, by Quillen's Theorem A, the functor $\Sigma$ induces a weak homotopy equivalence of realizations $\abs{N_{\bullet}(W(X \wedge \mathcal{E} A_*))} \to U(X \otimes A)$. This consequently induces an equivalence of spectra $K(\mathcal{E} A_*) \simeq H A$.
     
 \end{proof}
 
 \subsection[A good notion of K-theory]{A good notion of $K$-theory}
-For this construction to properly encapsulate $K$-theory, we expect it to fulfill the properties listed in \cref{subsection:properties_of_k_theory}. Indeed, the most fundamental results already hold. While they were originally proved for assemblers in \cite{zakharevich2016ktheoryassemblers}, they made no use of the additional specific structure of an assembler, which may inherently be seen as a category with covering family.
+For this construction to properly encapsulate $K$-theory, we expect it to fulfill the properties listed in \cref{subsection:properties_of_k_theory}. Indeed, the most fundamental desired properties already hold. While they were originally proved for assemblers in \cite{zakharevich2016ktheoryassemblers}, the proofs made no use of the additional specific structure of an assembler, which may inherently be seen as a category with covering family.
 
-In the context of Waldhausen categories, many of the results had to do with cofibration sequences, which were a key structural element of such categories. Similarly, the analogous results for categories with covering families will be related to covering families.
+In the context of Waldhausen categories, many of the results we saw concerned cofibration sequences, which are a key structural element of such categories. Similarly, the analogous results for categories with covering families will be related to covering families.
 
 \subsubsection[The free abelian group approach to the 0-th K-group]{The free abelian group approach to the $0$-th $K$-group}
 Much like $K_0(R)$ is obtained as a quotient of the free abelian group over isomorphism classes of finitely generated projective modules, a nearly identical presentation exists for categories with covering families.

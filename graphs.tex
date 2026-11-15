@@ -4,7 +4,7 @@ As a way to harness this theoretical framework, we may construct covering struct
 \begin{definition}
     Let $\FinGraph$ be the category consisting of
     \begin{itemize}
-        \item Objects: Finite graphs, i.e. pairs of finite sets $(V,E)$ with an injective map $\delta: E \to \Pair{V}$, where $\Pair{V}$ is the set of unordered pairs of distinct vertices in $V$.
+        \item Objects: Finite graphs, i.e., pairs of finite sets $(V,E)$ equipped with an injective map $\delta: E \to \Pair{V}$, where $\Pair{V}$ is the set of unordered pairs of distinct vertices in $V$.
         \item Morphisms: A morphism $f : (V,E,\delta) \to (V',E', \delta')$ is a pair of injective maps $f_V : V to V'$ and $f_E : E \to E'$ such that, for all $e \in E$, $\delta'f_E(e) = f_V(\delta(e))$.
     \end{itemize}
     The category $\FinGraph_{\leq n}$ is the full subcategory of $\FinGraph$ consisting of graphs with at most $n$ edges.
@@ -15,13 +15,13 @@ As a way to harness this theoretical framework, we may construct covering struct
 \end{definition}
 
 \subsection{A naive covering family structure}
-As a first way to define a covering family structure on the category $\FinGraph_{\leq n}$, we may herein consider edge-disjoint coverings of a graph.
+As a first way to define a covering family structure on the category $\FinGraph_{\leq n}$, we consider edge-disjoint coverings of a graph.
 
 \begin{definition}
     Define a collection of covering families on $\FinGraph_{\leq n}$ containing
     \begin{itemize}
-        \item For every finite set $I$, $\{\varnothing \xto{\Id{\varnothing}} \varnothing\}_{i \in I}$;
-        \item the family $\{f_i : G_i \to G\}_{i \in I}$, where each $f_i$ is the inclusion of $G_i$ as a subgraph of $G$, such that $G = \cup_i G_i$ and $G_i \cap G_j$ only contains vertices if $i \neq j$.
+        \item for every finite set $I$, $\{\varnothing \xto{\Id{\varnothing}} \varnothing\}_{i \in I}$;
+        \item the family $\{f_i : G_i \to G\}_{i \in I}$, where each $f_i$ is the inclusion of a subgraph $G_i$ into $G$, such that $G = \cup_i G_i$, and $G_i \cap G_j$ has no edges if $i \neq j$.
     \end{itemize}
 \end{definition}
 

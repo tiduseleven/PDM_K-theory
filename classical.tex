@@ -20,7 +20,7 @@ The $0^{\text{th}}$ $K$-theory group serves as a universal space for the rank of
 \[ r: \Iso{\Proj{R}} \to A \]
 such that $r(M) = r(L) + r(N)$ whenever there is a short exact sequence
 \[ 0 \to L \to M \to N \to 0.\]
-The way $K_0(R)$ is constructed allows it to be a universal generalized rank, meaning that the natural map $\tilde{r} : \Iso{\Proj{R}} \to K_0(R)$ is a generalized rank, such that for any other generalized rank $r : \Iso{\Proj{R}} \to A$, there is a unique group homomorphism $\hat{r} : K_0(R) \to A$ such that the following diagram is commutative:
+The construction of $K_0(R)$ is designed so that it is a universal generalized rank, meaning that the natural map $\tilde{r} : \Iso{\Proj{R}} \to K_0(R)$ is a generalized rank, such that for any other generalized rank $r : \Iso{\Proj{R}} \to A$, there is a unique group homomorphism $\hat{r} : K_0(R) \to A$ such that the following diagram is commutative:
 % https://q.uiver.app/#q=WzAsMyxbMCwwLCJcXElzb3tcXFByb2p7Un19Il0sWzEsMCwiS18wKFxcUHJvantSfSkiXSxbMCwxLCJBIl0sWzAsMiwiciJdLFswLDEsIlxcdGlsZGV7cn0iLDJdLFsxLDIsIlxcaGF0e3J9Il1d
 \[\begin{tikzcd}
 	{\Iso{\Proj{R}}} & {K_0(\Proj{R})} \\
@@ -30,14 +30,14 @@ The way $K_0(R)$ is constructed allows it to be a universal generalized rank, me
 	\arrow["{\hat{r}}", from=1-2, to=2-1]
 \end{tikzcd}\]
 
-If $R$ is actually a field, there is an isomorphism $K_0(R) \cong \ZZ$, so that it happens to be the group completion of $\NN$, and the generalized rank is precisely given by the dimension of a vector space.
+If $R$ is actually a field, there is an isomorphism $K_0(R) \cong \ZZ$, i.e., the group completion of $\NN$, and the generalized rank is precisely given by the dimension of a vector space.
 
 Similarly, the group $K_1(R)$ comes with the quotient map $\tilde{\delta}: \GL{R} \to K_1(R)$ which can be thought of as a universal generalized determinant.
 
 \subsubsection[Higher K-groups: Quillen's approach]{Higher $K$-groups: Quillen's approach}
-While the intuition behind $K_0$ and $K_1$ naturally leads to their definition, it is at first sight unclear what the right notion would give rise to higher $K$-groups. Some work has been done in order to construct $K_2$ explicitly (see for example~\cite[Chapter~3, Section~5]{weibel_k-book_nodate}), which can be seen as a universal Steinberg Symbol in the case of fields (see~\cite[Chapter~3, Section~6]{weibel_k-book_nodate}), but higher $K$-groups have not yet found such explicit descriptions.
+While the intuition behind $K_0$ and $K_1$ naturally leads to their definition, it is at first sight unclear what the right notion is to give rise to higher $K$-groups. Some work has been done in order to construct $K_2$ explicitly (see for example~\cite[Chapter~3, Section~5]{weibel_k-book_nodate}), which can be seen as a universal Steinberg Symbol in the case of fields (see~\cite[Chapter~3, Section~6]{weibel_k-book_nodate}), but higher $K$-groups have not yet found such explicit descriptions.
 
-Instead, they can be realized through a plethora of different constructions which happen to coincide. We detail here the classical topological construction due to Quillen, as described in~\cite[Chapter~5]{berrick_approach_1982}.
+Instead, they can be realized through a plethora of different constructions that happen to coincide. We detail here the classical topological construction due to Quillen, as described in~\cite[Chapter~5]{berrick_approach_1982}.
 
 The main idea of the construction is to express $K$-theory as homotopy groups of a specific topological space. The space in question arises from the so-called $+$-construction.
 
@@ -47,11 +47,11 @@ The main idea of the construction is to express $K$-theory as homotopy groups of
     The \emph{$+$-construction of $X$} is the $+$-construction relative to the largest perfect subgroup of $\pi_1(X)$.
 \end{definition}
 
-Recall that a map of topological spaces $f : X \to Y$ is called acyclic if and only if its homotopy fibre $E_f = X \times_Y PY$ is acyclic, i.e.~is contractible. Here, $PY$ denotes the space of paths $\lambda: I \to Y$. Equivalently, if both $X$ and $Y$ are path-connected, a map $f$ is acyclic if and only if the induced map $f_*: H_*(X; M) \to H_*(Y; M)$ is an isomorphism for any $\pi_1(X)$-module (see~\cite[Chapter~4, Lemma~1.6]{weibel_k-book_nodate}). 
+Recall that a map of topological spaces $f : X \to Y$ is called \emph{acyclic} if and only if its homotopy fibre $E_f = X \times_Y PY$ is acyclic, i.e.,~is contractible. Here, $PY$ denotes the space of paths $\lambda: I \to Y$. Equivalently, if both $X$ and $Y$ are path-connected, a map $f$ is acyclic if and only if the induced map $f_*: H_*(X; M) \to H_*(Y; M)$ is an isomorphism for any $\pi_1(X)$-module (see~\cite[Chapter~4, Lemma~1.6]{weibel_k-book_nodate}). 
 \textbf{add transition}
 
 \begin{theorem}[{{\cite[Theorem~5.1]{berrick_approach_1982}}}]
-    Let $X$ be a path-connected topological space and let $P$ be a perfect normal subgroup of $\pi_1(X)$. Then there exists a $+$-construction $f: X \to Y$ relative to $P$. Furthermore, the $+$-construction relative to $P$ is unique up to homotopy equivalence.
+    Let $X$ be a path-connected topological space. If $P$ is a perfect normal subgroup of $\pi_1(X)$, then there exists a $+$-construction $f: X \to Y$ relative to $P$. Furthermore, the $+$-construction relative to $P$ is unique up to homotopy equivalence.
 \end{theorem}
 
 Recall the construction of the classifying space of a group.
@@ -63,13 +63,13 @@ Recall the construction of the classifying space of a group.
 Since $\GL{R}$ is a group, we may construct its classifying space $\B \GL{R}$ and apply the $+$-construction to this space to obtain $\B \GL{R}^+$. Since the largest perfect subgroup of $\pi_1(\B \GL{R}) = \GL{R}$ is $E(R)$, we obtain by definition that 
 \[ \pi_1(\B \GL{R}^+) = \nicefrac{\GL{R}}{E(R)} = K_1(R). \]
 
-This motivates the following definition
+This observation motivates the following definition.
 
 \begin{definition}
     Let $R$ be a ring. The \emph{$K$-theory space} of $R$ is defined as
     \[ K(R) = K_0(R) \times \B \GL{R}^+, \]
     where $K_0(R)$ is given the discrete topology.
-    The \emph{$K$-theory groups} of $R$ are the homotopy groups of $K(R)$, i.e.
+    The \emph{$K$-theory groups} of $R$ are the homotopy groups of $K(R)$, i.e.,
     \[ K_i(R) = \pi_i(K(R)). \]
 \end{definition}
 
@@ -82,13 +82,13 @@ A lot of work has been done to generalize $K$-theory to many categories. While i
 \subsubsection{Essential definitions}
 
 \begin{definition}
-    Let $\CC$ be a category, with two classes of morphisms $\co{\CC}$ and $\we{\CC}$. Elements of $\co{\CC}$ are called \emph{cofibrations} and denoted $A \rightarrowtail B$. Elements of $\we{\CC}$ are called \emph{weak equivalences} and denoted $A \xto{\sim} B$. The triple $(\CC, \co{\CC}, \we{\CC})$ is a \emph{Waldhausen category} if it satisfies the following properties:
+    Let $\CC$ be a category, with two distinguished classes of morphisms $\co{\CC}$ and $\we{\CC}$. Elements of $\co{\CC}$ are called \emph{cofibrations} and denoted $A \rightarrowtail B$. Elements of $\we{\CC}$ are called \emph{weak equivalences} and denoted $A \xto{\sim} B$. The triple $(\CC, \co{\CC}, \we{\CC})$ is a \emph{Waldhausen category} if it satisfies the following properties.
     \begin{itemize}
-        \item[{[C$0$]}] $\CC$ has a zero object, i.e. an initial-terminal object, denoted $0$;
-        \item[{[C$1$]/[W$1$]}] Isomorphisms are cofibrations and weak equivalences;
-        \item[{[C$2$]/[W$2$]}] $\co{\CC}$ and $\we{\CC}$ are closed under composition;
-        \item[{[C$3$]}] For all $C \in \Ob{\CC}$, the morphism $0 \to A$ is in $\co{\CC}$;
-        \item[{[C$4$]}] If $A \rightarrowtail B$ is a cofibration, then the pushout $B \cup_A C$ along any map $A \to C$ exists and the induced map $C \to B \cup_A C$ is also a cofibration;
+        \item[{[C$0$]}] $\CC$ has a zero object, i.e., an initial-terminal object, denoted $0$.
+        \item[{[C$1$]/[W$1$]}] Isomorphisms are cofibrations and weak equivalences.
+        \item[{[C$2$]/[W$2$]}] The classes $\co{\CC}$ and $\we{\CC}$ are closed under composition.
+        \item[{[C$3$]}] For all $C \in \Ob{\CC}$, the morphism $0 \to A$ is in $\co{\CC}$.
+        \item[{[C$4$]}] If $A \rightarrowtail B$ is a cofibration, then the pushout $B \cup_A C$ along any map $A \to C$ exists and the induced map $C \to B \cup_A C$ is also a cofibration.
         \item[{[W$3$]}] For every commutative diagram
             % https://q.uiver.app/#q=WzAsNixbMSwwLCJBIl0sWzIsMCwiQiJdLFswLDAsIkMiXSxbMCwxLCJDJyJdLFsxLDEsIkEnIl0sWzIsMSwiQiciXSxbMCwxLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtb25vIn19fV0sWzAsMl0sWzIsMywiXFxzaW0iLDJdLFswLDQsIlxcc2ltIiwyXSxbMSw1LCJcXHNpbSJdLFs0LDUsIiIsMix7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1vbm8ifX19XSxbNCwzXV0=
             \[\begin{tikzcd}
@@ -105,39 +105,38 @@ A lot of work has been done to generalize $K$-theory to many categories. While i
             the induced map $B \cup_A C \to B' \cup_A' C'$ is a weak equivalence.
     \end{itemize}
 
-    We denote $\Wald$ the category of small Waldhausen categories with exact functors between them, i.e.~functors that preserve zero object, cofibrations, weak equivalences and pushouts along cofibrations.
+    We denote by $\Wald$ the category of small Waldhausen categories and of exact functors between them, i.e.,~functors that preserve zero object, cofibrations, weak equivalences, and pushouts along cofibrations.
 \end{definition}
 
-When clear from context, we will not specify the classes $\co{\CC}$ and $\we{\CC}$.
+When clear from context, we will not mention the classes $\co{\CC}$ and $\we{\CC}$ explicitly.
 
 By the properties of cofibrations, certain constructions always exist in Waldhausen categories. First, for a given cofibration $A \rightarrowtail B$, there is a pushout $B \cup_A 0$ where the second morphism is the unique map $A \to 0$, which will be denoted $B/A$. This fits into a \emph{cofibration sequence} denoted $A \rightarrowtail B \twoheadrightarrow B/A$.
-
-Then, coproducts also exist as the pushout of the morphisms $A \leftarrowtail 0 \rightarrowtail B$, and will be denoted $A \sqcup B$.
+Coproducts also exist, as the pushout of the morphisms $A \leftarrowtail 0 \rightarrowtail B$, and will be denoted $A \sqcup B$.
 
 The meaning of Waldhausen categories is deeply embedded in topology, the point being to extend the tools from $K$-theory to spaces. Nevertheless, this framework also captures classical $K$-theory, since the category of finitely generated projective modules over a ring $R$ may be given the structure of a Waldhausen category.
 
 \begin{proposition}
-    Let $R$ be a ring. Let $\PP(R)$ denote the category of finitely generated projective modules over $R$. Let $\co{\PP(R)}$ be the set of all injective morphisms between projective modules and $\we{\PP(R)}$ be the set of all isomorphisms. Then $(\PP(R), \co{\PP(R)}, \we{\PP(R)})$ is a Waldhausen category.
+    Let $R$ be a ring. Let $\PP(R)$ denote the category of finitely generated projective modules over $R$. Let $\co{\PP(R)}$ be the set of all injective morphisms between projective modules and $\we{\PP(R)}$ be the set of all isomorphisms. Then $\big(\PP(R), \co{\PP(R)}, \we{\PP(R)}\big)$ is a Waldhausen category.
 \end{proposition}
 
 \begin{proof}
-    The zero-object is simply the zero module. It is then clear that $0 \to P$ is injective for any projective module, thus it is a cofibration. By definition, all isomorphisms are weak equivalences. They are furthermore cofibrations since they are injective. It is also clear that composition of both isomorphisms and injective morphisms once again gives and isomorphism or an injective morphism.  This shows $[C0]$, $[C1]$, $[C2]$, $[W1]$ and $[W2]$.
+    The zero-object is simply the zero module. It is then clear that $0 \to P$ is injective for any projective module, thus it is a cofibration. By definition, all isomorphisms are weak equivalences. They are furthermore cofibrations since they are injective. It is also clear that both isomorphisms and injective morphisms are closed under composition.  This establishes $[C0]$, $[C1]$, $[C2]$, $[W1]$ and $[W2]$.
     
     To show $[C4]$, let $f : P \rightarrowtail Q$ be an injective map and $g : P \to R$ be any map. The pushout of $f$ along $g$ is given by
     \[ Q \cup_P R = \frac{Q \oplus R}{\{(f(p), -g(p)) | p \in P\}}.\]
-    The map $f': R \to Q \cup_P R$ then sends an element $r$ to its class ${(0, r) + \{(f(p), -g(p)) | p \in P\}}$. The kernel consists of elements $r \in R$ such that $(0, r)$ is in the set $\{(f(p), -g(p)) | p \in P\}$. In particular, for $f(p)$ to be $0$, $p$ must be $0$ (since $f$ is injective). Thus, the only element in the kernel is $-g(0) = 0$, i.e.~$f'$ is a cofibration. This shows $[C3]$.
+    The map $f': R \to Q \cup_P R$ then sends an element $r$ to its class ${(0, r) + \{(f(p), -g(p)) | p \in P\}}$. The kernel consists of elements $r \in R$ such that $(0, r)$ is in the set $\{(f(p), -g(p)) | p \in P\}$. In particular, for $f(p)$ to be $0$, $p$ must be $0$ (since $f$ is injective). Thus, the only element in the kernel is $-g(0) = 0$, i.e.,~$f'$ is a cofibration, so $[C3]$ holds.
 
     The last axiom $[W3]$ can easily be proven using the universal property of the pushout, since weak equivalences here are isomorphisms and therefore admit an inverse map.
 \end{proof}
 
 This proof naturally extends to the framework of abelian categories, and more generally to that of exact categories.
 
-To give rise to a notion of $K$-theory on Waldhausen categories, we will proceed by obtaining a suitable simplicial object, giving rise to a geometric realization.
+To define a notion of $K$-theory on Waldhausen categories, we will proceed by obtaining a suitable simplicial object, giving rise to a geometric realization.
 
 \begin{definition}
     Let $\CC$ be a Waldhausen category. For $n \geq 0$, let $S_n \CC$ denote the category whose objects are sequences of length $n$ composable cofibrations
     \[ 0 = A_0 \rightarrowtail A_1 \rightarrowtail \cdots \rightarrowtail A_n\]
-    with a compatible choice of quotients $A_ij = A_j/A_i$ ($0 < i < j \leq n$) that fits in the commutative diagram
+    with a compatible choice of quotients $A_{ij} = A_j/A_i$ ($0 < i < j \leq n$) that fits in the commutative diagram
     % https://q.uiver.app/#q=WzAsMTQsWzAsMCwiQV8xIl0sWzEsMCwiQV8yIl0sWzIsMCwiQV8zIl0sWzMsMCwiXFxjZG90cyJdLFs0LDAsIkFfbiJdLFsxLDEsIkFfezEyfSJdLFsyLDEsIkFfezEzfSJdLFsyLDIsIkFfezIzfSJdLFszLDIsIlxcY2RvdHMiXSxbNCwyLCJBX3sybn0iXSxbNCwxLCJBX3sxbn0iXSxbMywxLCJcXGNkb3RzIl0sWzQsMywiXFx2ZG90cyJdLFs0LDQsIkFfe24tMSxufSJdLFswLDEsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1vbm8ifX19XSxbMSwyLCIiLDAseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtb25vIn19fV0sWzIsMywiIiwwLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibW9ubyJ9fX1dLFszLDQsIiIsMCx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1vbm8ifX19XSxbMSw1XSxbMiw2XSxbNSw2LCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtb25vIn19fV0sWzYsN10sWzcsOCwiIiwxLHsic3R5bGUiOnsidGFpbCI6eyJuYW1lIjoibW9ubyJ9fX1dLFs4LDksIiIsMSx7InN0eWxlIjp7InRhaWwiOnsibmFtZSI6Im1vbm8ifX19XSxbNCwxMF0sWzEwLDldLFs2LDExLCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtb25vIn19fV0sWzExLDEwLCIiLDEseyJzdHlsZSI6eyJ0YWlsIjp7Im5hbWUiOiJtb25vIn19fV0sWzksMTJdLFsxMiwxM11d
     \[\begin{tikzcd}[cramped]
         {A_1} & {A_2} & {A_3} & \cdots & {A_n} \\
@@ -168,18 +167,18 @@ To give rise to a notion of $K$-theory on Waldhausen categories, we will proceed
 \begin{remark}
     The classical way to define the $S_{\bullet}$-construction, due to Waldhausen (\textbf{add cite}), is formulated quite differently and allows for a more functorial approach. Let $\Ar{\textbf{n}}$ denote the arrow category of the poset category $0 < 1 < \cdots < n$. Elements thereof are thus given by arrows $i \to j$ (which we will denote $i / j$) whenever $i \leq j$, and there is a unique morphism $i/j \to i'/j'$ if and only if $i \leq i'$ and $j \leq j'$. Elements of $S_n \CC$ can then be seen as functors $A : \Ar{\textbf{n}} \to \CC$, where $A(i/j) := A_{i,j}$, such that
     \begin{itemize}
-        \item The object $A_{i,i}$ is the zero-object for all $0 \leq i \leq n$;
-        \item For every triple $0 \leq i \leq j \leq k \leq n$, the map $A_{i,j} \to A_{i, k}$ is a cofibration and the sequence $A_{i,j} \rightarrowtail A_{i,k} \twoheadrightarrow A_{j,k}$ is a cofibration sequence.
+        \item the object $A_{i,i}$ is the zero-object for all $0 \leq i \leq n$;
+        \item for every triple $0 \leq i \leq j \leq k \leq n$, the map $A_{i,j} \to A_{i, k}$ is a cofibration and the sequence $A_{i,j} \rightarrowtail A_{i,k} \twoheadrightarrow A_{j,k}$ is a cofibration sequence.
     \end{itemize}
     The morphisms are then natural transformations between these functors.
 
-    It is clear by the notation we used that both definitions are equivalent.
+    It is clear from the notation we used that both definitions are equivalent.
 \end{remark}
 
-The assignment of a category for each non-negative integer hints at an underlying structure of a simplicial object in the category of small categories, which we indeed have.
+The assignment of a category to each non-negative integer hints at an underlying structure of a simplicial object in the category of small categories, which we indeed have.
 
 \begin{proposition}
-    Let $\CC$ be a Waldhausen category The $S_{\bullet}$-construction on $\CC$ yields a functor $S_{\bullet} \CC : \op{\Delta}  \to \Wald$, where $S_n \CC$ is as described above. This is therefore a $S_{\bullet} \CC$ is a simplicial Waldhausen category.
+    Let $\CC$ be a Waldhausen category. The $S_{\bullet}$-construction on $\CC$ yields a functor $S_{\bullet} \CC : \op{\Delta}  \to \Wald$, where $S_n \CC$ is as described above. This is therefore a simplicial Waldhausen category.
 \end{proposition}
 
 \begin{proof}
@@ -210,7 +209,7 @@ The assignment of a category for each non-negative integer hints at an underlyin
 \end{proof}
 
 \subsection[Expected properties of K-theory spectra]{Expected properties of $K$-theory spectra}\label{subsection:properties_of_k_theory}
-There are numerous standard results about the algebraic $K$-theory of a ring that naturally translate to more general settings. Consequently, they are a good baseline to describe what is and isn't a good notion of $K$-theory.
+There are numerous standard results about the algebraic $K$-theory of a ring that naturally translate to more general settings. Consequently, they provide a good baseline to describe what is and isn't a good notion of $K$-theory.
 
 \subsubsection{The Dévissage theorem}
 
