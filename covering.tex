@@ -46,7 +46,7 @@ To have a suitable notion of category with covering families, one may intuitivel
     Let $X$ be a topological space, and let $\CC$ be the category consisting of its open sets, with morphisms given by inclusions. Then $\CC$ naturally inherits a covering families structure by declaring that $\{U_i \subseteq U\}_{i \in I}$ is a covering family if and only if $\bigcup_{i \in I} U_i = U$. Here, the distinguished basepoint is naturally the empty set. More generally, a Grothendieck site inherits a structure of category with covering families (see \cite[Chapter~2, Definition~1.1.5]{grothendieck1963topos}).
 \end{example}
 
-\begin{example}[ADD CITATION]
+\begin{example}[Taken from~\cite{calle_combinatorial_2025}]
     Let $\Gamma_{\leq n}$ be the category of finite graphs with $n$ or fewer edges, with morphisms given by inclusions of subgraphs. More precisely, objects are given by pairs of sets $(V,E)$ equipped with an injective map $\partial: E \to \textnormal{Pair}(V)$, where $\textnormal{Pair}(V)$ is the set of unordered pairs of distinct elements of $V$. A morphism $(V,E, \partial) \to (V',E', \partial')$ is then given by injective maps $f_V : V \to V'$ and $f_E : E \to E'$ such that $\partial'(f_E(e)) = f_V(\partial(e))$.
 
     There is a natural covering family structure on $\Gamma_{\leq n}$ given by:
@@ -78,7 +78,7 @@ To any category with covering families corresponds its category of covers which,
 In particular, morphisms in $\W{\CC}$ describe how a collection of non-distinguished objects in $\CC$ may cover another collection of objects in $\CC$.
 
 The construction above yields a functor
-\[ \W{} : \CatFam \to \Cat \]
+\[ \mathcal{W} : \CatFam \to \Cat \]
 because functors in $\CatFam$ preserve both basepoint and covering families.
 
 Since categories with covering families have a basepoint, the category $\CatFam$ naturally inherits an action of the monoidal category of pointed sets. Notice a pointed set $(X, x_0)$ can be seen as a category whose morphisms are identities and a unique morphism $x_0 \to a$ for any element $a \in X$.
@@ -96,7 +96,7 @@ Since categories with covering families have a basepoint, the category $\CatFam$
 
     As for the functoriality, let $f : (X, x_0) \to (Y, y_0)$ be a map of based sets, i.e.,~such that $f(x_0) = y_0$. It induces a functor $f_* : X \wedge \CC \to Y \wedge \CC$ by letting $f([x, C]) = [f(x), C]$ and, for a morphism $(a, b): [x, C] \to [x', C']$, letting $f((a,b)) = (f(a), b)$, with $f(a)$ defined as the unique morphism from $f(x)$ to $f(x')$.
 
-    To see it preserves covering families, \textbf{blablabla}
+    It remains to show that $f_*$ preserves covering families. Let $\{g_i : [x_i,C_i] \to [x,C]\}_{i \in I}$ be a covering family in $\CC$, i.e. $x_i$ is $x$ or $x_0$ and $\{C_i \to C\}_{i \in I}$ is a covering family. The resulting image is $\{f_*(g_i) : [f(x_i), C_i] \to [f(x), C]\}$, which is a covering family in $Y \wedge C$ since $f(x_i)$ is either $f(x)$ or $f(x_0) = y_0$.
 \end{proof}
 
 The definition of the $K$-theory of a category with covering families will arise from a more general spectrum construction, which we will now study detail. 
@@ -151,13 +151,19 @@ with the structural maps as described above
 \[ S^1 \wedge A(X^n) \to A(S^1 \wedge X^n) \to A(X^{n+1}) \]
 where the last map is obtained by applying $A$ to the structural map $S^1 \wedge X^n \to X^{n+1}$ of the spectrum $X^{\bullet}$.
 
-As we have progressively extended $\Gamma$-spaces to endomorphisms of the category of spectra, we may study its effect on the unit of the category of spectra, namely the sphere spectrum $\mathbb{S}$ seen as a symmetric spectrum.
+As we have progressively extended $\Gamma$-spaces to endomorphisms of the category of spectra, we may study its effect on the unit of the category of spectra, namely the sphere spectrum $\SS$ seen as a symmetric spectrum.
 
 \begin{definition}
     Let $A$ be a $\Gamma$-space. The \emph{spectrum associated to $A$} is the image of the sphere spectrum under $A$. It is given degree-wise by
-    \[ A(\mathbb{S})_n = A((S^n)),\]
+    \[ A(\SS)_n = A((S^n)),\]
     where $S^n$ denotes the $n$-dimensional sphere as a simplicial set.
 \end{definition}
+
+The specialness condition of a $\Gamma$-space ensures the stable homotopy groups of the associated spectrum are easier to compute.
+
+\begin{proposition}[Theorem 4.4 of~\cite{Bousfield2006Aug}]
+    If $A$ is a special $\Gamma$-space, then its associated spectrum $A(\SS)$ is an $\Omega$-spectrum.
+\end{proposition}
 
 \subsection{The spectrum associated to a category with covering families}
 
